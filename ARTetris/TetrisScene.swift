@@ -52,7 +52,7 @@ class TetrisScene {
 		recent = SCNNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i)))
+			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i)))
 		}
 		scene.rootNode.addChildNode(recent)
 	}
@@ -61,7 +61,7 @@ class TetrisScene {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			let box = block(current, tetromino.x(i), tetromino.y(i))
+			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
 			scene.rootNode.addChildNode(box)
 			let row = tetromino.y(i) + current.y
 			while(blocksByLine.count <= row) {
@@ -184,10 +184,10 @@ class TetrisScene {
 		return text
 	}
 	
-	private func block(_ state: TetrisState, _ x: Int, _ y: Int) -> SCNNode {
+    private func block(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int) -> SCNNode {
 		let cell = cg(self.cell)
 		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
-		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5)
+		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(z))
 		return createNode(box, matrix, TetrisScene.colors[state.index])
 	}
 	

@@ -9,7 +9,7 @@
 /** All one sided tetrominos and their rotations */
 class OneSidedTetromino {
 	
-	static let all = [i, j, l, o, s, t, z]
+	static let all = [o] // i, j, l, o, s, t, z]
 	
 	static let i = OneSidedTetromino(
 		FixedTetromino([0, 1, 1, 1, 2, 1, 3, 1]),
@@ -26,9 +26,23 @@ class OneSidedTetromino {
 		FixedTetromino([1, 0, 1, 1, 1, 2, 0, 2]),
 		FixedTetromino([0, 1, 1, 1, 2, 1, 0, 0]),
 		FixedTetromino([1, 0, 1, 1, 1, 2, 2, 0])])
-	
+    
 	static let o = OneSidedTetromino(
-		FixedTetromino([0, 0, 0, 1, 1, 0, 1, 1]))
+		FixedTetromino([
+            0, 0, 0,
+            0, 1, 0,
+            1, 0, 0,
+            1, 1, 0]),
+        FixedTetromino([
+            0, 0, 0,
+            0, 0, 1,
+            1, 0, 0,
+            1, 0, 1]),
+        FixedTetromino([
+            0, 0, 0,
+            0, 0, 1,
+            0, 1, 0,
+            0, 1, 1]))
 	
 	static let s = OneSidedTetromino(
 		FixedTetromino([1, 0, 2, 0, 0, 1, 1, 1]),
@@ -47,8 +61,11 @@ class OneSidedTetromino {
 	let fixed: [FixedTetromino]
 	
 	init(_ t: FixedTetromino) { self.fixed = [t, t, t, t] }
-	
-	init(_ t1: FixedTetromino, _ t2: FixedTetromino) { self.fixed = [t1, t2, t1, t2] }
+    
+    init(_ t1: FixedTetromino, _ t2: FixedTetromino) { self.fixed = [t1, t2, t1, t2] }
+    
+    // TODO fix double rotation
+	init(_ t1: FixedTetromino, _ t2: FixedTetromino, _ t3: FixedTetromino) { self.fixed = [t1, t2, t3, t1] }
 	
 	init(_ fixed: [FixedTetromino]) { self.fixed = fixed }
 }
@@ -60,8 +77,9 @@ class FixedTetromino {
 	
 	init(_ values: [Int]) { self.values = values }
 	
-	func x(_ index: Int) -> Int { return values[index * 2] }
-	
-	func y(_ index: Int) -> Int { return values[index * 2 + 1] }
-	
+	func x(_ index: Int) -> Int { return values[index * 3] }
+    
+	func y(_ index: Int) -> Int { return values[index * 3 + 1] }
+    
+    func z(_ index: Int) -> Int { return values[index * 3 + 2] }
 }
