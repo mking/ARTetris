@@ -25,7 +25,7 @@ class TetrisScene {
 	private static let scoresColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
 	private static let titleColor = UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0)
 	
-	private let cell: Float = 0.05
+	private let cell: Float = 0.03
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene

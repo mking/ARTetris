@@ -15,6 +15,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     var tetris: TetrisEngine?
     
+    var didTap = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,14 +89,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
 //        // We need async execution to get anchor node's position relative to the root
 //        DispatchQueue.main.async {
 //            self.updateFocusSquare()
 //            if let planeAnchor = anchor as? ARPlaneAnchor {
 //                // For a first detected plane
-//                if (self.tetris == nil) {
-//                    placeTetris(planeAnchor, node)
+//                if (self.tetris == nil && self.didTap) {
+//                    self.placeTetris(planeAnchor: planeAnchor, node: node)
+//
 ////                    // get center of the plane
 ////                    let x = planeAnchor.center.x + node.position.x
 ////                    let y = planeAnchor.center.y + node.position.y
@@ -107,7 +110,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //                }
 //            }
 //        }
-//    }
+    }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
@@ -116,11 +119,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func placeTetris(planeAnchor: ARPlaneAnchor, node: SCNNode) {
-        // get center of the plane
-        let x = planeAnchor.center.x + node.position.x
-        let y = planeAnchor.center.y + node.position.y
-        let z = planeAnchor.center.z + node.position.z
+    func placeTetris() {
+        // place tetris at last focus square position
+        print("+++ focus square position \(focusSquare!.position)")
+        let x = focusSquare!.position.x
+        let y = focusSquare!.position.y
+        let z = focusSquare!.position.z
+        
         // initialize Tetris with a well placed on this plane
         let config = TetrisConfig.standard
         let well = TetrisWell(config)
@@ -140,10 +145,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let result = planeHitTestResults.first {
             
             let planeHitTestPosition = SCNVector3.positionFromTransform(result.worldTransform)
-            let planeAnchor = result.anchor
+            let planeAnchor = result.anchor as? ARPlaneAnchor
+            print("+++ plane anchor position \(planeAnchor!.center)")
             
             // Return immediately - this is the best possible outcome.
-            return (planeHitTestPosition, planeAnchor as? ARPlaneAnchor, true)
+            return (planeHitTestPosition, planeAnchor, true)
         }
         
         // -------------------------------------------------------------------------------
@@ -223,6 +229,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let worldPos = worldPos {
             focusSquare?.update(for: worldPos, planeAnchor: planeAnchor, camera: self.session.currentFrame?.camera)
         }
+        
+        if didTap && tetris == nil {
+            placeTetris()
+        }
     }
     
     private func addGestures() {
@@ -249,6 +259,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc private func handleTap(sender: UITapGestureRecognizer) {
+        if tetris == nil {
+            if (sender.state == .ended) {
+                didTap = true
+            }
+            
+            return
+        }
+        
         let location = sender.location(in: self.view)
         let x = location.x / self.view.bounds.size.width
         if (x < 0.5) {
