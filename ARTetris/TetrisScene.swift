@@ -43,7 +43,7 @@ class TetrisScene {
 		self.x = x
 		self.y = y
 		self.z = z
-		self.frame = createWellFrame(config.width, config.height)
+		self.frame = createWellFrame(config.width, config.height, config.depth)
 		scene.rootNode.addChildNode(self.frame)
 	}
 	
@@ -160,21 +160,30 @@ class TetrisScene {
 		self.scene.rootNode.addChildNode(node)
 	}
 	
-	private func createWellFrame(_ width: Int, _ height: Int) -> SCNNode {
+    private func createWellFrame(_ width: Int, _ height: Int, _ depth: Int) -> SCNNode {
 		let node = SCNNode()
+        
+        // user facing column lines
 		for i in 1...width + 1 {
-			addLine(to: node, 0.001, cell * Float(height + 3), 0.001, Float(i), 0, 0)
-			addLine(to: node, 0.001, cell * Float(height + 3), 0.001, Float(i), 0, 1)
+            for k in 0...depth + 1 {
+                addLine(to: node, 0.001, cell * Float(height + 3), 0.001, Float(i), 0, Float(k))
+            }
 		}
+        
+        // user facing row lines
 		for i in 0...height + 3 {
-			addLine(to: node, cell * Float(width), 0.001, 0.001, 1, Float(i), 0)
-			addLine(to: node, cell * Float(width), 0.001, 0.001, 1, Float(i), 1)
+            for k in 0...depth + 1 {
+                addLine(to: node, cell * Float(width), 0.001, 0.001, 1, Float(i), Float(k))
+            }
 		}
+        
+        // z direction plane parallel lines
 		for i in 1...width + 1 {
 			for j in 0...height + 3 {
 				addLine(to: node, 0.001, 0.001, cell, Float(i), Float(j), 1)
 			}
 		}
+        
 		return node
 	}
 	

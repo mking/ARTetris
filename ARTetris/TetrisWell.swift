@@ -10,11 +10,11 @@
 class TetrisWell {
 	
 	private let config: TetrisConfig
-	private var matrix: [[Bool]] = []
+	private var matrix: [[[Bool]]] = []
 
 	init(_ config: TetrisConfig) {
 		self.config = config
-		matrix.append([Bool](repeating: true, count: config.width + 2))
+        matrix.append([[Bool]](repeating: [Bool](repeating: true, count: config.depth + 2), count: config.width + 2))
 		for _ in 0...config.height + 3 {
 			addLine()
 		}
@@ -23,7 +23,7 @@ class TetrisWell {
 	public func hasCollision(_ state: TetrisState) -> Bool {
 		let tetromino = state.tetromino()
 		for i in 0...3 {
-			if (matrix[state.y + tetromino.y(i)][state.x + tetromino.x(i)]) {
+			if (matrix[state.y + tetromino.y(i)][state.x + tetromino.x(i)][state.z + tetromino.z(i)]) {
 				return true
 			}
 		}
@@ -33,7 +33,7 @@ class TetrisWell {
 	public func add(_ current: TetrisState) {
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			matrix[current.y + tetromino.y(i)][current.x + tetromino.x(i)] = true
+			matrix[current.y + tetromino.y(i)][current.x + tetromino.x(i)][current.z + tetromino.z(i)] = true
 		}
 	}
 	
@@ -41,9 +41,11 @@ class TetrisWell {
 		var toRemove: [Int] = []
 		loop: for i in 1...config.height + 1 {
 			for j in 1...config.width {
-				if (!matrix[i][j]) {
-					continue loop
-				}
+                for k in 1...config.depth {
+                    if (!matrix[i][j][k]) {
+                        continue loop
+                    }
+                }
 			}
 			toRemove.append(i)
 		}
@@ -56,9 +58,14 @@ class TetrisWell {
 	}
 	
 	private func addLine() {
-		var row = [Bool](repeating: false, count: config.width + 2)
-		row[0] = true
-		row[config.width + 1] = true
+        var row = [[Bool]](repeating: [Bool](repeating: false, count: config.depth + 2), count: config.width + 2)
+        
+        for i in 0...config.width + 1 {
+            for j in 0...config.depth + 1 {
+                row[i][j] = i == 0 || i == config.width + 1 || j == 0 || j == config.depth + 1
+            }
+        }
+        
 		matrix.append(row)
 	}
 	
