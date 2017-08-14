@@ -196,7 +196,7 @@ class TetrisScene {
     private func block(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int) -> SCNNode {
 		let cell = cg(self.cell)
 		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
-		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(z))
+		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
 		return createNode(box, matrix, TetrisScene.colors[state.index])
 	}
 	

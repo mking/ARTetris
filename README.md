@@ -35,3 +35,10 @@ This project is maintained by the [exyte](http://www.exyte.com) company, a team 
 ## License
 
 ARTetris is available under the MIT license. See the LICENSE file for more info.
+
+## Solving the left-right issue
+- We want the pad directions to be relative to the camera
+- Project the camera position onto the board plane
+- Connect the camera position to the board center
+- The side that the line of sight intersects is the side of the board that is facing the camera
+- The pad directions should be relative to the facing side

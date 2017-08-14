@@ -270,16 +270,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             return
         }
-        
-        let location = sender.location(in: self.view)
-        let x = location.x / self.view.bounds.size.width
-        if (x < 0.5) {
-            // move tetromino left on tap first 50% of the screen
-            tetris?.left()
-        } else {
-            // move tetromino right on tap second 50% of the screen
-            tetris?.right()
-        }
     }
     
     // For this to work, need to add the tap gesture recognizer as a gesture recognizer of the pad view.
@@ -305,8 +295,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 tetris?.left()
             case .right:
                 tetris?.right()
-            default:
-                break
             }
         }
     }
