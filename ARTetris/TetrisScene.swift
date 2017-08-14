@@ -50,10 +50,20 @@ class TetrisScene {
 	func show(_ current: TetrisState) {
 		recent?.removeFromParentNode()
 		recent = SCNNode()
+        
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i)))
+			recent.addChildNode(block(current, current.x + tetromino.x(i), current.y + tetromino.y(i), current.z + tetromino.z(i)))
 		}
+        
+        // ghost
+        if current.ghostY != 0 {
+            print("valid ghost \(current.ghostY)")
+            for i in 0...3 {
+                recent.addChildNode(block(current, current.x + tetromino.x(i), current.ghostY + tetromino.y(i), current.z + tetromino.z(i)))
+            }
+        }
+        
 		scene.rootNode.addChildNode(recent)
 	}
 	
@@ -61,7 +71,7 @@ class TetrisScene {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
+			let box = block(current, current.x + tetromino.x(i), current.x + tetromino.y(i), current.x + tetromino.z(i))
 			scene.rootNode.addChildNode(box)
 			let row = tetromino.y(i) + current.y
 			while(blocksByLine.count <= row) {
@@ -196,7 +206,7 @@ class TetrisScene {
     private func block(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int) -> SCNNode {
 		let cell = cg(self.cell)
 		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
-		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
+		let matrix = translate(Float(x), Float(y) - 0.5, Float(z))
 		return createNode(box, matrix, TetrisScene.colors[state.index])
 	}
 	

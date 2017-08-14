@@ -41,18 +41,24 @@ class TetrisEngine {
 	
 	func drop() {
 		animate(onComplete: addCurrentTetrominoToWell) {
-			let initial = current
-			while(!well.hasCollision(current.down())) {
-				current = current.down()
-			}
-			return scene.drop(from: initial, to: current)
+            let initial = current
+            current = dropState(state: current)
+            return scene.drop(from: initial, to: current)
 		}
 	}
+    
+    func dropState(state: TetrisState) -> TetrisState {
+        var next = state
+        while(!well.hasCollision(next.down())) {
+            next = next.down()
+        }
+        return next
+    }
 	
 	private func setState(_ state: TetrisState) {
 		if (!well.hasCollision(state)) {
-			self.current = state
-			scene.show(state)
+            self.current = state.withGhost(ghostY: dropState(state: state).y)
+			scene.show(self.current)
 		}
 	}
 	
