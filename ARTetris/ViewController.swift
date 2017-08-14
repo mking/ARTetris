@@ -15,6 +15,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     var tetris: TetrisEngine?
     
+    @IBOutlet var padView: PadView!
+    
+    @IBOutlet var imageView: UIImageView!
+    
     var didTap = false
     
     override func viewDidLoad() {
@@ -275,6 +279,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         } else {
             // move tetromino right on tap second 50% of the screen
             tetris?.right()
+        }
+    }
+    
+    // For this to work, need to add the tap gesture recognizer as a gesture recognizer of the pad view.
+    // The location in view is relative to the top left corner of the view.
+    @IBAction func handleTapPad(_ sender: UITapGestureRecognizer) {
+        if sender.state == .recognized {
+            let location = sender.location(in: padView)
+            let center = CGPoint(x: padView.frame.width / 2, y: padView.frame.width / 2)
+            let angle = computeAngle(location: location, center: center)
+            let direction = computeDirection(angle: angle)
+            imageView.image = computeImage(direction: direction)
+            imageView.alpha = 1
+            UIView.animate(withDuration: 0.5) {
+                self.imageView.alpha = 0
+            }
+            
+            switch (direction) {
+            case .top:
+                tetris?.forward()
+            case .bottom:
+                tetris?.backward()
+            case .left:
+                tetris?.left()
+            case .right:
+                tetris?.right()
+            default:
+                break
+            }
         }
     }
     

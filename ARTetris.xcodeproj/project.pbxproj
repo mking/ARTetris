@@ -18,6 +18,8 @@
 		58C1385D1F0567D20080598A /* TetrisWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1385C1F0567D20080598A /* TetrisWell.swift */; };
 		58C1385F1F05680E0080598A /* TetrisScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1385E1F05680E0080598A /* TetrisScene.swift */; };
 		58C138611F059B800080598A /* TetrisState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C138601F059B800080598A /* TetrisState.swift */; };
+		8B8BF4341F411885000ED625 /* PadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8BF4331F411885000ED625 /* PadView.swift */; };
+		8BA74CFF1F411CD000C70C33 /* PadDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA74CFE1F411CD000C70C33 /* PadDirection.swift */; };
 		9088190D1F25336300181A7A /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190C1F25336300181A7A /* FocusSquare.swift */; };
 		9088190F1F25337E00181A7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190E1F25337E00181A7A /* Utilities.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		58C1385C1F0567D20080598A /* TetrisWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisWell.swift; sourceTree = "<group>"; };
 		58C1385E1F05680E0080598A /* TetrisScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisScene.swift; sourceTree = "<group>"; };
 		58C138601F059B800080598A /* TetrisState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisState.swift; sourceTree = "<group>"; };
+		8B8BF4331F411885000ED625 /* PadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadView.swift; sourceTree = "<group>"; };
+		8BA74CFE1F411CD000C70C33 /* PadDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadDirection.swift; sourceTree = "<group>"; };
 		9088190C1F25336300181A7A /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		9088190E1F25337E00181A7A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +88,8 @@
 				581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */,
 				9088190C1F25336300181A7A /* FocusSquare.swift */,
 				9088190E1F25337E00181A7A /* Utilities.swift */,
+				8B8BF4331F411885000ED625 /* PadView.swift */,
+				8BA74CFE1F411CD000C70C33 /* PadDirection.swift */,
 			);
 			path = ARTetris;
 			sourceTree = "<group>";
@@ -160,7 +166,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				58C1385D1F0567D20080598A /* TetrisWell.swift in Sources */,
+				8B8BF4341F411885000ED625 /* PadView.swift in Sources */,
 				589A2D151F02417D003BB05E /* ViewController.swift in Sources */,
+				8BA74CFF1F411CD000C70C33 /* PadDirection.swift in Sources */,
 				589A2D271F0261D2003BB05E /* Tetromino.swift in Sources */,
 				58C1385F1F05680E0080598A /* TetrisScene.swift in Sources */,
 				9088190D1F25336300181A7A /* FocusSquare.swift in Sources */,

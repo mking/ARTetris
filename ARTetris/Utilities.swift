@@ -624,3 +624,48 @@ func createPlane(size: CGSize, contents: AnyObject?) -> SCNPlane {
     return plane
 }
 
+func computeAngle(location: CGPoint, center: CGPoint) -> CGFloat {
+    let opp = center.x - location.y
+    let adj = location.x - center.y
+    
+    var angle = atan(opp / adj)
+    
+    // account for arctan which only covers one half of the circle
+    if adj < 0 {
+        angle += CGFloat.pi
+    }
+    
+    // normalize -45 to 360-45
+    if angle < 0 {
+        angle += 2 * CGFloat.pi
+    }
+    
+    return angle
+}
+
+func computeDirection(angle: CGFloat) -> PadDirection {
+    if (angle < (1.0 / 4.0) * CGFloat.pi) {
+        return .right
+    } else if (angle < (3.0 / 4.0) * CGFloat.pi) {
+        return .top
+    } else if (angle < (5.0 / 4.0) * CGFloat.pi) {
+        return .left
+    } else if (angle < (7.0 / 4.0) * CGFloat.pi) {
+        return .bottom
+    } else {
+        return .right
+    }
+}
+
+func computeImage(direction: PadDirection) -> UIImage {
+    switch (direction) {
+    case .top:
+        return UIImage(named: "TopArrow")!
+    case .bottom:
+        return UIImage(named: "BottomArrow")!
+    case .left:
+        return UIImage(named: "LeftArrow")!
+    case .right:
+        return UIImage(named: "RightArrow")!
+    }
+}

@@ -12,17 +12,63 @@
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARTetris" customModuleProvider="target" sceneMemberID="viewController">
-                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9kB-le-yJ8"/>
+                        <viewControllerLayoutGuide type="bottom" id="j49-Qv-12v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qrU-Qk-cHL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <gestureRecognizers/>
-                    </arscnView>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gm-5K-F1B">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                            </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Z8-f5-xfe" customClass="PadView" customModule="ARTetris" customModuleProvider="target">
+                                <rect key="frame" x="20" y="497" width="150" height="150"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cE5-vB-ebP">
+                                        <rect key="frame" x="30" y="30" width="90" height="90"/>
+                                    </imageView>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cE5-vB-ebP" secondAttribute="trailing" constant="30" id="FV5-xG-GJV"/>
+                                    <constraint firstItem="cE5-vB-ebP" firstAttribute="leading" secondItem="2Z8-f5-xfe" secondAttribute="leading" constant="30" id="L7S-yG-HXF"/>
+                                    <constraint firstItem="cE5-vB-ebP" firstAttribute="top" secondItem="2Z8-f5-xfe" secondAttribute="top" constant="30" id="aOr-WI-icx"/>
+                                    <constraint firstAttribute="bottom" secondItem="cE5-vB-ebP" secondAttribute="bottom" constant="30" id="c9g-Bn-U9w"/>
+                                    <constraint firstAttribute="width" constant="150" id="fHs-5Y-zJ9"/>
+                                    <constraint firstAttribute="height" constant="150" id="zb9-nq-lSr"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="M8H-fk-0EF" appends="YES" id="v08-aS-5jL"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Z8-f5-xfe" firstAttribute="leading" secondItem="qrU-Qk-cHL" secondAttribute="leading" constant="20" id="17B-Iz-9ZE"/>
+                            <constraint firstItem="j49-Qv-12v" firstAttribute="top" secondItem="2gm-5K-F1B" secondAttribute="bottom" id="5pn-nB-r35"/>
+                            <constraint firstItem="2gm-5K-F1B" firstAttribute="leading" secondItem="qrU-Qk-cHL" secondAttribute="leading" id="DFl-6X-kGX"/>
+                            <constraint firstItem="j49-Qv-12v" firstAttribute="top" secondItem="2Z8-f5-xfe" secondAttribute="bottom" constant="20" id="Ewe-I8-H7F"/>
+                            <constraint firstAttribute="trailing" secondItem="2gm-5K-F1B" secondAttribute="trailing" id="GYE-K4-hug"/>
+                            <constraint firstItem="2gm-5K-F1B" firstAttribute="top" secondItem="qrU-Qk-cHL" secondAttribute="top" id="nXO-e9-6eb"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="imageView" destination="cE5-vB-ebP" id="0r6-Cm-F9q"/>
+                        <outlet property="padView" destination="2Z8-f5-xfe" id="iRc-j9-W7r"/>
+                        <outlet property="sceneView" destination="2gm-5K-F1B" id="jOL-ac-Uze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="M8H-fk-0EF">
+                    <connections>
+                        <action selector="handleTapPad:" destination="BV1-FR-VrT" id="VNB-5F-4We"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="103.89805097451276"/>
         </scene>
     </scenes>
 </document>

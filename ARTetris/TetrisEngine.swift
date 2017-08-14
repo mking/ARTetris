@@ -30,6 +30,10 @@ class TetrisEngine {
 	}
 	
 	func rotate() { setState(current.rotate()) }
+    
+    func forward() { setState(current.forward()) }
+    
+    func backward() { setState(current.backward()) }
 	
 	func left() { setState(current.left()) }
 	
