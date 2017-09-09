@@ -258,7 +258,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             tetris?.drop()
         } else {
             // rotate tetromino on swipe up
-            tetris?.rotate()
+//            tetris?.rotate()
         }
     }
     
@@ -299,4 +299,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    @IBAction func handleLeftSwipe(_ sender: UISwipeGestureRecognizer) {
+        tetris?.rotate(-1)
+    }
+    
+    @IBAction func handleRightSwipe(_ sender: UISwipeGestureRecognizer) {
+        tetris?.rotate(1)
+    }
+    
+    @IBAction func handleUpSwipe(_ sender: UISwipeGestureRecognizer) {
+        print("+++ up swipe \(sender.direction.rawValue)")
+    }
+    
+    @IBAction func handleDownSwipe(_ sender: UISwipeGestureRecognizer) {
+        print("+++ down swipe \(sender.direction.rawValue)")
+    }
 }

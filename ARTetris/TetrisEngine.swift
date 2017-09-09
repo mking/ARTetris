@@ -29,7 +29,7 @@ class TetrisEngine {
 		startTimer()
 	}
 	
-	func rotate() { setState(current.rotate()) }
+	func rotate(_ increment: Int) { setState(current.rotate(increment)) }
     
     func forward() { setState(current.forward()) }
     

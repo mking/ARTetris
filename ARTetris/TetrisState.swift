@@ -31,7 +31,7 @@ class TetrisState {
 	
 	func tetromino() -> FixedTetromino { return OneSidedTetromino.all[index].fixed[rotation] }
 	
-	func rotate() -> TetrisState { return TetrisState(index, (rotation + 1) % 4, x, y, z) }
+    func rotate(_ increment: Int) -> TetrisState { return TetrisState(index, (rotation + increment + 4) % 4, x, y, z) }
     
     func forward() -> TetrisState { return TetrisState(index, rotation, x, y, z + 1) }
     

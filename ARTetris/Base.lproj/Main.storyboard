@@ -13,6 +13,7 @@
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARTetris" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides/>
                     <view key="view" contentMode="scaleToFill" id="qrU-Qk-cHL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -20,6 +21,12 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gm-5K-F1B">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eG1-1q-HG4" appends="YES" id="FPF-EK-lh1"/>
+                                    <outletCollection property="gestureRecognizers" destination="7VE-fp-LXS" appends="YES" id="u2Z-rl-FDo"/>
+                                    <outletCollection property="gestureRecognizers" destination="4Lu-Z2-AvF" appends="YES" id="MwK-zA-aTJ"/>
+                                    <outletCollection property="gestureRecognizers" destination="Qnd-MV-cD6" appends="YES" id="da3-9O-FOB"/>
+                                </connections>
                             </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Z8-f5-xfe" customClass="PadView" customModule="ARTetris" customModuleProvider="target">
                                 <rect key="frame" x="20" y="497" width="150" height="150"/>
@@ -65,6 +72,26 @@
                         <action selector="handleTapPad:" destination="BV1-FR-VrT" id="VNB-5F-4We"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="eG1-1q-HG4" userLabel="Left Swipe">
+                    <connections>
+                        <action selector="handleLeftSwipe:" destination="BV1-FR-VrT" id="1Wq-HY-bmp"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="7VE-fp-LXS" userLabel="Right Swipe">
+                    <connections>
+                        <action selector="handleRightSwipe:" destination="BV1-FR-VrT" id="X1b-dg-6y1"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="4Lu-Z2-AvF" userLabel="Up Swipe">
+                    <connections>
+                        <action selector="handleUpSwipe:" destination="BV1-FR-VrT" id="FYL-NV-5Uh"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="Qnd-MV-cD6" userLabel="Down Swipe">
+                    <connections>
+                        <action selector="handleDownSwipe:" destination="BV1-FR-VrT" id="jzp-7G-Z0y"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="103.89805097451276"/>
         </scene>
