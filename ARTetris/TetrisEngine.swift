@@ -44,7 +44,7 @@ class TetrisEngine {
 	func drop() {
 		animate(onComplete: addCurrentTetrominoToWell) {
 			let initial = current
-			while(!well.hasCollision(current.down())) {
+			while(!well.hasBlockCollision(current.down())) {
 				current = current.down()
 			}
 			return scene.drop(from: initial, to: current)
@@ -75,7 +75,10 @@ class TetrisEngine {
 	}
 	
 	private func nextTetromino() {
-		current = .random(config)
+        repeat {
+            current = .random(config)
+        } while (well.hasWallCollision(current))
+        
 		if (well.hasCollision(current)) {
 			stopTimer()
 			scene.showGameOver(scores)
@@ -107,8 +110,9 @@ class TetrisEngine {
 	
 	private func startTimer() {
 		self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            // When the current tetromino reaches the bottom, add it to the well.
 			let down = self.current.down()
-			if (self.well.hasCollision(down)) {
+			if (self.well.hasBlockCollision(down)) {
 				self.addCurrentTetrominoToWell()
 			} else {
 				self.current = down

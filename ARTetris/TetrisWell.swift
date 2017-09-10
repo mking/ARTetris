@@ -16,31 +16,52 @@ class TetrisWell {
 		self.config = config
         
         // Add a collision boundary at the top of the well.
-        matrix.append([[Bool]](repeating: [Bool](repeating: true, count: config.fullDepth), count: config.fullWidth))
+        matrix.append([[Bool]](repeating: [Bool](repeating: true, count: config.depth), count: config.width))
         
-		for _ in 0..<config.fullHeight {
+		for _ in 0..<config.height {
 			addLine()
 		}
 	}
-	
-	public func hasCollision(_ state: TetrisState) -> Bool {
-        // There is only one active tetronimo at a time.
-        // It has exactly 4 blocks.
-        // If any part of the translated and rotated tetronimo (given by state.blah + tetronimo.blah) overlaps with a true value in the matrix,
-        // there is a collision with the well.
-        
-        // This function is used to test potential states (hasCollision(state.down())).
-        // If the potential state is invalid, disallow it.
-        
-		let tetromino = state.tetromino()
-		for i in 0...3 {
-			if (matrix[state.y + tetromino.y(i)][state.x + tetromino.x(i)][state.z + tetromino.z(i)]) {
-				return true
-			}
-		}
-		return false
-	}
-	
+    
+    public func hasCollision(_ state: TetrisState) -> Bool {
+        return hasWallCollision(state) || hasBlockCollision(state)
+    }
+    
+    public func hasWallCollision(_ state: TetrisState) -> Bool {
+        let tetromino = state.tetromino()
+        for i in 0...3 {
+            let potentialX = state.x + tetromino.x(i)
+            let potentialZ = state.z + tetromino.z(i)
+            if (
+                potentialX < 0 || potentialX >= config.width || potentialZ < 0 || potentialZ >= config.depth
+            ) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    // Floor or block
+    public func hasBlockCollision(_ state: TetrisState) -> Bool {
+        let tetromino = state.tetromino()
+        for i in 0...3 {
+            let potentialX = state.x + tetromino.x(i)
+            let potentialY = state.x + tetromino.x(i)
+            let potentialZ = state.z + tetromino.z(i)
+            if (
+                potentialY < 0 || (
+                    potentialX >= 0 && potentialX < config.width &&
+                    potentialY >= 0 && potentialY < config.height &&
+                    potentialZ >= 0 && potentialZ < config.depth &&
+                    matrix[potentialY][potentialX][potentialZ]
+                )
+            ) {
+                return true
+            }
+        }
+        return false
+    }
+    
 	public func add(_ current: TetrisState) {   
 		let tetromino = current.tetromino()
 		for i in 0...3 {
@@ -50,9 +71,9 @@ class TetrisWell {
 	
 	public func clearFilledLines() -> [Int] {
 		var toRemove: [Int] = []
-		loop: for i in 1..<config.fullHeight {
-			for j in 1..<config.fullWidth {
-                for k in 1..<config.fullDepth {
+		loop: for i in 1..<config.height {
+			for j in 1..<config.width {
+                for k in 1..<config.depth {
                     if (!matrix[i][j][k]) {
                         continue loop
                     }
@@ -71,13 +92,13 @@ class TetrisWell {
 	private func addLine() {
         // Add a collision plane
         // The center is collision free (false values)
-        var row = [[Bool]](repeating: [Bool](repeating: false, count: config.fullDepth), count: config.fullWidth)
+        var row = [[Bool]](repeating: [Bool](repeating: false, count: config.depth), count: config.width)
         
         // The edges are collision boundary (true values)
         // Both width and depth have 2 extra indexes to hold the collision boundary
-        for i in 0..<config.fullWidth {
-            for j in 0..<config.fullDepth {
-                row[i][j] = i == 0 || i == config.fullWidth - 1 || j == 0 || j == config.fullDepth - 1
+        for i in 0..<config.width {
+            for j in 0..<config.depth {
+                row[i][j] = i == 0 || i == config.width - 1 || j == 0 || j == config.depth - 1
             }
         }
         

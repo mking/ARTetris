@@ -38,5 +38,3 @@ ARTetris is available under the MIT license. See the LICENSE file for more info.
 
 ## Matt's TODO
 - Implement position movement based on tap (divide the infinite board plane into four parts)
-- Fix rotation edge cases (if the user tries to rotate outside the well boundary, prevent it)
-- Remove TetrisConfig.extraLength and Tetromino.offset hacks

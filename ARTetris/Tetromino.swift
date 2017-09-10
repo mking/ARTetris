@@ -47,19 +47,15 @@ class Tetromino {
         0, -1, 0,
     ])
     
-    // Translate x, y, z coords by an initial offset to avoid negative coords
-    // Adjust the scene size in TetrisWell if you change this offset!
-    static let offset = 1
-	
     let values: [Int]
 	
 	init(_ values: [Int]) { self.values = values }
     
-	func x(_ index: Int) -> Int { return values[index * 3] + Tetromino.offset }
+	func x(_ index: Int) -> Int { return values[index * 3] }
     
-	func y(_ index: Int) -> Int { return values[index * 3 + 1] + Tetromino.offset }
+	func y(_ index: Int) -> Int { return values[index * 3 + 1] }
     
-    func z(_ index: Int) -> Int { return values[index * 3 + 2] + Tetromino.offset }
+    func z(_ index: Int) -> Int { return values[index * 3 + 2] }
     
     func rotate(x: Int, y: Int) -> Tetromino {
         return rotateX(angle: x).rotateY(angle: y)
@@ -77,7 +73,7 @@ class Tetromino {
     
     func rotate(rotateMatrix: simd_float4x4) -> Tetromino {
         let rotatedValues = (0...3).flatMap { i -> [Int] in
-            let point = SCNVector3(x(i) - Tetromino.offset, y(i) - Tetromino.offset, z(i) - Tetromino.offset)
+            let point = SCNVector3(x(i), y(i), z(i))
             let translateMatrix = simd_float4x4(SCNMatrix4MakeTranslation(point.x, point.y, point.z))
             let rotatedMatrix = simd_mul(rotateMatrix, translateMatrix)
             return [
