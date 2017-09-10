@@ -53,6 +53,7 @@ class TetrisEngine {
 	}
 	
 	private func addCurrentTetrominoToWell() {
+        print("i'm called, my name is addCurrentTetrominoToWell")
 		well.add(current)
 		scene.addToWell(current)
 		

@@ -89,29 +89,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//        // We need async execution to get anchor node's position relative to the root
-//        DispatchQueue.main.async {
-//            self.updateFocusSquare()
-//            if let planeAnchor = anchor as? ARPlaneAnchor {
-//                // For a first detected plane
-//                if (self.tetris == nil && self.didTap) {
-//                    self.placeTetris(planeAnchor: planeAnchor, node: node)
-//
-////                    // get center of the plane
-////                    let x = planeAnchor.center.x + node.position.x
-////                    let y = planeAnchor.center.y + node.position.y
-////                    let z = planeAnchor.center.z + node.position.z
-////                    // initialize Tetris with a well placed on this plane
-////                    let config = TetrisConfig.standard
-////                    let well = TetrisWell(config)
-////                    let scene = TetrisScene(config, self.sceneView.scene, x, y, z)
-////                    self.tetris = TetrisEngine(config, well, scene)
-//                }
-//            }
-//        }
-    }
-    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         DispatchQueue.main.async {
@@ -143,7 +120,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let planeHitTestResults = sceneView.hitTest(position, types: .existingPlaneUsingExtent)
         if let result = planeHitTestResults.first {
-            
             let planeHitTestPosition = SCNVector3.positionFromTransform(result.worldTransform)
             let planeAnchor = result.anchor as? ARPlaneAnchor
             print("+++ plane anchor position \(planeAnchor!.center)")
@@ -246,6 +222,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tap)
+        
+        let pinch = UIPinchGestureRecognizer(target:self, action: #selector(handlePinch(sender:)))
+        self.view.addGestureRecognizer(pinch)
     }
     
     @objc private func handleSwipe(sender: UISwipeGestureRecognizer) {
@@ -276,6 +255,36 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // move tetromino right on tap second 50% of the screen
             tetris?.right()
         }
+//        print("try double the size of tetris board size")
+//        self.tetris?.scene.doubleSize()
     }
     
+    @objc private func handlePinch(sender: UIPinchGestureRecognizer) {
+        if let view = sender.view {
+            switch sender.state {
+            case .changed:
+                print ("x: ", sender.location(in: view).x)
+                print ("x-m ", view.bounds.midX)
+                print ("y: ", sender.location(in: view).y)
+                print ("y-m ", view.bounds.midY)
+                print ("scale", sender.scale)
+                print ("velocity", sender.velocity)
+                self.tetris?.scene.resize(scale: Float(sender.scale))
+                sender.scale = 1
+            case .ended:
+                
+                print ("x: ", sender.location(in: view).x)
+                print ("x-m ", view.bounds.midX)
+                print ("y: ", sender.location(in: view).y)
+                print ("y-m ", view.bounds.midY)
+                print ("scale", sender.scale)
+                print ("velocity", sender.velocity)
+                print ("pinch ended")
+            default:
+                return
+            }
+            
+        }
+        
+    }
 }

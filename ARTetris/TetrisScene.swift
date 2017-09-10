@@ -25,7 +25,7 @@ class TetrisScene {
 	private static let scoresColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
 	private static let titleColor = UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0)
 	
-	private let cell: Float = 0.03
+	private var cell: Float = 0.03
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
@@ -36,7 +36,9 @@ class TetrisScene {
 	private var blocksByLine: [[SCNNode]] = []
 	private var recent: SCNNode!
 	private var frame: SCNNode!
-	
+    
+    private var uniformScale: Float = 1.0
+    
 	init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float) {
 		self.config = config
 		self.scene = scene
@@ -46,14 +48,39 @@ class TetrisScene {
 		self.frame = createWellFrame(config.width, config.height, config.depth)
 		scene.rootNode.addChildNode(self.frame)
 	}
-	
+    
+    
+    func resize (scale: Float) {
+        print ("cell size", self.cell)
+        uniformScale *= scale
+        self.frame.setUniformScale(uniformScale)
+        resizeTree(root: self.scene.rootNode, scale: uniformScale)
+        for i in blocksByLine {
+            for j in i {
+                resizeTree(root: j, scale: uniformScale)
+            }
+        }
+    }
+    
+    func resizeTree (root :SCNNode, scale: Float) {
+        if root.childNodes.count == 0 {
+            return
+        }
+        for childNode in root.childNodes {
+            resizeTree(root: childNode, scale: scale)
+        }
+        root.setUniformScale(scale)
+    }
+    
 	func show(_ current: TetrisState) {
+        print("I'm show")
 		recent?.removeFromParentNode()
 		recent = SCNNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
 			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i)))
 		}
+        resizeTree(root: recent, scale: uniformScale)
 		scene.rootNode.addChildNode(recent)
 	}
 	
@@ -61,13 +88,20 @@ class TetrisScene {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
-			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
+            let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
+            resizeTree(root: box, scale: uniformScale)
 			scene.rootNode.addChildNode(box)
+            resizeTree(root: scene.rootNode, scale: uniformScale)
 			let row = tetromino.y(i) + current.y
 			while(blocksByLine.count <= row) {
 				blocksByLine.append([])
 			}
 			blocksByLine[row].append(box)
+            for i in blocksByLine {
+                for j in i {
+                    resizeTree(root: j, scale: uniformScale)
+                }
+            }
 		}
 	}
 	
@@ -223,6 +257,7 @@ class TetrisScene {
 		geometry.firstMaterial = material
 		let node = SCNNode(geometry: geometry)
 		node.transform = matrix
+        resizeTree(root: node, scale: uniformScale)
 		return node
 	}
 	
