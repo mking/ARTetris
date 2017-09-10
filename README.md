@@ -36,9 +36,7 @@ This project is maintained by the [exyte](http://www.exyte.com) company, a team 
 
 ARTetris is available under the MIT license. See the LICENSE file for more info.
 
-## Solving the left-right issue
-- We want the pad directions to be relative to the camera
-- Project the camera position onto the board plane
-- Connect the camera position to the board center
-- The side that the line of sight intersects is the side of the board that is facing the camera
-- The pad directions should be relative to the facing side
+## Matt's TODO
+- Implement position movement based on tap (divide the infinite board plane into four parts)
+- Fix rotation edge cases (if the user tries to rotate outside the well boundary, prevent it)
+- Remove TetrisConfig.extraLength and Tetromino.offset hacks

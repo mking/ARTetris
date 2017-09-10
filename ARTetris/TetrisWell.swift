@@ -16,9 +16,9 @@ class TetrisWell {
 		self.config = config
         
         // Add a collision boundary at the top of the well.
-        matrix.append([[Bool]](repeating: [Bool](repeating: true, count: config.depth + 2), count: config.width + 2))
+        matrix.append([[Bool]](repeating: [Bool](repeating: true, count: config.fullDepth), count: config.fullWidth))
         
-		for _ in 0...config.height + 3 {
+		for _ in 0..<config.fullHeight {
 			addLine()
 		}
 	}
@@ -50,9 +50,9 @@ class TetrisWell {
 	
 	public func clearFilledLines() -> [Int] {
 		var toRemove: [Int] = []
-		loop: for i in 1...config.height + 1 {
-			for j in 1...config.width {
-                for k in 1...config.depth {
+		loop: for i in 1..<config.fullHeight {
+			for j in 1..<config.fullWidth {
+                for k in 1..<config.fullDepth {
                     if (!matrix[i][j][k]) {
                         continue loop
                     }
@@ -71,13 +71,13 @@ class TetrisWell {
 	private func addLine() {
         // Add a collision plane
         // The center is collision free (false values)
-        var row = [[Bool]](repeating: [Bool](repeating: false, count: config.depth + 2), count: config.width + 2)
+        var row = [[Bool]](repeating: [Bool](repeating: false, count: config.fullDepth), count: config.fullWidth)
         
         // The edges are collision boundary (true values)
         // Both width and depth have 2 extra indexes to hold the collision boundary
-        for i in 0...config.width + 1 {
-            for j in 0...config.depth + 1 {
-                row[i][j] = i == 0 || i == config.width + 1 || j == 0 || j == config.depth + 1
+        for i in 0..<config.fullWidth {
+            for j in 0..<config.fullDepth {
+                row[i][j] = i == 0 || i == config.fullWidth - 1 || j == 0 || j == config.fullDepth - 1
             }
         }
         

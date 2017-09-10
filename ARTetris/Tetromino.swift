@@ -10,13 +10,41 @@ import SceneKit
 
 class Tetromino {
     
-    static let all = [t]
+    static let all = [t, j, s, o, i]
     
     static let t = Tetromino([
         0, 1, 0,
         -1, 0, 0,
         0, 0, 0,
         1, 0, 0
+    ])
+    
+    static let j = Tetromino([
+        0, 1, 0,
+        0, 0, 0,
+        0, -1, 0,
+        -1, -1, 0,
+    ])
+    
+    static let s = Tetromino([
+        0, 1, 0,
+        1, 1, 0,
+        0, 0, 0,
+        -1, 0, 0,
+    ])
+    
+    static let o = Tetromino([
+        -1, 1, 0,
+        0, 1, 0,
+        -1, 0, 0,
+        0, 0, 0,
+    ])
+    
+    static let i = Tetromino([
+        0, 2, 0,
+        0, 1, 0,
+        0, 0, 0,
+        0, -1, 0,
     ])
     
     // Translate x, y, z coords by an initial offset to avoid negative coords

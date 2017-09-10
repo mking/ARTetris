@@ -157,7 +157,7 @@ class TetrisScene {
 	}
 	
 	private func showFinalScores(_ scores: Int) {
-		let x = Float(config.width / 2 - 2)
+		let x = Float(config.width / 2)
 		let y = Float(config.height / 2)
 		let node = createNode(text("Scores: \(scores)"), translate(x, y).scale(0.003), TetrisScene.titleColor)
 		self.scene.rootNode.addChildNode(node)
@@ -165,6 +165,11 @@ class TetrisScene {
 	
     private func createWellFrame(_ width: Int, _ height: Int, _ depth: Int) -> SCNNode {
 		let node = SCNNode()
+        
+        // Matt's note: These well lines aren't accurate right now.
+        // The right fix is to remove TetrisConfig.extraLength and Tetromino.offset, making sure the well fits within the defined TetrisConfig dimensions.
+        // Then we need to add logic when adding a Tetromino so the initial Tetromino is in a valid position from an x/z perspective.
+        // If the Tetromino is an invalid position from a y perspective, the user loses the game.
         
         // user facing column lines
 		for i in 1...width + 1 {
