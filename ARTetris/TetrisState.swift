@@ -12,36 +12,42 @@ import Foundation
 class TetrisState {
 	
 	static func random(_ config: TetrisConfig) -> TetrisState {
-		return TetrisState(random(OneSidedTetromino.all.count), random(4), config.width / 2, config.height, config.depth / 2)
+		return TetrisState(random(Tetromino.all.count), random(4), random(4), config.width / 2, config.height, config.depth / 2)
 	}
 	
 	let index: Int
-	let rotation: Int
+	let rotationX: Int
+    let rotationY: Int
 	let x: Int
 	let y: Int
     let z: Int
 	
-    private init(_ index: Int, _ rotation: Int, _ x: Int, _ y: Int, _ z: Int) {
+    private init(_ index: Int, _ rotationX: Int, _ rotationY: Int, _ x: Int, _ y: Int, _ z: Int) {
 		self.index = index
-		self.rotation = rotation
+		self.rotationX = rotationX
+        self.rotationY = rotationY
 		self.x = x
 		self.y = y
         self.z = z
+        
+        print("+++ rotation state is now \(rotationX) \(rotationY)")
 	}
 	
-	func tetromino() -> FixedTetromino { return OneSidedTetromino.all[index].fixed[rotation] }
+	func tetromino() -> Tetromino { return Tetromino.all[index].rotate(x: rotationX, y: rotationY) }
 	
-    func rotate(_ increment: Int) -> TetrisState { return TetrisState(index, (rotation + increment + 4) % 4, x, y, z) }
+    func rotateX(_ angle: Int) -> TetrisState { return TetrisState(index, (rotationX + angle + 4) % 4, rotationY, x, y, z) }
     
-    func forward() -> TetrisState { return TetrisState(index, rotation, x, y, z + 1) }
+    func rotateY(_ angle: Int) -> TetrisState { return TetrisState(index, rotationX, (rotationY + angle + 4) % 4, x, y, z) }
     
-    func backward() -> TetrisState { return TetrisState(index, rotation, x, y, z - 1) }
+    func forward() -> TetrisState { return TetrisState(index, rotationX, rotationY, x, y, z + 1) }
     
-	func left() -> TetrisState { return TetrisState(index, rotation, x - 1, y, z) }
+    func backward() -> TetrisState { return TetrisState(index, rotationX, rotationY, x, y, z - 1) }
+    
+	func left() -> TetrisState { return TetrisState(index, rotationX, rotationY, x - 1, y, z) }
+    
+    func right() -> TetrisState { return TetrisState(index, rotationX, rotationY, x + 1, y, z) }
 	
-	func right() -> TetrisState { return TetrisState(index, rotation, x + 1, y, z) }
-	
-	func down() -> TetrisState { return TetrisState(index, rotation, x, y - 1, z) }
+	func down() -> TetrisState { return TetrisState(index, rotationX, rotationY, x, y - 1, z) }
 	
 	private static func random(_ max: Int) -> Int {
 		return Int(arc4random_uniform(UInt32(max)))

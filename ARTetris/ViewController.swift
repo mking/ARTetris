@@ -125,7 +125,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func placeTetris() {
         // place tetris at last focus square position
-        print("+++ focus square position \(focusSquare!.position)")
+//        print("+++ focus square position \(focusSquare!.position)")
         let x = focusSquare!.position.x
         let y = focusSquare!.position.y
         let z = focusSquare!.position.z
@@ -150,7 +150,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             let planeHitTestPosition = SCNVector3.positionFromTransform(result.worldTransform)
             let planeAnchor = result.anchor as? ARPlaneAnchor
-            print("+++ plane anchor position \(planeAnchor!.center)")
+//            print("+++ plane anchor position \(planeAnchor!.center)")
             
             // Return immediately - this is the best possible outcome.
             return (planeHitTestPosition, planeAnchor, true)
@@ -300,18 +300,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func handleLeftSwipe(_ sender: UISwipeGestureRecognizer) {
-        tetris?.rotate(-1)
+        tetris?.rotateY(-1)
     }
     
     @IBAction func handleRightSwipe(_ sender: UISwipeGestureRecognizer) {
-        tetris?.rotate(1)
+        tetris?.rotateY(1)
     }
     
     @IBAction func handleUpSwipe(_ sender: UISwipeGestureRecognizer) {
-        print("+++ up swipe \(sender.direction.rawValue)")
+        tetris?.rotateX(-1)
     }
     
     @IBAction func handleDownSwipe(_ sender: UISwipeGestureRecognizer) {
-        print("+++ down swipe \(sender.direction.rawValue)")
+        tetris?.rotateX(1)
     }
 }
