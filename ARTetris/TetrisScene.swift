@@ -48,6 +48,8 @@ class TetrisScene {
 	}
 	
 	func show(_ current: TetrisState) {
+        // recent holds the current dropping tetronimo (its related scene nodes).
+        // Every time we rerender the TetrisState, we remove the old recent and replace it with a new one.
 		recent?.removeFromParentNode()
 		recent = SCNNode()
 		let tetromino = current.tetromino()
@@ -61,6 +63,7 @@ class TetrisScene {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
+            // Here we permanently add the tetronimo to the well.
 			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
 			scene.rootNode.addChildNode(box)
 			let row = tetromino.y(i) + current.y

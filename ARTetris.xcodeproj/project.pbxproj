@@ -18,11 +18,22 @@
 		58C1385D1F0567D20080598A /* TetrisWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1385C1F0567D20080598A /* TetrisWell.swift */; };
 		58C1385F1F05680E0080598A /* TetrisScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C1385E1F05680E0080598A /* TetrisScene.swift */; };
 		58C138611F059B800080598A /* TetrisState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C138601F059B800080598A /* TetrisState.swift */; };
+		8B20BB701F64B24E0072D393 /* ARTetrisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20BB6F1F64B24E0072D393 /* ARTetrisTests.swift */; };
 		8B8BF4341F411885000ED625 /* PadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8BF4331F411885000ED625 /* PadView.swift */; };
 		8BA74CFF1F411CD000C70C33 /* PadDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA74CFE1F411CD000C70C33 /* PadDirection.swift */; };
 		9088190D1F25336300181A7A /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190C1F25336300181A7A /* FocusSquare.swift */; };
 		9088190F1F25337E00181A7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190E1F25337E00181A7A /* Utilities.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B20BB721F64B24E0072D393 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 589A2D051F02417D003BB05E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 589A2D0C1F02417D003BB05E;
+			remoteInfo = ARTetris;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		581A9D851F065AB1003ABB79 /* TetrisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEngine.swift; sourceTree = "<group>"; };
@@ -38,6 +49,9 @@
 		58C1385C1F0567D20080598A /* TetrisWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisWell.swift; sourceTree = "<group>"; };
 		58C1385E1F05680E0080598A /* TetrisScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisScene.swift; sourceTree = "<group>"; };
 		58C138601F059B800080598A /* TetrisState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisState.swift; sourceTree = "<group>"; };
+		8B20BB6D1F64B24E0072D393 /* ARTetrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARTetrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B20BB6F1F64B24E0072D393 /* ARTetrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTetrisTests.swift; sourceTree = "<group>"; };
+		8B20BB711F64B24E0072D393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B8BF4331F411885000ED625 /* PadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadView.swift; sourceTree = "<group>"; };
 		8BA74CFE1F411CD000C70C33 /* PadDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadDirection.swift; sourceTree = "<group>"; };
 		9088190C1F25336300181A7A /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
@@ -52,6 +66,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B20BB6A1F64B24E0072D393 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -59,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				589A2D0F1F02417D003BB05E /* ARTetris */,
+				8B20BB6E1F64B24E0072D393 /* ARTetrisTests */,
 				589A2D0E1F02417D003BB05E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				589A2D0D1F02417D003BB05E /* ARTetris.app */,
+				8B20BB6D1F64B24E0072D393 /* ARTetrisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +117,15 @@
 			path = ARTetris;
 			sourceTree = "<group>";
 		};
+		8B20BB6E1F64B24E0072D393 /* ARTetrisTests */ = {
+			isa = PBXGroup;
+			children = (
+				8B20BB6F1F64B24E0072D393 /* ARTetrisTests.swift */,
+				8B20BB711F64B24E0072D393 /* Info.plist */,
+			);
+			path = ARTetrisTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,6 +146,24 @@
 			productReference = 589A2D0D1F02417D003BB05E /* ARTetris.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8B20BB6C1F64B24E0072D393 /* ARTetrisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B20BB761F64B24E0072D393 /* Build configuration list for PBXNativeTarget "ARTetrisTests" */;
+			buildPhases = (
+				8B20BB691F64B24E0072D393 /* Sources */,
+				8B20BB6A1F64B24E0072D393 /* Frameworks */,
+				8B20BB6B1F64B24E0072D393 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B20BB731F64B24E0072D393 /* PBXTargetDependency */,
+			);
+			name = ARTetrisTests;
+			productName = ARTetrisTests;
+			productReference = 8B20BB6D1F64B24E0072D393 /* ARTetrisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -126,6 +176,10 @@
 				TargetAttributes = {
 					589A2D0C1F02417D003BB05E = {
 						CreatedOnToolsVersion = 9.0;
+					};
+					8B20BB6C1F64B24E0072D393 = {
+						CreatedOnToolsVersion = 9.0;
+						TestTargetID = 589A2D0C1F02417D003BB05E;
 					};
 				};
 			};
@@ -143,6 +197,7 @@
 			projectRoot = "";
 			targets = (
 				589A2D0C1F02417D003BB05E /* ARTetris */,
+				8B20BB6C1F64B24E0072D393 /* ARTetrisTests */,
 			);
 		};
 /* End PBXProject section */
@@ -155,6 +210,13 @@
 				589A2D1D1F02417D003BB05E /* LaunchScreen.storyboard in Resources */,
 				589A2D1A1F02417D003BB05E /* Assets.xcassets in Resources */,
 				589A2D181F02417D003BB05E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8B20BB6B1F64B24E0072D393 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +242,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8B20BB691F64B24E0072D393 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B20BB701F64B24E0072D393 /* ARTetrisTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8B20BB731F64B24E0072D393 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 589A2D0C1F02417D003BB05E /* ARTetris */;
+			targetProxy = 8B20BB721F64B24E0072D393 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		589A2D161F02417D003BB05E /* Main.storyboard */ = {
@@ -333,6 +411,36 @@
 			};
 			name = Release;
 		};
+		8B20BB741F64B24E0072D393 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QN46P2PK7U;
+				INFOPLIST_FILE = ARTetrisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ardev.ARTetrisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARTetris.app/ARTetris";
+			};
+			name = Debug;
+		};
+		8B20BB751F64B24E0072D393 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = QN46P2PK7U;
+				INFOPLIST_FILE = ARTetrisTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ardev.ARTetrisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ARTetris.app/ARTetris";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -353,6 +461,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8B20BB761F64B24E0072D393 /* Build configuration list for PBXNativeTarget "ARTetrisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B20BB741F64B24E0072D393 /* Debug */,
+				8B20BB751F64B24E0072D393 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
