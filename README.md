@@ -44,7 +44,8 @@ ARTetris is available under the MIT license. See the LICENSE file for more info.
 - Focus square stabilization (sometimes the focus square or the board is jittery)
 - Correctly detecting depth of focus square (sometimes the board is off the ground)
 - Fix game over detection
-- Come up with a new way to display well frame that is easier to understand
 - Come up with a way to see blocks underneath other blocks
 - Show a ghost tetronmino for the eventual position on the bottom of the well
 - Implement fast movement (dropping)
+- Luo: Simplify well frame
+- Matt: Work on scale
