@@ -29,9 +29,9 @@ class TetrisScene {
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
-	private let x: Float
-	private let y: Float
-	private let z: Float
+	private var x: Float
+	private var y: Float
+	private var z: Float
 	
 	private var blocksByLine: [[SCNNode]] = []
 	private var recent: SCNNode!
@@ -51,9 +51,16 @@ class TetrisScene {
     
     
     func resize (scale: Float) {
-        print ("cell size", self.cell)
         uniformScale *= scale
+        
+//        self.cell = self.cell * uniformScale
+//        self.x = self.x * uniformScale
+//        self.y = self.y * uniformScale
+//        self.z = self.z * uniformScale
+        print ("cell size", self.cell)
+        
         self.frame.setUniformScale(uniformScale)
+        
         resizeTree(root: self.scene.rootNode, scale: uniformScale)
         for i in blocksByLine {
             for j in i {
@@ -63,13 +70,13 @@ class TetrisScene {
     }
     
     func resizeTree (root :SCNNode, scale: Float) {
+        root.setUniformScale(scale)
         if root.childNodes.count == 0 {
             return
         }
         for childNode in root.childNodes {
             resizeTree(root: childNode, scale: scale)
         }
-        root.setUniformScale(scale)
     }
     
 	func show(_ current: TetrisState) {
@@ -85,18 +92,19 @@ class TetrisScene {
 	}
 	
 	func addToWell(_ current: TetrisState) {
+        print("add to wall")
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
 		for i in 0...3 {
             let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
-            resizeTree(root: box, scale: uniformScale)
+//            resizeTree(root: box, scale: uniformScale)
 			scene.rootNode.addChildNode(box)
             resizeTree(root: scene.rootNode, scale: uniformScale)
 			let row = tetromino.y(i) + current.y
-			while(blocksByLine.count <= row) {
-				blocksByLine.append([])
-			}
-			blocksByLine[row].append(box)
+            while(blocksByLine.count <= row) {
+                blocksByLine.append([])
+            }
+            blocksByLine[row].append(box)
             for i in blocksByLine {
                 for j in i {
                     resizeTree(root: j, scale: uniformScale)
@@ -257,7 +265,6 @@ class TetrisScene {
 		geometry.firstMaterial = material
 		let node = SCNNode(geometry: geometry)
 		node.transform = matrix
-        resizeTree(root: node, scale: uniformScale)
 		return node
 	}
 	
