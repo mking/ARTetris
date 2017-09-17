@@ -289,14 +289,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return tapPoint.distanceTo(keyPoints[a]) < tapPoint.distanceTo(keyPoints[b])
         }
         let closestIndex = closestIndexes.first!
+        
+        print("tapPoint \(tapPoint)")
+        print("closestPoint \(keyPoints[closestIndex])")
         switch closestIndex {
         case 1:
+            print("go left")
             tetris?.left()
         case 2:
+            print("go right")
             tetris?.right()
         case 3:
+            print("go down")
             tetris?.backward()
         default:
+            print("go up")
             tetris?.forward()
         }
     }
