@@ -50,16 +50,26 @@ class TetrisScene {
     
     // Show the board (the bottom of the well)
     func createBoard() -> SCNNode {
-        let material = SCNMaterial.material(withDiffuse: UIColor.blue)
-        
-        let geometry = SCNPlane(width: CGFloat(config.width) * CGFloat(cell), height: CGFloat(config.depth) * CGFloat(cell))
-        geometry.firstMaterial = material
-        
-        let node = SCNNode(geometry: geometry)
+        let boardMaterial = SCNMaterial.material(withDiffuse: UIColor.blue)
+        let boardGeometry = SCNPlane(width: CGFloat(config.width) * CGFloat(cell), height: CGFloat(config.depth) * CGFloat(cell))
+        boardGeometry.firstMaterial = boardMaterial
+        let boardNode = SCNNode(geometry: boardGeometry)
         // Place the board in the center of the well
-        node.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z + ((Float(config.depth) / 2) * cell))
+        boardNode.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z + ((Float(config.depth) / 2) * cell))
         // Rotate the board to be parallel to the floor
-        node.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
+        boardNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
+        
+        let markerMaterial = SCNMaterial.material(withDiffuse: UIColor.yellow)
+        let markerGeometry = SCNPlane(width: CGFloat(config.width) * CGFloat(cell), height: CGFloat(cell) / 4)
+        markerGeometry.firstMaterial = markerMaterial
+        // Place marker at the bottom in the z direction
+        let markerNode = SCNNode(geometry: markerGeometry)
+        markerNode.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z)
+        markerNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
+        
+        let node = SCNNode()
+        node.addChildNode(boardNode)
+        node.addChildNode(markerNode)
         return node
     }
 	
