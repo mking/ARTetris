@@ -36,5 +36,8 @@ This project is maintained by the [exyte](http://www.exyte.com) company, a team 
 
 ARTetris is available under the MIT license. See the LICENSE file for more info.
 
-## Matt's TODO
-- Implement position movement based on tap (divide the infinite board plane into four parts)
+## TODO
+- Focus square speed (sometimes it takes a while for the focus square to appear)
+- Focus square stabilization (sometimes the focus square or the board is jittery)
+- Correctly detecting depth of focus square (sometimes the board is off the ground)
+- Correctly scaling the game to a normal size in the viewport (many times, it is too big or too small)

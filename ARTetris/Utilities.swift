@@ -643,29 +643,3 @@ func computeAngle(location: CGPoint, center: CGPoint) -> CGFloat {
     return angle
 }
 
-func computeDirection(angle: CGFloat) -> PadDirection {
-    if (angle < (1.0 / 4.0) * CGFloat.pi) {
-        return .right
-    } else if (angle < (3.0 / 4.0) * CGFloat.pi) {
-        return .top
-    } else if (angle < (5.0 / 4.0) * CGFloat.pi) {
-        return .left
-    } else if (angle < (7.0 / 4.0) * CGFloat.pi) {
-        return .bottom
-    } else {
-        return .right
-    }
-}
-
-func computeImage(direction: PadDirection) -> UIImage {
-    switch (direction) {
-    case .top:
-        return UIImage(named: "TopArrow")!
-    case .bottom:
-        return UIImage(named: "BottomArrow")!
-    case .left:
-        return UIImage(named: "LeftArrow")!
-    case .right:
-        return UIImage(named: "RightArrow")!
-    }
-}
