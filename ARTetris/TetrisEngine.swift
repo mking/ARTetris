@@ -77,14 +77,14 @@ class TetrisEngine {
 	private func nextTetromino() {
         repeat {
             current = .random(config)
-        } while (well.hasWallCollision(current))
+        } while (well.hasSideCollision(current))
         
-		if (well.hasCollision(current)) {
-			stopTimer()
-			scene.showGameOver(scores)
-		} else {
+        if (well.hasCollision(current)) {
+            stopTimer()
+            scene.showGameOver(scores)
+        } else {
 			scene.show(current)
-		}
+        }
 	}
 	
 	private func getScores(_ lineCount: Int) -> Int {

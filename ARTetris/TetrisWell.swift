@@ -22,19 +22,21 @@ class TetrisWell {
 	}
     
     public func hasCollision(_ state: TetrisState) -> Bool {
-        return hasWallCollision(state) || hasBlockCollision(state)
-    }
-    
-    // Side or floor collision
-    public func hasWallCollision(_ state: TetrisState) -> Bool {
-        // Check all the blocks of the teromino
         let tetromino = state.tetromino()
         for i in 0...3 {
             let potentialX = state.x + tetromino.x(i)
             let potentialY = state.y + tetromino.y(i)
             let potentialZ = state.z + tetromino.z(i)
             if (
-                potentialX < 0 || potentialX >= config.width || potentialY < 0 || potentialZ < 0 || potentialZ >= config.depth
+                // side, ceiling, or floor collision
+                potentialX < 0 ||
+                potentialX >= config.width ||
+                potentialY < 0 ||
+                potentialY >= config.height ||
+                potentialZ < 0 ||
+                potentialZ >= config.depth ||
+                // block collision
+                matrix[potentialY][potentialX][potentialZ]
             ) {
                 return true
             }
@@ -42,18 +44,16 @@ class TetrisWell {
         return false
     }
     
-    // Block collision
-    public func hasBlockCollision(_ state: TetrisState) -> Bool {
+    public func hasSideCollision(_ state: TetrisState) -> Bool {
         let tetromino = state.tetromino()
         for i in 0...3 {
             let potentialX = state.x + tetromino.x(i)
-            let potentialY = state.y + tetromino.y(i)
             let potentialZ = state.z + tetromino.z(i)
             if (
-                potentialX >= 0 && potentialX < config.width &&
-                potentialY >= 0 && potentialY < config.height &&
-                potentialZ >= 0 && potentialZ < config.depth &&
-                matrix[potentialY][potentialX][potentialZ]
+                potentialX < 0 ||
+                potentialX >= config.width ||
+                potentialZ < 0 ||
+                potentialZ >= config.depth
             ) {
                 return true
             }
@@ -64,6 +64,8 @@ class TetrisWell {
 	public func add(_ current: TetrisState) {   
 		let tetromino = current.tetromino()
 		for i in 0...3 {
+            // Be careful of index out of range here!
+            // Make sure hasCollision is working correctly to prevent this.
 			matrix[current.y + tetromino.y(i)][current.x + tetromino.x(i)][current.z + tetromino.z(i)] = true
 		}
 	}

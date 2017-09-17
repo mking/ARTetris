@@ -40,12 +40,28 @@ class TetrisScene {
 	init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float) {
 		self.config = config
 		self.scene = scene
-		self.x = x
+        self.x = x
 		self.y = y
 		self.z = z
 		self.frame = createWellFrame(config.width, config.height, config.depth)
 		scene.rootNode.addChildNode(self.frame)
+        scene.rootNode.addChildNode(createBoard())
 	}
+    
+    // Show the board (the bottom of the well)
+    func createBoard() -> SCNNode {
+        let material = SCNMaterial.material(withDiffuse: UIColor.blue)
+        
+        let geometry = SCNPlane(width: CGFloat(config.width) * CGFloat(cell), height: CGFloat(config.depth) * CGFloat(cell))
+        geometry.firstMaterial = material
+        
+        let node = SCNNode(geometry: geometry)
+        // Place the board in the center of the well
+        node.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z + ((Float(config.depth) / 2) * cell))
+        // Rotate the board to be parallel to the floor
+        node.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
+        return node
+    }
 	
 	func show(_ current: TetrisState) {
         // recent holds the current dropping tetronimo (its related scene nodes).
@@ -166,31 +182,26 @@ class TetrisScene {
     private func createWellFrame(_ width: Int, _ height: Int, _ depth: Int) -> SCNNode {
 		let node = SCNNode()
         
-        // Matt's note: These well lines aren't accurate right now.
-        // The right fix is to remove TetrisConfig.extraLength and Tetromino.offset, making sure the well fits within the defined TetrisConfig dimensions.
-        // Then we need to add logic when adding a Tetromino so the initial Tetromino is in a valid position from an x/z perspective.
-        // If the Tetromino is an invalid position from a y perspective, the user loses the game.
-        
-        // user facing column lines
-		for i in 1...width + 1 {
-            for k in 0...depth + 1 {
-                addLine(to: node, 0.001, cell * Float(height + 3), 0.001, Float(i), 0, Float(k))
+        // x direction lines
+        for yIndex in 0...height {
+            for zIndex in 0...depth {
+                addLine(to: node, Float(width) * cell, Float(0.001), Float(0.001), 0, Float(yIndex), Float(zIndex))
             }
-		}
+        }
         
-        // user facing row lines
-		for i in 0...height + 3 {
-            for k in 0...depth + 1 {
-                addLine(to: node, cell * Float(width), 0.001, 0.001, 1, Float(i), Float(k))
+        // z direction lines
+        for yIndex in 0...height {
+            for xIndex in 0...width {
+                addLine(to: node, Float(0.001), Float(0.001), Float(depth) * cell, Float(xIndex), Float(yIndex), Float(depth))
             }
-		}
+        }
         
-        // z direction plane parallel lines
-		for i in 1...width + 1 {
-			for j in 0...height + 3 {
-				addLine(to: node, 0.001, 0.001, cell, Float(i), Float(j), 1)
-			}
-		}
+        // y direction lines
+        for xIndex in 0...width {
+            for zIndex in 0...depth {
+                addLine(to: node, Float(0.001), Float(height) * cell, Float(0.001), Float(xIndex), 0, Float(zIndex))
+            }
+        }
         
 		return node
 	}

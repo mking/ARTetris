@@ -126,13 +126,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func placeTetris() {
         // place tetris at last focus square position
 //        print("+++ focus square position \(focusSquare!.position)")
-        let x = focusSquare!.position.x
-        let y = focusSquare!.position.y
-        let z = focusSquare!.position.z
         
         // initialize Tetris with a well placed on this plane
         let config = TetrisConfig.standard
         let well = TetrisWell(config)
+        
+        let x = focusSquare!.position.x
+        let y = focusSquare!.position.y
+        let z = focusSquare!.position.z 
+        
         let scene = TetrisScene(config, self.sceneView.scene, x, y, z)
         self.tetris = TetrisEngine(config, well, scene)
     }
