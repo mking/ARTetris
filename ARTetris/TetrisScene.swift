@@ -62,8 +62,8 @@ class TetrisScene {
         let markerMaterial = SCNMaterial.material(withDiffuse: UIColor.yellow)
         let markerGeometry = SCNPlane(width: CGFloat(config.width) * CGFloat(cell), height: CGFloat(cell) / 4)
         markerGeometry.firstMaterial = markerMaterial
-        // Place marker at the bottom in the z direction
         let markerNode = SCNNode(geometry: markerGeometry)
+        // Place marker at the bottom in the z direction
         markerNode.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z)
         markerNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
         

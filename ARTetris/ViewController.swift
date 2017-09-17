@@ -269,6 +269,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             return
+        } else {
+            tapTranslate(sender: sender)
+        }
+    }
+    
+    func tapTranslate(sender: UITapGestureRecognizer) {
+        let tapPoint = sender.location(in: self.sceneView)
+        
+        // points are based on top left origin
+        let keyPoints = [
+            CGPoint(x: self.sceneView.frame.width / 2, y: 0), // top middle
+            CGPoint(x: 0, y: self.sceneView.frame.height / 2), // left middle
+            CGPoint(x: self.sceneView.frame.width, y: self.sceneView.frame.height / 2), // right middle
+            CGPoint(x: self.sceneView.frame.width / 2, y: self.sceneView.frame.height), // bottom middle
+        ]
+        
+        let closestIndexes = (0..<keyPoints.count).sorted { (a, b) -> Bool in
+            return tapPoint.distanceTo(keyPoints[a]) < tapPoint.distanceTo(keyPoints[b])
+        }
+        let closestIndex = closestIndexes.first!
+        switch closestIndex {
+        case 1:
+            tetris?.left()
+        case 2:
+            tetris?.right()
+        case 3:
+            tetris?.backward()
+        default:
+            tetris?.forward()
         }
     }
     
