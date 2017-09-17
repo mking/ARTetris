@@ -134,7 +134,7 @@ class FocusSquare: SCNNode {
         return normalized
     }
     
-    private func scaleBasedOnDistance(camera: ARCamera?) -> Float {
+    public func scaleBasedOnDistance(camera: ARCamera?) -> Float {
         if let camera = camera {
             let distanceFromCamera = (self.worldPosition - SCNVector3.positionFromTransform(camera.transform)).length()
             // This function reduces size changes of the focus square based on the distance by scaling it up if it far away,

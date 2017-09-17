@@ -25,7 +25,7 @@ class TetrisScene {
 	private static let scoresColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
 	private static let titleColor = UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0)
 	
-	private let cell: Float = 0.03
+	private let cell: Float
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
@@ -37,12 +37,13 @@ class TetrisScene {
 	private var recent: SCNNode!
 	private var frame: SCNNode!
 	
-	init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float, _ cell: Float) {
 		self.config = config
 		self.scene = scene
         self.x = x
 		self.y = y
 		self.z = z
+        self.cell = cell
 		self.frame = createWellFrame(config.width, config.height, config.depth)
 		scene.rootNode.addChildNode(self.frame)
         scene.rootNode.addChildNode(createBoard())
@@ -64,7 +65,7 @@ class TetrisScene {
         markerGeometry.firstMaterial = markerMaterial
         let markerNode = SCNNode(geometry: markerGeometry)
         // Place marker at the bottom in the z direction
-        markerNode.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z)
+        markerNode.position = SCNVector3(x + ((Float(config.width) / 2) * cell), y, z + (Float(config.depth) * cell))
         markerNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
         
         let node = SCNNode()

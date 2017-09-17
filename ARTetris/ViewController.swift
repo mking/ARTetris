@@ -131,9 +131,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let x = focusSquare!.position.x
         let y = focusSquare!.position.y
-        let z = focusSquare!.position.z 
+        let z = focusSquare!.position.z
+        let cell = 0.03 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
         
-        let scene = TetrisScene(config, self.sceneView.scene, x, y, z)
+        let scene = TetrisScene(config, self.sceneView.scene, x, y, z, cell)
         self.tetris = TetrisEngine(config, well, scene)
     }
     
@@ -301,10 +302,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             tetris?.right()
         case 3:
             print("go down")
-            tetris?.backward()
+            tetris?.forward()
         default:
             print("go up")
-            tetris?.forward()
+            tetris?.backward()
         }
     }
     
