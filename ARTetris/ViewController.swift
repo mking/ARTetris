@@ -324,4 +324,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func handleDownSwipe(_ sender: UISwipeGestureRecognizer) {
         tetris?.rotateX(1)
     }
+    
+    @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        guard tetris != nil else { return }
+        
+        tetris!.scene.scale = tetris!.scene.scale * Float(sender.scale)
+    }
 }

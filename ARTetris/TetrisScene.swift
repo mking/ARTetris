@@ -29,6 +29,7 @@ class TetrisScene {
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
+    private let gameNode: SCNNode
 	private let x: Float
 	private let y: Float
 	private let z: Float
@@ -44,9 +45,11 @@ class TetrisScene {
 		self.y = y
 		self.z = z
         self.cell = cell
+        gameNode = SCNNode()
 		self.frame = createWellFrame(config.width, config.height, config.depth)
-		scene.rootNode.addChildNode(self.frame)
-        scene.rootNode.addChildNode(createBoard())
+        gameNode.addChildNode(self.frame)
+        gameNode.addChildNode(createBoard())
+		scene.rootNode.addChildNode(gameNode)
 	}
     
     // Show the board (the bottom of the well)
@@ -83,7 +86,7 @@ class TetrisScene {
 		for i in 0...3 {
 			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i)))
 		}
-		scene.rootNode.addChildNode(recent)
+		gameNode.addChildNode(recent)
 	}
 	
 	func addToWell(_ current: TetrisState) {
@@ -92,7 +95,7 @@ class TetrisScene {
 		for i in 0...3 {
             // Here we permanently add the tetronimo to the well.
 			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
-			scene.rootNode.addChildNode(box)
+			gameNode.addChildNode(box)
 			let row = tetromino.y(i) + current.y
 			while(blocksByLine.count <= row) {
 				blocksByLine.append([])
@@ -155,7 +158,7 @@ class TetrisScene {
 		let matrix = SCNMatrix4Mult(SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0), translate(0, 0))
 		let floor = createNode(SCNPlane(width: 10, height: 10), matrix, TetrisScene.floorColor)
 		floor.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-		scene.rootNode.addChildNode(floor)
+		gameNode.addChildNode(floor)
 		
 		for i in 0..<blocksByLine.count {
 			// Apply little impulse to all boxes in a random direction.
@@ -180,14 +183,14 @@ class TetrisScene {
 		let y = node.position.y
 		animate(node, "position.y", from: y, to: y + cell * 4, during: 2)
 		animate(node, "opacity", from: 1, to: 0, during: 2)
-		self.scene.rootNode.addChildNode(node)
+		gameNode.addChildNode(node)
 	}
 	
 	private func showFinalScores(_ scores: Int) {
 		let x = Float(config.width / 2)
 		let y = Float(config.height / 2)
 		let node = createNode(text("Scores: \(scores)"), translate(x, y).scale(0.003), TetrisScene.titleColor)
-		self.scene.rootNode.addChildNode(node)
+		gameNode.addChildNode(node)
 	}
 	
     private func createWellFrame(_ width: Int, _ height: Int, _ depth: Int) -> SCNNode {
@@ -262,6 +265,15 @@ class TetrisScene {
 	
 	private func cg(_ f: Float) -> CGFloat { return CGFloat(f) }
 	
+    var scale: Float {
+        get {
+            return gameNode.scale.x
+        }
+        
+        set {
+            gameNode.setUniformScale(min(2.0, max(0.5, newValue)))
+        }
+    }
 }
 
 extension SCNMatrix4 {
