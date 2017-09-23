@@ -48,7 +48,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - ARKit / ARSCNView
     let session = ARSession()
-    var sessionConfig: ARSessionConfiguration = ARWorldTrackingSessionConfiguration()
+    var sessionConfig: ARConfiguration = ARWorldTrackingConfiguration()
     var use3DOFTracking = false 
     var use3DOFTrackingFallback = false
     var screenCenter: CGPoint?
@@ -79,15 +79,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    private func getSessionConfiguration() -> ARSessionConfiguration {
-        if ARWorldTrackingSessionConfiguration.isSupported {
+    private func getSessionConfiguration() -> ARConfiguration {
+        if ARWorldTrackingConfiguration.isSupported {
             // Create a session configuration
-            let configuration = ARWorldTrackingSessionConfiguration()
+            let configuration = ARWorldTrackingConfiguration()
             configuration.planeDetection = .horizontal
             return configuration;
         } else {
             // Slightly less immersive AR experience due to lower end processor
-            return ARSessionConfiguration()
+            return AROrientationTrackingConfiguration()
         }
     }
     
