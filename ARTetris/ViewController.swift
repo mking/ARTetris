@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var imageView: UIImageView!
     
+    var startScale: Float = 0
     var didTap = false
     
     override func viewDidLoad() {
@@ -238,6 +239,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if didTap && tetris == nil {
             placeTetris()
         }
+        
+        if let s = focusSquare, let p = s.lastPosition {
+            print("tetris position \(p)")
+        }
     }
     
     private func addGestures() {
@@ -327,7 +332,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
         guard tetris != nil else { return }
-        
-        tetris!.scene.scale = tetris!.scene.scale * Float(sender.scale)
+
+        switch sender.state {
+        case .began:
+            startScale = tetris!.scene.scale
+        case .changed:
+            tetris!.scene.scale = startScale * Float(sender.scale)
+        default:
+            break
+        }
     }
 }

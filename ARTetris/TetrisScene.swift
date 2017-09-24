@@ -30,6 +30,7 @@ class TetrisScene {
 	private let config: TetrisConfig
 	private let scene: SCNScene
     private let gameNode: SCNNode
+    private var pinchNode: SCNNode!
 	private let x: Float
 	private let y: Float
 	private let z: Float
@@ -45,12 +46,28 @@ class TetrisScene {
 		self.y = y
 		self.z = z
         self.cell = cell
-        gameNode = SCNNode()
-		self.frame = createWellFrame(config.width, config.height, config.depth)
-        gameNode.addChildNode(self.frame)
-        gameNode.addChildNode(createBoard())
-		scene.rootNode.addChildNode(gameNode)
+        self.gameNode = SCNNode()
+        self.frame = createWellFrame(config.width, config.height, config.depth)
+//        gameNode.addChildNode(self.frame)
+//        gameNode.addChildNode(createBoard())
+//        scene.rootNode.addChildNode(gameNode)
+        self.pinchNode = createPinchNode()
+        scene.rootNode.addChildNode(pinchNode)
 	}
+    
+    func createPinchNode() -> SCNNode {
+        let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.0)
+        let cubeMaterial = SCNMaterial.material(withDiffuse: UIColor.red)
+        cubeGeometry.firstMaterial = cubeMaterial
+        let cubeNode = SCNNode(geometry: cubeGeometry)
+        cubeNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
+        
+        let pinchNode = SCNNode()
+        pinchNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
+//        pinchNode.addChildNode(cubeNode)
+        pinchNode.addChildNode(self.frame)
+        return pinchNode
+    }
     
     // Show the board (the bottom of the well)
     func createBoard() -> SCNNode {
@@ -234,9 +251,13 @@ class TetrisScene {
 	}
 	
 	private func addLine(to node: SCNNode, _ w: Float, _ h: Float, _ l: Float, _ x: Float, _ y: Float, _ z: Float) {
-		let line = SCNBox(width: cg(w), height: cg(h), length: cg(l), chamferRadius: 0)
-		let matrix = SCNMatrix4Translate(translate(x - 0.5, y, z - 0.5), w / 2, h / 2, -l / 2)
-		node.addChildNode(createNode(line, matrix, TetrisScene.wellColor))
+		let lineGeometry = SCNBox(width: cg(w), height: cg(h), length: cg(l), chamferRadius: 0)
+        lineGeometry.firstMaterial = SCNMaterial.material(withDiffuse: TetrisScene.wellColor)
+        let lineNode = SCNNode(geometry: lineGeometry)
+        lineNode.position = SCNVector3(((x - 0.5) * cell) + (w / 2), (y * cell) + (h / 2), ((z - 0.5) * cell) + (-l / 2))
+        node.addChildNode(lineNode)
+//        let matrix = SCNMatrix4Translate(translate(x - 0.5, y, z - 0.5), w / 2, h / 2, -l / 2)
+//        node.addChildNode(createNode(line, matrix, TetrisScene.wellColor))
 	}
 	
 	private func animate(_ node: SCNNode, _ path: String, from: Any, to: Any, during: CFTimeInterval) {
@@ -267,11 +288,11 @@ class TetrisScene {
 	
     var scale: Float {
         get {
-            return gameNode.scale.x
+            return pinchNode.scale.x
         }
         
         set {
-            gameNode.setUniformScale(min(2.0, max(0.5, newValue)))
+            pinchNode.setUniformScale(min(2.0, max(0.5, newValue)))
         }
     }
 }
