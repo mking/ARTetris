@@ -445,7 +445,7 @@ extension ARSCNView {
         
         let points = features.points
         
-        for i in 0...points.count {
+        for i in 0..<points.count {
             
             let feature = points[Int(i)]
             let featurePos = SCNVector3(feature)
@@ -521,7 +521,7 @@ extension ARSCNView {
         var closestFeaturePoint = origin
         var minDistance = Float.greatestFiniteMagnitude
         
-        for i in 0...points.count {
+        for i in 0..<points.count {
             let feature = points[Int(i)]
             let featurePos = SCNVector3(feature)
             
