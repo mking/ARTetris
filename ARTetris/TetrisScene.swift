@@ -66,6 +66,7 @@ class TetrisScene {
         pinchNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
 //        pinchNode.addChildNode(cubeNode)
         pinchNode.addChildNode(self.frame)
+        pinchNode.addChildNode(self.gameNode)
         return pinchNode
     }
     
@@ -172,8 +173,10 @@ class TetrisScene {
 		scene.physicsWorld.gravity = SCNVector3Make(0, -1.6, 0)
 		
 		// SCNPlanes are vertically oriented in their local coordinate space
-		let matrix = SCNMatrix4Mult(SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0), translate(0, 0))
-		let floor = createNode(SCNPlane(width: 10, height: 10), matrix, TetrisScene.floorColor)
+		//let matrix = SCNMatrix4Mult(SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0), translate(0, 0))
+		let floor = createNode(SCNPlane(width: 10, height: 10), TetrisScene.floorColor)
+        floor.position = translate(0, 0)
+        floor.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
 		floor.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
 		gameNode.addChildNode(floor)
 		
@@ -196,7 +199,9 @@ class TetrisScene {
 	}
 	
 	private func showLinesScores(_ line: Float, _ scores: Int) {
-		let node = createNode(text("+\(scores)"), translate(5, line, 2).scale(0.001), TetrisScene.scoresColor)
+		let node = createNode(text("+\(scores)"), TetrisScene.scoresColor)
+        node.position = translate(5, line, 2)
+        node.setUniformScale(0.001)
 		let y = node.position.y
 		animate(node, "position.y", from: y, to: y + cell * 4, during: 2)
 		animate(node, "opacity", from: 1, to: 0, during: 2)
@@ -206,7 +211,9 @@ class TetrisScene {
 	private func showFinalScores(_ scores: Int) {
 		let x = Float(config.width / 2)
 		let y = Float(config.height / 2)
-		let node = createNode(text("Scores: \(scores)"), translate(x, y).scale(0.003), TetrisScene.titleColor)
+		let node = createNode(text("Scores: \(scores)"), TetrisScene.titleColor)
+        node.position = translate(x, y, 0)
+        node.setUniformScale(0.003)
 		gameNode.addChildNode(node)
 	}
 	
@@ -246,8 +253,10 @@ class TetrisScene {
     private func block(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int) -> SCNNode {
 		let cell = cg(self.cell)
 		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
-		let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
-		return createNode(box, matrix, TetrisScene.colors[state.index])
+//        let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
+		let node = createNode(box, TetrisScene.colors[state.index])
+        node.position = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
+        return node
 	}
 	
 	private func addLine(to node: SCNNode, _ w: Float, _ h: Float, _ l: Float, _ x: Float, _ y: Float, _ z: Float) {
@@ -270,18 +279,23 @@ class TetrisScene {
 		node.addAnimation(animation, forKey: nil)
 	}
 	
-	private func createNode(_ geometry: SCNGeometry, _ matrix: SCNMatrix4, _ color: UIColor) -> SCNNode {
+//    private func createNode(_ geometry: SCNGeometry, _ matrix: SCNMatrix4, _ color: UIColor) -> SCNNode {
+//        return createNode(geometry, color)
+//    }
+    
+	private func createNode(_ geometry: SCNGeometry, _ color: UIColor) -> SCNNode {
 		let material = SCNMaterial()
 		material.diffuse.contents = color
 		// use the same material for all geometry elements
 		geometry.firstMaterial = material
 		let node = SCNNode(geometry: geometry)
-		node.transform = matrix
+		//node.transform = matrix
 		return node
 	}
 	
-	private func translate(_ x: Float, _ y: Float, _ z: Float = 0) -> SCNMatrix4 {
-		return SCNMatrix4MakeTranslation(self.x + x * cell, self.y + y * cell, self.z + z * cell)
+	private func translate(_ x: Float, _ y: Float, _ z: Float = 0) -> SCNVector3 {
+        return SCNVector3(x * cell, y * cell, z * cell)
+//        return SCNVector3(self.x + x * cell, self.y + y * cell, self.z + z * cell)
 	}
 	
 	private func cg(_ f: Float) -> CGFloat { return CGFloat(f) }

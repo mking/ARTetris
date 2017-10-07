@@ -148,8 +148,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //    (If any such anchors exist & only within their extents.)
         
         let planeHitTestResults = sceneView.hitTest(position, types: .existingPlaneUsingExtent)
-        if let result = planeHitTestResults.first {
-            
+        if let result = planeHitTestResults.first {            
             let planeHitTestPosition = SCNVector3.positionFromTransform(result.worldTransform)
             let planeAnchor = result.anchor as? ARPlaneAnchor
 //            print("+++ plane anchor position \(planeAnchor!.center)")
@@ -178,7 +177,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //    against an infinite, horizontal plane (ignoring the real world).
         
         if infinitePlane || !highQualityFeatureHitTestResult {
-            
             let pointOnPlane = objectPos ?? SCNVector3Zero
             
             let pointOnInfinitePlane = sceneView.hitTestWithInfiniteHorizontalPlane(position, pointOnPlane)
@@ -241,7 +239,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         if let s = focusSquare, let p = s.lastPosition {
-            print("tetris position \(p)")
+//            print("tetris position \(p)")
         }
     }
     
