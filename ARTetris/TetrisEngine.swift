@@ -24,8 +24,8 @@ class TetrisEngine {
 		self.config = config
 		self.well = well
 		self.scene = scene
-		self.current = .random(config)
-		self.scene.show(current)
+        self.current = .random(config)
+        self.setState(current)
 		startTimer()
 	}
 	
@@ -51,10 +51,21 @@ class TetrisEngine {
 		}
 	}
 	
+    func getProjection () -> TetrisState {
+        var curCopy = current
+        while(!well.hasCollision(curCopy.down())) {
+            curCopy = curCopy.down()
+        }
+
+        return curCopy
+    }
+
 	private func setState(_ state: TetrisState) {
 		if (!well.hasCollision(state)) {
 			self.current = state
 			scene.show(state)
+            let project = self.getProjection()
+            scene.showProjection(project)
 		}
 	}
 	
@@ -115,8 +126,7 @@ class TetrisEngine {
 			if (self.well.hasCollision(down)) {
 				self.addCurrentTetrominoToWell()
 			} else {
-				self.current = down
-				self.scene.show(self.current)
+                self.setState(down)
 			}
 		}
 	}

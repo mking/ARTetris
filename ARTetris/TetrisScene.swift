@@ -20,8 +20,9 @@ class TetrisScene {
 		UIColor(red:0.20, green:0.67, blue:0.86, alpha:1.0),
 		UIColor(red:0.56, green:0.56, blue:0.58, alpha:1.0)]
 	
-	private static let wellColor = UIColor(red:0, green:0, blue:0, alpha:0.3)
-	private static let floorColor = UIColor(red:0, green:0, blue:0, alpha:0)
+	private static let wellColor = UIColor(red:0, green:0, blue:0, alpha:0)
+    private static let projectionColor = UIColor(red:0, green:0, blue:0.2, alpha:0.2)
+	private static let floorColor = UIColor(red:0, green:0, blue:0, alpha:0.3)
 	private static let scoresColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
 	private static let titleColor = UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0)
 	
@@ -37,8 +38,9 @@ class TetrisScene {
 	
 	private var blocksByLine: [[SCNNode]] = []
 	private var recent: SCNNode!
+    private var projection: SCNNode!
 	private var frame: SCNNode!
-	
+    
     init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float, _ cell: Float) {
 		self.config = config
 		self.scene = scene
@@ -107,6 +109,16 @@ class TetrisScene {
 		gameNode.addChildNode(recent)
 	}
 	
+    func showProjection(_ project: TetrisState) {
+        projection?.removeFromParentNode()
+        projection = SCNNode()
+        let tetromino = project.tetromino()
+        for i in 0...3 {
+            projection.addChildNode(blockWithColor(project, tetromino.x(i), tetromino.y(i), tetromino.z(i), TetrisScene.projectionColor))
+        }
+        gameNode.addChildNode(projection)
+    }
+
 	func addToWell(_ current: TetrisState) {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
@@ -259,6 +271,14 @@ class TetrisScene {
         return node
 	}
 	
+    private func blockWithColor(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int, _ color: UIColor) -> SCNNode {
+        let cell = cg(self.cell)
+        let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
+        let node = createNode(box, color)
+        node.position = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
+        return node
+    }
+
 	private func addLine(to node: SCNNode, _ w: Float, _ h: Float, _ l: Float, _ x: Float, _ y: Float, _ z: Float) {
 		let lineGeometry = SCNBox(width: cg(w), height: cg(h), length: cg(l), chamferRadius: 0)
         lineGeometry.firstMaterial = SCNMaterial.material(withDiffuse: TetrisScene.wellColor)
