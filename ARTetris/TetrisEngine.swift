@@ -88,7 +88,7 @@ class TetrisEngine {
 	private func nextTetromino() {
         repeat {
             current = .random(config)
-        } while (well.hasSideCollision(current))
+        } while (well.hasSideCollision(current) > 0)
         
         if (well.hasCollision(current)) {
             stopTimer()

@@ -44,21 +44,30 @@ class TetrisWell {
         return false
     }
     
-    public func hasSideCollision(_ state: TetrisState) -> Bool {
+    // 1 for left; 2 for right; 3 for back; 4 for front
+    public func hasSideCollision(_ state: TetrisState) -> Int {
         let tetromino = state.tetromino()
         for i in 0...3 {
             let potentialX = state.x + tetromino.x(i)
             let potentialZ = state.z + tetromino.z(i)
-            if (
-                potentialX < 0 ||
-                potentialX >= config.width ||
-                potentialZ < 0 ||
-                potentialZ >= config.depth
-            ) {
-                return true
+
+            if (potentialX < 0) {
+                return 1
+            }
+
+            if (potentialX >= config.width) {
+                return 2
+            }
+
+            if (potentialZ < 0) {
+                return 3
+            }
+
+            if (potentialZ >= config.depth) {
+                return 4
             }
         }
-        return false
+        return 0
     }
     
 	public func add(_ current: TetrisState) {   
