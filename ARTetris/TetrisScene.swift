@@ -20,7 +20,8 @@ class TetrisScene {
 		UIColor(red:0.20, green:0.67, blue:0.86, alpha:1.0),
 		UIColor(red:0.56, green:0.56, blue:0.58, alpha:1.0)]
 	
-	private static let wellColor = UIColor(red:0, green:0, blue:0, alpha:0)
+	private static let wellColor = UIColor(red:0, green:0, blue:0, alpha:0.0)
+    private static let sideWellColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
     private static let projectionColor = UIColor(red:0, green:0, blue:0.2, alpha:0.2)
 	private static let floorColor = UIColor(red:0, green:0, blue:0, alpha:0.3)
 	private static let scoresColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
@@ -107,6 +108,11 @@ class TetrisScene {
 			recent.addChildNode(block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i)))
 		}
 		gameNode.addChildNode(recent)
+
+        // reset frame to be transparent
+        for node in self.frame.childNodes {
+            node.geometry?.firstMaterial?.diffuse.contents = TetrisScene.wellColor
+        }
 	}
 	
     func showProjection(_ project: TetrisState) {
@@ -231,7 +237,6 @@ class TetrisScene {
 	
     private func createWellFrame(_ width: Int, _ height: Int, _ depth: Int) -> SCNNode {
 		let node = SCNNode()
-        
         // x direction lines
         for yIndex in 0...height {
             for zIndex in 0...depth {
@@ -256,6 +261,51 @@ class TetrisScene {
 		return node
 	}
 	
+    // need to be align with createWellFrame function's implementation
+    // 1 for left; 2 for right; 3 for back; 4 for front
+    func showSideWall(_ side: Int) {
+        let X = config.width + 1
+        let Y = config.height + 1
+        let Z = config.depth + 1
+
+        switch side {
+        case 1:
+            // left
+            for i in stride(from: Z * Y, to: Z * Y + X * Y, by: X) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+            for i in stride(from: Z * Y + X * Y, to: Z * Y + X * Y + Z, by: 1) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+        case 2:
+            // right
+            for i in stride(from: Z * Y + X - 1, to: Z * Y + X * Y , by: X) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+            for i in stride(from: Z * Y + X * Y + Z * (X - 1), to: Z * Y + X * Y + Z * X, by: 1) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+        case 3:
+            // back
+            for i in stride(from: 0, to: Z * Y, by: Z) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+            for i in stride(from: Z * Y + X * Y, to: Z * Y + X * Y + Z * X, by: Z) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+        case 4:
+            // front
+            for i in stride(from: Z - 1, to: Z * Y, by: Z) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+            for i in stride(from: Z * Y + X * Y + Z - 1, to: Z * Y + X * Y + Z * X, by: Z) {
+                self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+            }
+        default:
+            break
+        }
+    }
+
 	private func text(_ string: String) -> SCNText {
 		let text = SCNText(string: string, extrusionDepth: 1)
 		text.font = UIFont.systemFont(ofSize: 20)

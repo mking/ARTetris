@@ -61,6 +61,8 @@ class TetrisEngine {
     }
 
 	private func setState(_ state: TetrisState) {
+        scene.showSideWall(well.hasSideCollision(state))
+
 		if (!well.hasCollision(state)) {
 			self.current = state
 			scene.show(state)
