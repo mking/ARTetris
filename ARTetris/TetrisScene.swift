@@ -113,6 +113,7 @@ class TetrisScene {
         for node in self.frame.childNodes {
             node.geometry?.firstMaterial?.diffuse.contents = TetrisScene.wellColor
         }
+        showFloor()
 	}
 	
     func showProjection(_ project: TetrisState) {
@@ -303,6 +304,19 @@ class TetrisScene {
             }
         default:
             break
+        }
+    }
+
+    func showFloor() {
+        let X = config.width + 1
+        let Y = config.height + 1
+        let Z = config.depth + 1
+
+        for i in stride(from: 0, to: Z, by: 1) {
+            self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
+        }
+        for i in stride(from: Z * Y, to: Z * Y + X, by: 1) {
+            self.frame.childNodes[i].geometry?.firstMaterial?.diffuse.contents = TetrisScene.sideWellColor
         }
     }
 
