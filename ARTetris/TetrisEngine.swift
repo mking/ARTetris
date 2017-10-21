@@ -72,17 +72,17 @@ class TetrisEngine {
 	}
 	
 	private func addCurrentTetrominoToWell() {
-		well.add(current)
-		scene.addToWell(current)
-		
-		let lines = well.clearFilledLines()
-		if (lines.isEmpty) {
+		let names = scene.addToWell(current)
+        well.add(current, names)
+        
+		let transition = well.clearFilledLines()
+		if (transition.isEmpty()) {
 			nextTetromino()
 		} else {
 			animate(onComplete: nextTetromino) {
-				let scores = getScores(lines.count)
+				let scores = getScores(transition.score)
 				self.scores += scores
-				return scene.removeLines(lines, scores)
+				return scene.removeLines(transition, scores)
 			}
 		}
 	}
@@ -122,7 +122,7 @@ class TetrisEngine {
 	}
 	
 	private func startTimer() {
-		self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             // When the current tetromino reaches the bottom, add it to the well.
 			let down = self.current.down()
 			if (self.well.hasCollision(down)) {
