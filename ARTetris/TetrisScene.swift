@@ -351,7 +351,7 @@ class TetrisScene {
 		let lineGeometry = SCNBox(width: cg(w), height: cg(h), length: cg(l), chamferRadius: 0)
         lineGeometry.firstMaterial = SCNMaterial.material(withDiffuse: TetrisScene.wellColor)
         let lineNode = SCNNode(geometry: lineGeometry)
-        lineNode.position = SCNVector3(((x - 0.5) * cell) + (w / 2), (y * cell) + (h / 2), ((z - 0.5) * cell) + (-l / 2))
+        lineNode.position = SCNVector3(((x - 0.5) * cell) + (w / 2), ((y - 0.5) * cell) + (h / 2), ((z - 0.5) * cell) + (-l / 2))
         node.addChildNode(lineNode)
 //        let matrix = SCNMatrix4Translate(translate(x - 0.5, y, z - 0.5), w / 2, h / 2, -l / 2)
 //        node.addChildNode(createNode(line, matrix, TetrisScene.wellColor))
