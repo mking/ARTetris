@@ -32,7 +32,7 @@ class TetrisWell {
                 potentialX < 0 ||
                 potentialX >= config.width ||
                 potentialY < 0 ||
-                potentialY >= config.height ||
+                potentialY > config.height + 2 ||
                 potentialZ < 0 ||
                 potentialZ >= config.depth ||
                 // block collision
