@@ -37,15 +37,8 @@ This project is maintained by the [exyte](http://www.exyte.com) company, a team 
 ARTetris is available under the MIT license. See the LICENSE file for more info.
 
 ## TODO
-- Fix off by one errors
-  - The well frame is missing one level (the lowest level)
-  - The board rectangle is off by half a unit
-- Focus square speed (sometimes it takes a while for the focus square to appear)
-- Focus square stabilization (sometimes the focus square or the board is jittery)
-- Correctly detecting depth of focus square (sometimes the board is off the ground)
-- Fix game over detection
-- Come up with a way to see blocks underneath other blocks
-- Show a ghost tetronmino for the eventual position on the bottom of the well
-- Implement fast movement (dropping)
-- Luo: Simplify well frame
-- Matt: Work on scale
+- Home screen
+- Down button
+- Matt: 
+  - Show score
+  - Restart
