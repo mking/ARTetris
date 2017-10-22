@@ -16,7 +16,7 @@ class TetrisWell {
 		self.config = config
         
         // Init the matrix
-        for _ in 0..<config.height {
+        for _ in 0..<config.matrixHeight {
             addLine()
         }
 	}
@@ -27,12 +27,13 @@ class TetrisWell {
             let potentialX = state.x + tetromino.x(i)
             let potentialY = state.y + tetromino.y(i)
             let potentialZ = state.z + tetromino.z(i)
+            print ("x: ", potentialX, "y: ", potentialY, "z: ", potentialZ)
             if (
                 // side, ceiling, or floor collision
                 potentialX < 0 ||
                 potentialX >= config.width ||
                 potentialY < 0 ||
-                potentialY > config.height + 2 ||
+                potentialY >= config.matrixHeight ||
                 potentialZ < 0 ||
                 potentialZ >= config.depth ||
                 // block collision
@@ -105,7 +106,7 @@ class TetrisWell {
             }
         }
         var newMatrix = [[[TetrisSlot]]]()
-        for i in 0..<config.height {
+        for i in 0..<config.matrixHeight {
             newMatrix.append([[TetrisSlot]]())
             for j in 0..<config.width {
                 newMatrix[i].append([TetrisSlot]())
@@ -124,7 +125,7 @@ class TetrisWell {
 	}
     
     func shiftColumnDown(matrix: inout [[[TetrisSlot]]], name: String) {
-        for i in 0..<config.height {
+        for i in 0..<config.matrixHeight {
             for j in 0..<config.width {
                 for k in 0..<config.depth {
                     if matrix[i][j][k].name != nil && matrix[i][j][k].name! == name {
