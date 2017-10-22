@@ -10,7 +10,7 @@
 class TetrisWell {
 	
 	private let config: TetrisConfig
-	private var matrix: [[[Bool]]] = []
+	private var matrix: [[[TetrisSlot]]] = []
 
 	init(_ config: TetrisConfig) {
 		self.config = config
@@ -36,7 +36,7 @@ class TetrisWell {
                 potentialZ < 0 ||
                 potentialZ >= config.depth ||
                 // block collision
-                matrix[potentialY][potentialX][potentialZ]
+                matrix[potentialY][potentialX][potentialZ].isFilled
             ) {
                 return true
             }
@@ -70,39 +70,77 @@ class TetrisWell {
         return 0
     }
     
-	public func add(_ current: TetrisState) {   
+    public func add(_ current: TetrisState, _ names: [String]) {
 		let tetromino = current.tetromino()
 		for i in 0...3 {
             // Be careful of index out of range here!
             // Make sure hasCollision is working correctly to prevent this.
-			matrix[current.y + tetromino.y(i)][current.x + tetromino.x(i)][current.z + tetromino.z(i)] = true
+            matrix[current.y + tetromino.y(i)][current.x + tetromino.x(i)][current.z + tetromino.z(i)] = TetrisSlot(name: names[i])
 		}
 	}
 	
-	public func clearFilledLines() -> [Int] {
-		var toRemove: [Int] = []
-		loop: for i in 1..<config.height {
-			for j in 1..<config.width {
-                for k in 1..<config.depth {
-                    if (!matrix[i][j][k]) {
-                        continue loop
+	public func clearFilledLines() -> TetrisMatrixTransition {
+        var removed = Set<String>()
+        var score = 0
+        loop: for j in 0..<config.width {
+            for k in 0..<config.depth {
+                if (!matrix[0][j][k].isFilled) {
+                    continue loop
+                }
+            }
+            score += 1
+            for k in 0..<config.depth {
+                removed.insert(matrix[0][j][k].name!)
+            }
+        }
+        loop: for k in 0..<config.depth {
+            for j in 0..<config.width {
+                if (!matrix[0][j][k].isFilled) {
+                    continue loop
+                }
+            }
+            score += 1
+            for j in 0..<config.width {
+                removed.insert(matrix[0][j][k].name!)
+            }
+        }
+        var newMatrix = [[[TetrisSlot]]]()
+        for i in 0..<config.height {
+            newMatrix.append([[TetrisSlot]]())
+            for j in 0..<config.width {
+                newMatrix[i].append([TetrisSlot]())
+                for k in 0..<config.depth {
+                    newMatrix[i][j].append(matrix[i][j][k])
+                }
+            }
+        }
+        for name in removed {
+            shiftColumnDown(matrix: &newMatrix, name: name)
+        }
+        
+        let oldMatrix = matrix
+        matrix = newMatrix
+        return TetrisMatrixTransition(oldMatrix: oldMatrix, newMatrix: newMatrix, removed: removed, score: score)
+	}
+    
+    func shiftColumnDown(matrix: inout [[[TetrisSlot]]], name: String) {
+        for i in 0..<config.height {
+            for j in 0..<config.width {
+                for k in 0..<config.depth {
+                    if matrix[i][j][k].name != nil && matrix[i][j][k].name! == name {
+                        for ii in i..<config.height - 1 {
+                            matrix[ii][j][k] = matrix[ii + 1][j][k]
+                        }
                     }
                 }
-			}
-			toRemove.append(i)
-		}
-		toRemove.reverse()
-		for i in toRemove {
-			matrix.remove(at: i)
-			addLine()
-		}
-		return toRemove
-	}
+            }
+        }
+    }
     
     private func addLine() {
         // Add a collision plane
         // The center is collision free (false values)
-        let row = [[Bool]](repeating: [Bool](repeating: false, count: config.depth), count: config.width)
+        let row = [[TetrisSlot]](repeating: [TetrisSlot](repeating: TetrisSlot(name: nil), count: config.depth), count: config.width)
         matrix.append(row)
     }
 	

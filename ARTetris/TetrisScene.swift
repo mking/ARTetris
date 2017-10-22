@@ -37,7 +37,8 @@ class TetrisScene {
 	private let y: Float
 	private let z: Float
 	
-	private var blocksByLine: [[SCNNode]] = []
+    private var blocksByLine: [[SCNNode]] = []
+    private var blocksByName = [String: SCNNode]()
 	private var recent: SCNNode!
     private var projection: SCNNode!
 	private var frame: SCNNode!
@@ -126,9 +127,10 @@ class TetrisScene {
         gameNode.addChildNode(projection)
     }
 
-	func addToWell(_ current: TetrisState) {
+	func addToWell(_ current: TetrisState) -> [String] {
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
+        var names = [String]()
 		for i in 0...3 {
             // Here we permanently add the tetronimo to the well.
 			let box = block(current, tetromino.x(i), tetromino.y(i), tetromino.z(i))
@@ -138,38 +140,38 @@ class TetrisScene {
 				blocksByLine.append([])
 			}
 			blocksByLine[row].append(box)
+            blocksByName[box.name!] = box
+            names.append(box.name!)
 		}
+        return names
 	}
 	
-	func removeLines(_ lines: [Int], _ scores: Int) -> CFTimeInterval {
+	func removeLines(_ transition: TetrisMatrixTransition, _ scores: Int) -> CFTimeInterval {
 		let time = 0.2
 		// hide blocks in removed lines
-		for line in lines {
-			for block in blocksByLine[line] {
+		for name in transition.removed {
+			if let block = blocksByName[name] {
 				animate(block, "opacity", from: 1, to: 0, during: time)
 			}
 		}
 		Timer.scheduledTimer(withTimeInterval: time, repeats: false) { _ in
-			self.showLinesScores(Float(lines.first!), scores)
-			// drop blocks down to fill empty spaces of removed lines
-			for (index, line) in lines.reversed().enumerated() {
-				let nextLine = index + 1 < lines.count ? lines[index + 1] : self.blocksByLine.count
-				if (nextLine > line + 1) {
-					for j in line + 1..<nextLine {
-						for block in self.blocksByLine[j] {
-							let y1 = self.y + Float(j) * self.cell - self.cell / 2
-							let y2 = y1 - self.cell * Float(index + 1)
-							self.animate(block, "position.y", from: y1, to: y2, during: time)
-						}
-					}
-				}
-			}
+//            self.showLinesScores(Float(lines.first!), scores)
+            
+            // drop blocks down to fill empty spaces of removed lines
+            for t in transition.heightTransitions() {
+                if let block = self.blocksByName[t.name] {
+                    let oldY = (self.y + (Float(t.oldY) * self.cell)) - (self.cell / 2)
+                    let newY = (self.y + (Float(t.newY) * self.cell)) - (self.cell / 2)
+                    self.animate(block, "position.y", from: oldY, to: newY, during: time)
+                }
+            }
+            
 			// remove filled lines from the scene
-			for line in lines {
-				for block in self.blocksByLine[line] {
+			for name in transition.removed {
+                if let block = self.blocksByName[name] {
 					block.removeFromParentNode()
-				}
-				self.blocksByLine.remove(at: line)
+                    self.blocksByName.removeValue(forKey: block.name!)
+                }
 			}
 		}
 		return time * 2
@@ -332,6 +334,7 @@ class TetrisScene {
 //        let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
 		let node = createNode(box, TetrisScene.colors[state.index])
         node.position = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
+        node.name = UUID().uuidString
         return node
 	}
 	
