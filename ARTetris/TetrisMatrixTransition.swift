@@ -31,7 +31,7 @@ class TetrisMatrixTransition {
             for j in 0..<matrix[i].count {
                 for k in 0..<matrix[i][j].count {
                     if matrix[i][j][k].isFilled {
-                        result[matrix[i][j][k].name!] = j
+                        result[matrix[i][j][k].name!] = i
                     }
                 }
             }
