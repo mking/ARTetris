@@ -128,6 +128,7 @@ class TetrisScene {
     }
 
 	func addToWell(_ current: TetrisState) -> [String] {
+        projection?.removeFromParentNode()
 		recent?.removeFromParentNode()
 		let tetromino = current.tetromino()
         var names = [String]()
