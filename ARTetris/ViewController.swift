@@ -251,6 +251,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.view.addGestureRecognizer(tap)
     }
     
+    @IBAction func handleDoubleSwipe(_ sender: UISwipeGestureRecognizer) {
+        tetris?.drop()
+    }
+
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         if tetris == nil {
             if (sender.state == .ended) {
