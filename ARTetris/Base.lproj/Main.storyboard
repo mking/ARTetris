@@ -26,6 +26,7 @@
                                     <outletCollection property="gestureRecognizers" destination="4Lu-Z2-AvF" appends="YES" id="MwK-zA-aTJ"/>
                                     <outletCollection property="gestureRecognizers" destination="Qnd-MV-cD6" appends="YES" id="da3-9O-FOB"/>
                                     <outletCollection property="gestureRecognizers" destination="KHu-rC-Xdy" appends="YES" id="sHb-z2-yNs"/>
+                                    <outletCollection property="gestureRecognizers" destination="BG4-nF-7ev" appends="YES" id="YQ7-nH-mLF"/>
                                 </connections>
                             </arscnView>
                         </subviews>
@@ -73,6 +74,11 @@
                         <action selector="handlePinch:" destination="BV1-FR-VrT" id="KM6-y3-ieg"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <swipeGestureRecognizer direction="down" numberOfTouchesRequired="2" id="BG4-nF-7ev">
+                    <connections>
+                        <action selector="handleDoubleSwipe:" destination="BV1-FR-VrT" id="jHc-sa-7F7"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="103.89805097451276"/>
         </scene>

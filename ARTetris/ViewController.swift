@@ -244,17 +244,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     private func addGestures() {
-        let swiftDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-        swiftDown.direction = .down
-        self.view.addGestureRecognizer(swiftDown)
-        
-        let swiftUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-        swiftUp.direction = .up
-        self.view.addGestureRecognizer(swiftUp)
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tap)
     }
+    
     
     @objc private func handleSwipe(sender: UISwipeGestureRecognizer) {
         if (sender.direction == .down) {
@@ -265,7 +258,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //            tetris?.rotate()
         }
     }
-    
+
+    @IBAction func handleDoubleSwipe(_ sender: UISwipeGestureRecognizer) {
+        tetris?.drop()
+    }
+
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         if tetris == nil {
             if (sender.state == .ended) {
