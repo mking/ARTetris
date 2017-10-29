@@ -15,16 +15,18 @@ class TetrisEngine {
 	let config: TetrisConfig
 	let well: TetrisWell
 	let scene: TetrisScene
+    let overlay: TetrisOverlay
 	
 	var current: TetrisState
 	var timer: Timer?
 	var scores = 0
 	
-	init(_ config: TetrisConfig, _ well: TetrisWell, _ scene: TetrisScene) {
+    init(_ config: TetrisConfig, _ well: TetrisWell, _ scene: TetrisScene, _ overlay: TetrisOverlay) {
 		self.config = config
 		self.well = well
 		self.scene = scene
         self.current = .random(config)
+        self.overlay = overlay
         self.setState(current)
 		startTimer()
 	}
@@ -69,6 +71,8 @@ class TetrisEngine {
             let project = self.getProjection()
             scene.showProjection(project)
 		}
+        
+        overlay.setScore(score: scores)
 	}
 	
 	private func addCurrentTetrominoToWell() {

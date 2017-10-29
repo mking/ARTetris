@@ -15,7 +15,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     var tetris: TetrisEngine?
     
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var scoreLabel: UILabel!
+    var movementHandler: TetrisMovementHandler!
     
     var startScale: Float = 0
     var didTap = false
@@ -135,8 +136,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let z = focusSquare!.position.z
         let cell = 0.03 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
         
-        let scene = TetrisScene(config, self.sceneView.scene, x, y, z, cell)
-        self.tetris = TetrisEngine(config, well, scene)
+        movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell)
+        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell)
+        let overlay = TetrisOverlay(scoreLabel: scoreLabel)
+        self.tetris = TetrisEngine(config, well, scene, overlay)
     }
     
     func worldPositionFromScreenPosition(_ position: CGPoint,
@@ -238,9 +241,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             placeTetris()
         }
         
-        if let s = focusSquare, let p = s.lastPosition {
+//        if let s = focusSquare, let p = s.lastPosition {
 //            print("tetris position \(p)")
-        }
+//        }
     }
     
     private func addGestures() {
@@ -248,21 +251,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.view.addGestureRecognizer(tap)
     }
     
-    
-    @objc private func handleSwipe(sender: UISwipeGestureRecognizer) {
-        if (sender.direction == .down) {
-            // drop down tetromino on swipe down
-            tetris?.drop()
-        } else {
-            // rotate tetromino on swipe up
-//            tetris?.rotate()
-        }
-    }
-
-    @IBAction func handleDoubleSwipe(_ sender: UISwipeGestureRecognizer) {
-        tetris?.drop()
-    }
-
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         if tetris == nil {
             if (sender.state == .ended) {
@@ -276,36 +264,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func tapTranslate(sender: UITapGestureRecognizer) {
-        let tapPoint = sender.location(in: self.sceneView)
-        
-        // points are based on top left origin
-        let keyPoints = [
-            CGPoint(x: self.sceneView.frame.width / 2, y: 0), // top middle
-            CGPoint(x: 0, y: self.sceneView.frame.height / 2), // left middle
-            CGPoint(x: self.sceneView.frame.width, y: self.sceneView.frame.height / 2), // right middle
-            CGPoint(x: self.sceneView.frame.width / 2, y: self.sceneView.frame.height), // bottom middle
-        ]
-        
-        let closestIndexes = (0..<keyPoints.count).sorted { (a, b) -> Bool in
-            return tapPoint.distanceTo(keyPoints[a]) < tapPoint.distanceTo(keyPoints[b])
-        }
-        let closestIndex = closestIndexes.first!
-        
-        print("tapPoint \(tapPoint)")
-        print("closestPoint \(keyPoints[closestIndex])")
-        switch closestIndex {
-        case 1:
-            print("go left")
-            tetris?.left()
-        case 2:
-            print("go right")
-            tetris?.right()
-        case 3:
-            print("go down")
-            tetris?.forward()
-        default:
-            print("go up")
-            tetris?.backward()
+        if let movementHandler = self.movementHandler {
+            let screenPosition = sender.location(in: self.sceneView)
+            let (worldPosition, _, _) = worldPositionFromScreenPosition(screenPosition, objectPos: focusSquare?.position)
+            let direction = movementHandler.tap(tapPosition: worldPosition!, sceneView: sceneView)
+            switch direction {
+            case .left:
+                tetris?.left()
+            case .right:
+                tetris?.right()
+            case .backward:
+                tetris?.backward()
+            case .forward:
+                tetris?.forward()
+            }
         }
     }
     

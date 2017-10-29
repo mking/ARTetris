@@ -27,7 +27,7 @@ class TetrisWell {
             let potentialX = state.x + tetromino.x(i)
             let potentialY = state.y + tetromino.y(i)
             let potentialZ = state.z + tetromino.z(i)
-            print ("x: ", potentialX, "y: ", potentialY, "z: ", potentialZ)
+//            print ("x: ", potentialX, "y: ", potentialY, "z: ", potentialZ)
             if (
                 // side, ceiling, or floor collision
                 potentialX < 0 ||
