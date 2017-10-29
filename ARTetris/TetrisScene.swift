@@ -42,8 +42,9 @@ class TetrisScene {
 	private var recent: SCNNode!
     private var projection: SCNNode!
 	private var frame: SCNNode!
+    private var movementHandler: TetrisMovementHandler
     
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ x: Float, _ y: Float, _ z: Float, _ cell: Float) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float) {
 		self.config = config
 		self.scene = scene
         self.x = x
@@ -51,6 +52,7 @@ class TetrisScene {
 		self.z = z
         self.cell = cell
         self.gameNode = SCNNode()
+        self.movementHandler = movementHandler
         self.frame = createWellFrame(config.width, config.height, config.depth)
 //        gameNode.addChildNode(self.frame)
 //        gameNode.addChildNode(createBoard())
@@ -71,6 +73,7 @@ class TetrisScene {
 //        pinchNode.addChildNode(cubeNode)
         pinchNode.addChildNode(self.frame)
         pinchNode.addChildNode(self.gameNode)
+        movementHandler.addArrows(parentNode: pinchNode)
         return pinchNode
     }
     

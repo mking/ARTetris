@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,26 +29,55 @@
                                     <outletCollection property="gestureRecognizers" destination="BG4-nF-7ev" appends="YES" id="YQ7-nH-mLF"/>
                                 </connections>
                             </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTF-KK-3Zy">
+                                <rect key="frame" x="289" y="20" width="70" height="70"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="54G-C9-ok4">
+                                        <rect key="frame" x="0.0" y="10" width="70" height="51"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpf-T3-900">
+                                                <rect key="frame" x="13" y="0.0" width="44.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6n-lL-pDq">
+                                                <rect key="frame" x="30" y="30.5" width="10.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="3nL-Zr-uJu"/>
+                                    <constraint firstItem="54G-C9-ok4" firstAttribute="leading" secondItem="fTF-KK-3Zy" secondAttribute="leading" id="FyZ-1x-kVm"/>
+                                    <constraint firstAttribute="height" constant="70" id="Vfj-Os-MGY"/>
+                                    <constraint firstAttribute="trailing" secondItem="54G-C9-ok4" secondAttribute="trailing" id="dPW-Ak-vC6"/>
+                                    <constraint firstItem="54G-C9-ok4" firstAttribute="centerY" secondItem="fTF-KK-3Zy" secondAttribute="centerY" id="qYc-93-euR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="bottom" secondItem="2gm-5K-F1B" secondAttribute="bottom" id="5pn-nB-r35"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="leading" secondItem="sN0-71-vJM" secondAttribute="leading" id="DFl-6X-kGX"/>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="2gm-5K-F1B" secondAttribute="trailing" id="GYE-K4-hug"/>
+                            <constraint firstItem="fTF-KK-3Zy" firstAttribute="top" secondItem="sN0-71-vJM" secondAttribute="top" id="eWV-s4-JRm"/>
+                            <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="fTF-KK-3Zy" secondAttribute="trailing" constant="16" id="gPm-xz-C2f"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="top" secondItem="qrU-Qk-cHL" secondAttribute="top" id="nXO-e9-6eb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sN0-71-vJM"/>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="2gm-5K-F1B" id="jOL-ac-Uze"/>
+                        <outlet property="scoreLabel" destination="J6n-lL-pDq" id="zUe-a6-2Vw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="M8H-fk-0EF">
-                    <connections>
-                        <action selector="handleTapPad:" destination="BV1-FR-VrT" id="VNB-5F-4We"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="M8H-fk-0EF"/>
                 <swipeGestureRecognizer direction="left" id="eG1-1q-HG4" userLabel="Left Swipe">
                     <connections>
                         <action selector="handleLeftSwipe:" destination="BV1-FR-VrT" id="1Wq-HY-bmp"/>

@@ -9,11 +9,22 @@
 /** Tetris configuration: width and height of the well */
 struct TetrisConfig {
 	
-    static let standard: TetrisConfig = TetrisConfig(width: 8, height: 20, depth: 8)
+    static let standard: TetrisConfig = TetrisConfig(length: 8, height: 20)
     
-	let width: Int
+    let length: Int
 	let height: Int
-    let depth: Int
+    
+    var width: Int {
+        get {
+            return length
+        }
+    }
+    
+    var depth: Int {
+        get {
+            return length
+        }
+    }
 
     var matrixHeight: Int {
         get {
