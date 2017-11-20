@@ -44,8 +44,9 @@ class TetrisScene {
 	private var frame: SCNNode!
     private var movementHandler: TetrisMovementHandler
     private var restartButton: UIButton!
-    
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!) {
+    private var downButton: UIButton!
+
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ downButton: UIButton!) {
 		self.config = config
 		self.scene = scene
         self.x = x
@@ -53,6 +54,7 @@ class TetrisScene {
 		self.z = z
         self.cell = cell
         self.restartButton = restartButton
+        self.downButton = downButton
         self.gameNode = SCNNode()
         self.movementHandler = movementHandler
         self.frame = createWellFrame(config.width, config.height, config.depth)
@@ -202,6 +204,7 @@ class TetrisScene {
 	
 	func showGameOver(_ scores: Int) {
         restartButton.isHidden = false
+        downButton.isHidden = true
         
 		// Remove well frame from the scene
 		self.frame.removeFromParentNode()

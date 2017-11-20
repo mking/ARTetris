@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet weak var restartButton: UIButton!
+    @IBOutlet weak var downButton: UIButton!
     var movementHandler: TetrisMovementHandler!
     
     var startScale: Float = 0
@@ -35,6 +36,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         setupScene()
         setupFocusSquare()
         addGestures()
+        addDottedLine()
+    }
+    
+    func addDottedLine() {
+        let path = UIBezierPath()
+        path.move(to: CGPoint.zero)
+        path.addLine(to: CGPoint(x: view.frame.width, y: 0))
+        
+        let layer = CAShapeLayer()
+        layer.frame = CGRect(x: 0.0, y: 0.0, width: 120.0, height: 120.0)
+        layer.lineWidth = 2
+        layer.fillColor = nil
+        layer.strokeColor = UIColor(red: CGFloat(255.0 / 255.0), green: CGFloat(204.0 / 255.0), blue: CGFloat(0.0 / 255.0), alpha: 0.5).cgColor
+        layer.path = path.cgPath
+        layer.lineDashPattern = [2, 6]
+        layer.lineCap = kCALineCapRound
+        downButton.layer.addSublayer(layer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,7 +156,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let cell = 0.03 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
         
         movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell)
-        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton)
+        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, downButton)
         let overlay = TetrisOverlay(scoreLabel: scoreLabel)
         self.tetris = TetrisEngine(config, well, scene, overlay)
     }
@@ -251,10 +269,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tap)
     }
-    
-    @IBAction func handleDoubleSwipe(_ sender: UISwipeGestureRecognizer) {
-        tetris?.drop()
-    }
 
     @objc private func handleTap(sender: UITapGestureRecognizer) {
         if tetris == nil {
@@ -318,6 +332,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func restart(_ sender: UIButton) {
         assert(tetris != nil, "shouldn't show restart button if game hasn't started yet")
         restartButton.isHidden = true
+        downButton.isHidden = false
         tetris!.restart()
+    }
+    
+    @IBAction func handleDown(_ sender: UIButton) {
+        tetris?.drop()
     }
 }
