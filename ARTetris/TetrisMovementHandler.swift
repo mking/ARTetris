@@ -8,13 +8,13 @@
 
 import ARKit
 import SceneKit
-import FontAwesomeKit
 
 class TetrisMovementHandler {
     let config: TetrisConfig
     let position: SCNVector3
     let cell: Float
-    let arrowLength = Float(3)
+    let outLength = Float(3)
+    let arrowLength = Float(1)
     
     var centerPosition: SCNVector3 {
         get {
@@ -29,26 +29,34 @@ class TetrisMovementHandler {
     }
     
     func addArrows(parentNode: SCNNode) {
-        let icon = try! FAKFontAwesome(identifier: "fa-chevron-up", size: 15)
-        icon.addAttributes([NSAttributedStringKey.foregroundColor: UIColor.white])
-        let image = icon.image(with: CGSize(width: 10, height: 10))
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.white
+        
+        let geometry = SCNBox(width: CGFloat(0.001), height: CGFloat(0.001), length: CGFloat(arrowLength * cell), chamferRadius: 0)
+        geometry.firstMaterial = material
         
         let centerX = (Float(config.length - 1) / 2) * cell
         let centerZ = (Float(config.length - 1) / 2) * cell
+        let deltaOut = ((Float(config.length) + outLength) / 2) * cell
+        let deltaArrow = ((arrowLength / 2) * cell) / sqrt(2)
+
         for (i, signX, signZ) in [(0, Float(0), Float(-1)), (1, Float(-1), Float(0)), (2, Float(0), Float(1)), (3, Float(1), Float(0))] {
-            let arrowMaterial = SCNMaterial()
-            arrowMaterial.diffuse.contents = image
-            arrowMaterial.diffuse.contentsTransform = SCNMatrix4Mult(SCNMatrix4Mult(SCNMatrix4MakeTranslation(-0.5, -0.5, 0), SCNMatrix4MakeRotation(Float(i) * (Float.pi / 2), 0, 0, 1)), SCNMatrix4MakeTranslation(0.5, 0.5, 0))
-        
-            let arrowPlane = SCNPlane(width: CGFloat(arrowLength) * CGFloat(cell), height: CGFloat(arrowLength) * CGFloat(cell))
-            arrowPlane.firstMaterial = arrowMaterial
+            let leftNode = SCNNode(geometry: geometry)
+            leftNode.position = SCNVector3(0, 0, -deltaArrow)
+            leftNode.rotation = SCNVector4(0, 1, 0, Float.pi / 4)
             
-            let deltaX = signX * ((Float(config.length) + arrowLength) / 2) * cell
-            let deltaZ = signZ * ((Float(config.length) + arrowLength) / 2) * cell
-            let arrowNode = SCNNode(geometry: arrowPlane)
-            arrowNode.position = SCNVector3(centerX + deltaX, -0.5 * cell, centerZ + deltaZ)
-            arrowNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
-            parentNode.addChildNode(arrowNode)
+            let rightNode = SCNNode(geometry: geometry)
+            rightNode.position = SCNVector3(0, 0, deltaArrow)
+            rightNode.rotation = SCNVector4(0, 1, 0, -Float.pi / 4)
+            
+            let node = SCNNode()
+            let deltaX = signX * deltaOut
+            let deltaZ = signZ * deltaOut
+            node.position = SCNVector3(centerX + deltaX, -0.5 * cell, centerZ + deltaZ)
+            node.rotation = SCNVector4(0, 1, 0, (Float.pi / 2) * Float(i + 1))
+            node.addChildNode(leftNode)
+            node.addChildNode(rightNode)
+            parentNode.addChildNode(node)
         }
     }
     

@@ -27,7 +27,7 @@
 		8B59F4FD1FA5569700DE80E1 /* TetrisMovementDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B59F4FC1FA5569700DE80E1 /* TetrisMovementDirection.swift */; };
 		9088190D1F25336300181A7A /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190C1F25336300181A7A /* FocusSquare.swift */; };
 		9088190F1F25337E00181A7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088190E1F25337E00181A7A /* Utilities.swift */; };
-		AC4F7C33069C9E8D162B176F /* Pods_ARTetris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CBE960948065863A919FF94 /* Pods_ARTetris.framework */; };
+		F1BA109A11648CD96CA2BC2D /* Pods_ARTetris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67BE88F057D48256F938374 /* Pods_ARTetris.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,9 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4ACC3F40B675AF77B902C187 /* Pods-ARTetris.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTetris.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris.debug.xcconfig"; sourceTree = "<group>"; };
-		4CBE960948065863A919FF94 /* Pods_ARTetris.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARTetris.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55DD26E041BF44843586BDEB /* Pods-ARTetris.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTetris.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris.release.xcconfig"; sourceTree = "<group>"; };
 		581A9D851F065AB1003ABB79 /* TetrisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEngine.swift; sourceTree = "<group>"; };
 		581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisConfig.swift; sourceTree = "<group>"; };
 		589A2D0D1F02417D003BB05E /* ARTetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +54,7 @@
 		58C1385C1F0567D20080598A /* TetrisWell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisWell.swift; sourceTree = "<group>"; };
 		58C1385E1F05680E0080598A /* TetrisScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisScene.swift; sourceTree = "<group>"; };
 		58C138601F059B800080598A /* TetrisState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisState.swift; sourceTree = "<group>"; };
+		5C820C08FBDCD54AF755A2E7 /* Pods-ARTetris.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTetris.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris.release.xcconfig"; sourceTree = "<group>"; };
 		8B20BB6D1F64B24E0072D393 /* ARTetrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARTetrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B20BB6F1F64B24E0072D393 /* ARTetrisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTetrisTests.swift; sourceTree = "<group>"; };
 		8B20BB711F64B24E0072D393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +66,8 @@
 		8B59F4FC1FA5569700DE80E1 /* TetrisMovementDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisMovementDirection.swift; sourceTree = "<group>"; };
 		9088190C1F25336300181A7A /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		9088190E1F25337E00181A7A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		927B1875CAF268DAB7D0DFAF /* Pods-ARTetris.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARTetris.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris.debug.xcconfig"; sourceTree = "<group>"; };
+		A67BE88F057D48256F938374 /* Pods_ARTetris.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARTetris.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC4F7C33069C9E8D162B176F /* Pods_ARTetris.framework in Frameworks */,
+				F1BA109A11648CD96CA2BC2D /* Pods_ARTetris.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,21 +89,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1592BC9EB39B8C0AC524044F /* Pods */ = {
+		27296211EA4F84CF5076B71B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4ACC3F40B675AF77B902C187 /* Pods-ARTetris.debug.xcconfig */,
-				55DD26E041BF44843586BDEB /* Pods-ARTetris.release.xcconfig */,
+				927B1875CAF268DAB7D0DFAF /* Pods-ARTetris.debug.xcconfig */,
+				5C820C08FBDCD54AF755A2E7 /* Pods-ARTetris.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		5570D59F011276DBB97E7BB9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4CBE960948065863A919FF94 /* Pods_ARTetris.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		589A2D041F02417D003BB05E = {
@@ -112,8 +104,8 @@
 				589A2D0F1F02417D003BB05E /* ARTetris */,
 				8B20BB6E1F64B24E0072D393 /* ARTetrisTests */,
 				589A2D0E1F02417D003BB05E /* Products */,
-				1592BC9EB39B8C0AC524044F /* Pods */,
-				5570D59F011276DBB97E7BB9 /* Frameworks */,
+				27296211EA4F84CF5076B71B /* Pods */,
+				90A0A98651832DF9ACAB8266 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +154,14 @@
 			path = ARTetrisTests;
 			sourceTree = "<group>";
 		};
+		90A0A98651832DF9ACAB8266 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A67BE88F057D48256F938374 /* Pods_ARTetris.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,12 +169,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 589A2D211F02417D003BB05E /* Build configuration list for PBXNativeTarget "ARTetris" */;
 			buildPhases = (
-				C93B04A5E891C281E47D09D7 /* [CP] Check Pods Manifest.lock */,
+				8B749FE9D05500D6C40F83E4 /* [CP] Check Pods Manifest.lock */,
 				589A2D091F02417D003BB05E /* Sources */,
 				589A2D0A1F02417D003BB05E /* Frameworks */,
 				589A2D0B1F02417D003BB05E /* Resources */,
-				D9C553EA9B81D159A1B966F3 /* [CP] Embed Pods Frameworks */,
-				A9D3FB805767503FAE16FE56 /* [CP] Copy Pods Resources */,
+				1FF1165E05D772CFC5B480F9 /* [CP] Embed Pods Frameworks */,
+				64A06CABE8316C4C6B741B6C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,7 +262,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A9D3FB805767503FAE16FE56 /* [CP] Copy Pods Resources */ = {
+		1FF1165E05D772CFC5B480F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		64A06CABE8316C4C6B741B6C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,7 +292,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C93B04A5E891C281E47D09D7 /* [CP] Check Pods Manifest.lock */ = {
+		8B749FE9D05500D6C40F83E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -293,24 +308,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9C553EA9B81D159A1B966F3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARTetris/Pods-ARTetris-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -486,7 +483,7 @@
 		};
 		589A2D221F02417D003BB05E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACC3F40B675AF77B902C187 /* Pods-ARTetris.debug.xcconfig */;
+			baseConfigurationReference = 927B1875CAF268DAB7D0DFAF /* Pods-ARTetris.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QN46P2PK7U;
@@ -501,7 +498,7 @@
 		};
 		589A2D231F02417D003BB05E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55DD26E041BF44843586BDEB /* Pods-ARTetris.release.xcconfig */;
+			baseConfigurationReference = 5C820C08FBDCD54AF755A2E7 /* Pods-ARTetris.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QN46P2PK7U;

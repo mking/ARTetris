@@ -1,14 +1,3 @@
-PODS:
-  - FontAwesomeKit/Core (2.2.1)
-  - FontAwesomeKit/FontAwesome (2.2.1):
-    - FontAwesomeKit/Core
-
-DEPENDENCIES:
-  - FontAwesomeKit/FontAwesome (~> 2.2.0)
-
-SPEC CHECKSUMS:
-  FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
-
-PODFILE CHECKSUM: 5fbc4d10998c9a2a7c01657ec2375a377c9dfdf4
+PODFILE CHECKSUM: c9d341a765f3bdea2c2775cf97d0fb2da9ce7bc3
 
 COCOAPODS: 1.3.1
