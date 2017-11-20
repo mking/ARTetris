@@ -14,12 +14,15 @@ class TetrisWell {
 
 	init(_ config: TetrisConfig) {
 		self.config = config
-        
-        // Init the matrix
+        restart()
+	}
+    
+    func restart() {
+        matrix = []
         for _ in 0..<config.matrixHeight {
             addLine()
         }
-	}
+    }
     
     public func hasCollision(_ state: TetrisState) -> Bool {
         let tetromino = state.tetromino()

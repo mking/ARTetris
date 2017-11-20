@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,12 +59,21 @@
                                     <constraint firstItem="54G-C9-ok4" firstAttribute="centerY" secondItem="fTF-KK-3Zy" secondAttribute="centerY" id="qYc-93-euR"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCp-d2-0oi">
+                                <rect key="frame" x="162" y="318" width="50" height="30"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="restart:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Iub-kc-Byr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="bottom" secondItem="2gm-5K-F1B" secondAttribute="bottom" id="5pn-nB-r35"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="leading" secondItem="sN0-71-vJM" secondAttribute="leading" id="DFl-6X-kGX"/>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="2gm-5K-F1B" secondAttribute="trailing" id="GYE-K4-hug"/>
+                            <constraint firstItem="VCp-d2-0oi" firstAttribute="centerX" secondItem="qrU-Qk-cHL" secondAttribute="centerX" id="H1e-sM-BCE"/>
+                            <constraint firstItem="VCp-d2-0oi" firstAttribute="centerY" secondItem="qrU-Qk-cHL" secondAttribute="centerY" id="afi-1Z-r1v"/>
                             <constraint firstItem="fTF-KK-3Zy" firstAttribute="top" secondItem="sN0-71-vJM" secondAttribute="top" id="eWV-s4-JRm"/>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="fTF-KK-3Zy" secondAttribute="trailing" constant="16" id="gPm-xz-C2f"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="top" secondItem="qrU-Qk-cHL" secondAttribute="top" id="nXO-e9-6eb"/>
@@ -72,6 +81,7 @@
                         <viewLayoutGuide key="safeArea" id="sN0-71-vJM"/>
                     </view>
                     <connections>
+                        <outlet property="restartButton" destination="VCp-d2-0oi" id="41W-wX-lwl"/>
                         <outlet property="sceneView" destination="2gm-5K-F1B" id="jOL-ac-Uze"/>
                         <outlet property="scoreLabel" destination="J6n-lL-pDq" id="zUe-a6-2Vw"/>
                     </connections>

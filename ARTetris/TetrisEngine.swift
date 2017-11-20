@@ -20,6 +20,12 @@ class TetrisEngine {
 	var current: TetrisState
 	var timer: Timer?
 	var scores = 0
+    
+    var isRunning: Bool {
+        get {
+            return timer != nil
+        }
+    }
 	
     init(_ config: TetrisConfig, _ well: TetrisWell, _ scene: TetrisScene, _ overlay: TetrisOverlay) {
 		self.config = config
@@ -27,8 +33,9 @@ class TetrisEngine {
 		self.scene = scene
         self.current = .random(config)
         self.overlay = overlay
+        
+        startTimer()
         self.setState(current)
-		startTimer()
 	}
 	
 	func rotateX(_ angle: Int) { setState(current.rotateX(angle)) }
@@ -61,8 +68,23 @@ class TetrisEngine {
 
         return curCopy
     }
+    
+    func restart() {
+        assert(!isRunning, "shouldn't restart game that isn't over")
+        current = .random(config)
+        startTimer()
+        scores = 0
+        setState(current)
+        well.restart()
+        scene.restart()
+    }
 
 	private func setState(_ state: TetrisState) {
+        // Disable movement while game is stopped
+        if !isRunning {
+            return
+        }
+        
         scene.showSideWall(well.hasSideCollision(state))
 
 		if (!well.hasCollision(state)) {

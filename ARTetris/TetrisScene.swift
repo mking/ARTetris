@@ -31,7 +31,7 @@ class TetrisScene {
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
-    private let gameNode: SCNNode
+    private var gameNode: SCNNode!
     private var pinchNode: SCNNode!
 	private let x: Float
 	private let y: Float
@@ -43,14 +43,16 @@ class TetrisScene {
     private var projection: SCNNode!
 	private var frame: SCNNode!
     private var movementHandler: TetrisMovementHandler
+    private var restartButton: UIButton!
     
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!) {
 		self.config = config
 		self.scene = scene
         self.x = x
 		self.y = y
 		self.z = z
         self.cell = cell
+        self.restartButton = restartButton
         self.gameNode = SCNNode()
         self.movementHandler = movementHandler
         self.frame = createWellFrame(config.width, config.height, config.depth)
@@ -60,6 +62,14 @@ class TetrisScene {
         self.pinchNode = createPinchNode()
         scene.rootNode.addChildNode(pinchNode)
 	}
+    
+    func restart() {
+        pinchNode.removeFromParentNode()
+        gameNode = SCNNode()
+        frame = createWellFrame(config.width, config.height, config.depth)
+        pinchNode = createPinchNode()
+        scene.rootNode.addChildNode(pinchNode)
+    }
     
     func createPinchNode() -> SCNNode {
         let cubeGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.0)
@@ -191,6 +201,8 @@ class TetrisScene {
 	}
 	
 	func showGameOver(_ scores: Int) {
+        restartButton.isHidden = false
+        
 		// Remove well frame from the scene
 		self.frame.removeFromParentNode()
 		
@@ -219,7 +231,7 @@ class TetrisScene {
 			}
 		}
 		Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-			self.showFinalScores(scores)
+//            self.showFinalScores(scores)
 		}
 	}
 	

@@ -16,6 +16,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var tetris: TetrisEngine?
     
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet weak var restartButton: UIButton!
     var movementHandler: TetrisMovementHandler!
     
     var startScale: Float = 0
@@ -137,7 +138,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let cell = 0.03 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
         
         movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell)
-        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell)
+        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton)
         let overlay = TetrisOverlay(scoreLabel: scoreLabel)
         self.tetris = TetrisEngine(config, well, scene, overlay)
     }
@@ -312,5 +313,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         default:
             break
         }
+    }
+    
+    @IBAction func restart(_ sender: UIButton) {
+        assert(tetris != nil, "shouldn't show restart button if game hasn't started yet")
+        restartButton.isHidden = true
+        tetris!.restart()
     }
 }
