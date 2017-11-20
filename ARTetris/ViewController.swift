@@ -331,6 +331,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func restart(_ sender: UIButton) {
+        restart()
+    }
+    
+    func restart() {
         assert(tetris != nil, "shouldn't show restart button if game hasn't started yet")
         restartButton.isHidden = true
         downButton.isHidden = false
@@ -339,5 +343,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func handleDown(_ sender: UIButton) {
         tetris?.drop()
+    }
+    
+    @IBAction func handleMenu(_ sender: UIButton) {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        controller.addAction(UIAlertAction(title: "Restart", style: .`default`, handler: { _ in
+            self.restart()
+        }))
+        controller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(controller, animated: true, completion: nil)
     }
 }
