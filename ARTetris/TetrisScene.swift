@@ -28,6 +28,7 @@ class TetrisScene {
 	private static let titleColor = UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0)
 	
 	private let cell: Float
+    private let lineWidth: Float
 	
 	private let config: TetrisConfig
 	private let scene: SCNScene
@@ -46,7 +47,7 @@ class TetrisScene {
     private var restartButton: UIButton!
     private var downButton: UIButton!
 
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ downButton: UIButton!) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ downButton: UIButton!, _ lineWidth: Float) {
 		self.config = config
 		self.scene = scene
         self.x = x
@@ -57,6 +58,7 @@ class TetrisScene {
         self.downButton = downButton
         self.gameNode = SCNNode()
         self.movementHandler = movementHandler
+        self.lineWidth = lineWidth
         self.frame = createWellFrame(config.width, config.height, config.depth)
 //        gameNode.addChildNode(self.frame)
 //        gameNode.addChildNode(createBoard())
@@ -262,21 +264,21 @@ class TetrisScene {
         // x direction lines
         for yIndex in 0...height {
             for zIndex in 0...depth {
-                addLine(to: node, Float(width) * cell, Float(0.001), Float(0.001), 0, Float(yIndex), Float(zIndex))
+                addLine(to: node, Float(width) * cell, lineWidth, lineWidth, 0, Float(yIndex), Float(zIndex))
             }
         }
         
         // z direction lines
         for yIndex in 0...height {
             for xIndex in 0...width {
-                addLine(to: node, Float(0.001), Float(0.001), Float(depth) * cell, Float(xIndex), Float(yIndex), Float(depth))
+                addLine(to: node, lineWidth, lineWidth, Float(depth) * cell, Float(xIndex), Float(yIndex), Float(depth))
             }
         }
         
         // y direction lines
         for xIndex in 0...width {
             for zIndex in 0...depth {
-                addLine(to: node, Float(0.001), Float(height) * cell, Float(0.001), Float(xIndex), 0, Float(zIndex))
+                addLine(to: node, lineWidth, Float(height) * cell, lineWidth, Float(xIndex), 0, Float(zIndex))
             }
         }
         

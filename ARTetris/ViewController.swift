@@ -155,9 +155,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let y = focusSquare!.position.y
         let z = focusSquare!.position.z
         let cell = 0.03 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
-        
-        movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell)
-        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, downButton)
+        let lineWidth = 0.001 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
+
+        movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell, lineWidth: lineWidth)
+        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, downButton, lineWidth)
         let overlay = TetrisOverlay(scoreLabel: scoreLabel)
         self.tetris = TetrisEngine(config, well, scene, overlay)
     }

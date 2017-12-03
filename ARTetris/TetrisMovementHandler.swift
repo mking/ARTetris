@@ -13,6 +13,7 @@ class TetrisMovementHandler {
     let config: TetrisConfig
     let position: SCNVector3
     let cell: Float
+    let lineWidth: Float
     let outLength = Float(3)
     let arrowLength = Float(1)
     
@@ -22,17 +23,18 @@ class TetrisMovementHandler {
         }
     }
     
-    init(config: TetrisConfig, position: SCNVector3, cell: Float) {
+    init(config: TetrisConfig, position: SCNVector3, cell: Float, lineWidth: Float) {
         self.config = config
         self.position = position
         self.cell = cell
+        self.lineWidth = lineWidth
     }
     
     func addArrows(parentNode: SCNNode) {
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.white
         
-        let geometry = SCNBox(width: CGFloat(0.001), height: CGFloat(0.001), length: CGFloat(arrowLength * cell), chamferRadius: 0)
+        let geometry = SCNBox(width: CGFloat(lineWidth), height: CGFloat(lineWidth), length: CGFloat(arrowLength * cell), chamferRadius: 0)
         geometry.firstMaterial = material
         
         let centerX = (Float(config.length - 1) / 2) * cell
