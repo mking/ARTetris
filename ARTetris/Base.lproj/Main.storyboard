@@ -137,9 +137,9 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sN0-71-vJM" firstAttribute="bottom" secondItem="2gm-5K-F1B" secondAttribute="bottom" id="5pn-nB-r35"/>
+                            <constraint firstAttribute="bottom" secondItem="2gm-5K-F1B" secondAttribute="bottom" id="5pn-nB-r35"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="leading" secondItem="sN0-71-vJM" secondAttribute="leading" id="DFl-6X-kGX"/>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="2gm-5K-F1B" secondAttribute="trailing" id="GYE-K4-hug"/>
                             <constraint firstItem="VCp-d2-0oi" firstAttribute="centerX" secondItem="qrU-Qk-cHL" secondAttribute="centerX" id="H1e-sM-BCE"/>
