@@ -33,23 +33,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hGT-Ui-580">
-                                <rect key="frame" x="148.5" y="319" width="78" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-hX-FEc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hGT-Ui-580">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-P9-tZK">
-                                        <rect key="frame" x="0.0" y="0.0" width="78" height="30"/>
-                                        <state key="normal" title="Start Game"/>
-                                        <connections>
-                                            <segue destination="BV1-FR-VrT" kind="show" id="xiQ-Ww-grT"/>
-                                        </connections>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Quj-h2-HrK">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tetris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-7k-uxb">
+                                                <rect key="frame" x="124" y="70.5" width="128" height="60"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="e9F-7k-uxb" firstAttribute="centerX" secondItem="Quj-h2-HrK" secondAttribute="centerX" id="30k-sg-BVy"/>
+                                            <constraint firstItem="e9F-7k-uxb" firstAttribute="centerY" secondItem="Quj-h2-HrK" secondAttribute="centerY" id="aoA-VI-puc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpN-xp-KY3">
+                                        <rect key="frame" x="0.0" y="201" width="375" height="201"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oBc-fG-Kpk">
+                                                <rect key="frame" x="149.5" y="60" width="76" height="82"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-P9-tZK">
+                                                        <rect key="frame" x="15" y="0.0" width="46" height="41"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                        <state key="normal" title="Play">
+                                                            <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <segue destination="BV1-FR-VrT" kind="show" id="xiQ-Ww-grT"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81g-W8-9yZ">
+                                                        <rect key="frame" x="0.0" y="41" width="76" height="41"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <state key="normal" title="Tutorial">
+                                                            <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="oBc-fG-Kpk" firstAttribute="centerY" secondItem="xpN-xp-KY3" secondAttribute="centerY" id="MwE-yH-yps"/>
+                                            <constraint firstItem="oBc-fG-Kpk" firstAttribute="centerX" secondItem="xpN-xp-KY3" secondAttribute="centerX" id="UPA-qJ-Bvd"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebY-86-Kof">
+                                        <rect key="frame" x="0.0" y="402" width="375" height="201"/>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hGT-Ui-580" firstAttribute="centerY" secondItem="Fof-ke-7eN" secondAttribute="centerY" id="EOE-fQ-gCd"/>
-                            <constraint firstItem="hGT-Ui-580" firstAttribute="centerX" secondItem="Fof-ke-7eN" secondAttribute="centerX" id="eGc-5o-dtZ"/>
+                            <constraint firstItem="dIi-KL-LI7" firstAttribute="trailing" secondItem="hGT-Ui-580" secondAttribute="trailing" id="7ZQ-hS-Gcp"/>
+                            <constraint firstItem="hGT-Ui-580" firstAttribute="leading" secondItem="dIi-KL-LI7" secondAttribute="leading" id="E1m-7P-Hks"/>
+                            <constraint firstItem="hGT-Ui-580" firstAttribute="top" secondItem="dIi-KL-LI7" secondAttribute="top" id="Juk-gS-onP"/>
+                            <constraint firstItem="u6v-hX-FEc" firstAttribute="top" secondItem="Fof-ke-7eN" secondAttribute="top" id="NMM-sp-i4T"/>
+                            <constraint firstItem="u6v-hX-FEc" firstAttribute="bottom" secondItem="Fof-ke-7eN" secondAttribute="bottom" id="UEt-gi-F23"/>
+                            <constraint firstItem="dIi-KL-LI7" firstAttribute="trailing" secondItem="u6v-hX-FEc" secondAttribute="trailing" id="Yx4-tu-eal"/>
+                            <constraint firstItem="u6v-hX-FEc" firstAttribute="trailing" secondItem="dIi-KL-LI7" secondAttribute="trailing" id="lHm-51-Pqy"/>
+                            <constraint firstItem="u6v-hX-FEc" firstAttribute="leading" secondItem="dIi-KL-LI7" secondAttribute="leading" id="mgN-NQ-aYN"/>
+                            <constraint firstItem="dIi-KL-LI7" firstAttribute="trailing" secondItem="u6v-hX-FEc" secondAttribute="trailing" id="nQl-Lg-Qnb"/>
+                            <constraint firstItem="dIi-KL-LI7" firstAttribute="bottom" secondItem="hGT-Ui-580" secondAttribute="bottom" id="yt3-hD-XSF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dIi-KL-LI7"/>
                     </view>
@@ -201,4 +254,7 @@
             <point key="canvasLocation" x="-498" y="110"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="375" height="812"/>
+    </resources>
 </document>
