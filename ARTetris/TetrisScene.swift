@@ -197,8 +197,8 @@ class TetrisScene {
             // drop blocks down to fill empty spaces of removed lines
             for t in transition.heightTransitions() {
                 if let block = self.blocksByName[t.name] {
-                    let oldY = (self.y + (Float(t.oldY) * self.cell)) - (self.cell / 2)
-                    let newY = (self.y + (Float(t.newY) * self.cell)) - (self.cell / 2)
+                    let oldY = block.position.y
+                    let newY = (Float(t.newY) - 0.5) * self.cell
                     self.animate(block, "position.y", from: oldY, to: newY, during: time)
                 }
             }
