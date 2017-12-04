@@ -37,7 +37,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         setupFocusSquare()
         addGestures()
         addDottedLine()
-        navigationController!.isNavigationBarHidden = true
     }
     
     func addDottedLine() {

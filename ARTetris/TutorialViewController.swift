@@ -9,8 +9,7 @@
 import UIKit
 
 class TutorialViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController!.isNavigationBarHidden = false
+    @IBAction func handleDone(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }
