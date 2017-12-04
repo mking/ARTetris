@@ -142,16 +142,13 @@ class TetrisScene {
     }
 
     func disableProjectionNode() {
-        print("let me disable projection node")
         enableProjection = false
     }
     func enableProjectionNode() {
-        print ("ok, let me enable projection node")
         enableProjection = true
     }
 
     func showProjection(_ project: TetrisState) {
-        print ("projection state: ", self.enableProjection)
         if (enableProjection) {
             projection?.removeFromParentNode()
             projection = SCNNode()
@@ -224,6 +221,12 @@ class TetrisScene {
 	}
 	
 	func showGameOver(_ scores: Int) {
+        let topScore = UserDefaults.standard.integer(forKey: "topScore")
+        print ("gameover, the previous top score: ", topScore)
+        print ("gameover, current score: ", scores)
+        if (scores > topScore) {
+           UserDefaults.standard.set(scores, forKey: "topScore")
+        }
         restartButton.isHidden = false
         downButton.isHidden = true
         

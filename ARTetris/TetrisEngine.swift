@@ -153,7 +153,6 @@ class TetrisEngine {
             // When the current tetromino reaches the bottom, add it to the well.
 			let down = self.current.down()
             let downProject = self.getProjection()
-            print ("downy: ", down.y, " dpy: ", downProject.y)
             if (down.y <= downProject.y) {
                 self.scene.removeProjection()
             }

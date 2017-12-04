@@ -48,6 +48,13 @@
                                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kU-LS-F0n">
+                                                <rect key="frame" x="63" y="0.0" width="248" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <color key="textColor" red="0.19474684049999999" green="0.36178335700000003" blue="0.92450237270000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="e9F-7k-uxb" firstAttribute="centerX" secondItem="Quj-h2-HrK" secondAttribute="centerX" id="30k-sg-BVy"/>
@@ -110,10 +117,13 @@
                         <viewLayoutGuide key="safeArea" id="dIi-KL-LI7"/>
                     </view>
                     <navigationItem key="navigationItem" id="YjQ-Ua-Bst"/>
+                    <connections>
+                        <outlet property="TopScoreLabel" destination="5kU-LS-F0n" id="kZs-Q7-Xpn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVm-Vb-tln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1684" y="63"/>
+            <point key="canvasLocation" x="-1684" y="62.518740629685162"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
