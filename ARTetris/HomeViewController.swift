@@ -18,12 +18,17 @@ class HomeViewController: UIViewController {
         if (topScore == nil) {
             UserDefaults.standard.set(0, forKey: "topScore")
         }
-        self.topScoreLabel.text = "Top score:" + String(UserDefaults.standard.integer(forKey: "topScore"))
+        updateTopScore()
 
         navigationController!.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.topScoreLabel.text = "Top score:" + String(UserDefaults.standard.integer(forKey: "topScore"))
+        super.viewWillAppear(animated)
+        updateTopScore()
+    }
+    
+    func updateTopScore() {
+        self.topScoreLabel.text = "Top score: \(UserDefaults.standard.integer(forKey: "topScore"))"
     }
 }

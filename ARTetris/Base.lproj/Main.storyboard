@@ -42,23 +42,27 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Quj-h2-HrK">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tetris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-7k-uxb">
-                                                <rect key="frame" x="124" y="70.5" width="128" height="60"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
-                                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kU-LS-F0n">
-                                                <rect key="frame" x="63" y="0.0" width="248" height="52"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-WF-axN">
+                                                <rect key="frame" x="124" y="51" width="128" height="99"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tetris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-7k-uxb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="60"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                                        <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kU-LS-F0n">
+                                                        <rect key="frame" x="11" y="70" width="106.5" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="e9F-7k-uxb" firstAttribute="centerX" secondItem="Quj-h2-HrK" secondAttribute="centerX" id="30k-sg-BVy"/>
-                                            <constraint firstItem="e9F-7k-uxb" firstAttribute="centerY" secondItem="Quj-h2-HrK" secondAttribute="centerY" id="aoA-VI-puc"/>
+                                            <constraint firstItem="ULD-WF-axN" firstAttribute="centerX" secondItem="Quj-h2-HrK" secondAttribute="centerX" id="0AR-c7-ran"/>
+                                            <constraint firstItem="ULD-WF-axN" firstAttribute="centerY" secondItem="Quj-h2-HrK" secondAttribute="centerY" id="P6b-38-g9a"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpN-xp-KY3">
