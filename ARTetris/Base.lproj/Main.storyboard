@@ -76,6 +76,9 @@
                                                         <state key="normal" title="Tutorial">
                                                             <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <segue destination="u7S-cA-hMm" kind="show" id="mOb-j5-zXj"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -252,6 +255,55 @@
                 </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-498" y="110"/>
+        </scene>
+        <!--Tutorial-->
+        <scene sceneID="2Nd-5K-IhK">
+            <objects>
+                <viewController id="u7S-cA-hMm" customClass="TutorialViewController" customModule="ARTetris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KcR-cN-Ylc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8x3-VM-wb8">
+                                <rect key="frame" x="40" y="104" width="295" height="523"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">1. Tap "Play" to start the game.
+
+2. Tap the screen to place the Tetris game.
+
+3. Move the piece by tapping the sides of the board.
+
+4. Rotate the piece by swiping left and right or up and down.
+
+5. When there is a full line of blocks, the line disappears.
+
+6. The object of the game is to clear as many lines as possible.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OLd-St-PVB" firstAttribute="trailing" secondItem="8x3-VM-wb8" secondAttribute="trailing" constant="40" id="69m-72-VKH"/>
+                            <constraint firstItem="8x3-VM-wb8" firstAttribute="top" secondItem="OLd-St-PVB" secondAttribute="top" constant="40" id="Sym-fa-7wv"/>
+                            <constraint firstItem="OLd-St-PVB" firstAttribute="bottom" secondItem="8x3-VM-wb8" secondAttribute="bottom" constant="40" id="xk8-ZM-K5V"/>
+                            <constraint firstItem="8x3-VM-wb8" firstAttribute="leading" secondItem="OLd-St-PVB" secondAttribute="leading" constant="40" id="zc1-bu-sOg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OLd-St-PVB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tutorial" id="UgN-5a-835"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Bx-gR-eQB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-498" y="825"/>
         </scene>
     </scenes>
     <resources>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08EEE2211FD4D670009185F4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEE2201FD4D670009185F4 /* TutorialViewController.swift */; };
 		581A9D861F065AB1003ABB79 /* TetrisEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D851F065AB1003ABB79 /* TetrisEngine.swift */; };
 		581A9D881F0AA04F003ABB79 /* TetrisConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */; };
 		589A2D111F02417D003BB05E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589A2D101F02417D003BB05E /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08EEE2201FD4D670009185F4 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		581A9D851F065AB1003ABB79 /* TetrisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEngine.swift; sourceTree = "<group>"; };
 		581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisConfig.swift; sourceTree = "<group>"; };
 		589A2D0D1F02417D003BB05E /* ARTetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 				8B59F4FA1FA5372500DE80E1 /* TetrisMovementHandler.swift */,
 				8B59F4FC1FA5569700DE80E1 /* TetrisMovementDirection.swift */,
 				905EA7801FC2834C00BECD86 /* HomeViewController.swift */,
+				08EEE2201FD4D670009185F4 /* TutorialViewController.swift */,
 			);
 			path = ARTetris;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				589A2D111F02417D003BB05E /* AppDelegate.swift in Sources */,
 				8B59F4FB1FA5372500DE80E1 /* TetrisMovementHandler.swift in Sources */,
 				58C138611F059B800080598A /* TetrisState.swift in Sources */,
+				08EEE2211FD4D670009185F4 /* TutorialViewController.swift in Sources */,
 				581A9D881F0AA04F003ABB79 /* TetrisConfig.swift in Sources */,
 				9088190F1F25337E00181A7A /* Utilities.swift in Sources */,
 				581A9D861F065AB1003ABB79 /* TetrisEngine.swift in Sources */,
