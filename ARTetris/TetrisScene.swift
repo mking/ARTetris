@@ -38,6 +38,7 @@ class TetrisScene {
 	private let y: Float
 	private let z: Float
 	
+    private var enableProjection: Bool
     private var blocksByLine: [[SCNNode]] = []
     private var blocksByName = [String: SCNNode]()
 	private var recent: SCNNode!
@@ -53,6 +54,7 @@ class TetrisScene {
         self.x = x
 		self.y = y
 		self.z = z
+        self.enableProjection = true
         self.cell = cell
         self.restartButton = restartButton
         self.downButton = downButton
@@ -134,14 +136,31 @@ class TetrisScene {
         showFloor()
 	}
 	
-    func showProjection(_ project: TetrisState) {
+    func removeProjection() {
         projection?.removeFromParentNode()
-        projection = SCNNode()
-        let tetromino = project.tetromino()
-        for i in 0...3 {
-            projection.addChildNode(blockWithColor(project, tetromino.x(i), tetromino.y(i), tetromino.z(i), TetrisScene.projectionColor))
+        self.disableProjectionNode()
+    }
+
+    func disableProjectionNode() {
+        print("let me disable projection node")
+        enableProjection = false
+    }
+    func enableProjectionNode() {
+        print ("ok, let me enable projection node")
+        enableProjection = true
+    }
+
+    func showProjection(_ project: TetrisState) {
+        print ("projection state: ", self.enableProjection)
+        if (enableProjection) {
+            projection?.removeFromParentNode()
+            projection = SCNNode()
+            let tetromino = project.tetromino()
+            for i in 0...3 {
+                projection.addChildNode(blockWithColor(project, tetromino.x(i), tetromino.y(i), tetromino.z(i), TetrisScene.projectionColor))
+            }
+            gameNode.addChildNode(projection)
         }
-        gameNode.addChildNode(projection)
     }
 
 	func addToWell(_ current: TetrisState) -> [String] {

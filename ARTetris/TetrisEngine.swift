@@ -116,6 +116,7 @@ class TetrisEngine {
 	private func nextTetromino() {
         repeat {
             current = .random(config)
+            scene.enableProjectionNode()
         } while (well.hasSideCollision(current) > 0)
         
         if (well.hasCollision(current)) {
@@ -151,7 +152,12 @@ class TetrisEngine {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             // When the current tetromino reaches the bottom, add it to the well.
 			let down = self.current.down()
-			if (self.well.hasCollision(down)) {
+            let downProject = self.getProjection()
+            print ("downy: ", down.y, " dpy: ", downProject.y)
+            if (down.y <= downProject.y) {
+                self.scene.removeProjection()
+            }
+            if (self.well.hasCollision(down)) {
 				self.addCurrentTetrominoToWell()
 			} else {
                 self.setState(down)
