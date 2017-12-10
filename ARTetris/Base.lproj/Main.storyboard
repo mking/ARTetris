@@ -143,8 +143,6 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="eG1-1q-HG4" appends="YES" id="FPF-EK-lh1"/>
                                     <outletCollection property="gestureRecognizers" destination="7VE-fp-LXS" appends="YES" id="u2Z-rl-FDo"/>
-                                    <outletCollection property="gestureRecognizers" destination="4Lu-Z2-AvF" appends="YES" id="MwK-zA-aTJ"/>
-                                    <outletCollection property="gestureRecognizers" destination="Qnd-MV-cD6" appends="YES" id="da3-9O-FOB"/>
                                     <outletCollection property="gestureRecognizers" destination="KHu-rC-Xdy" appends="YES" id="sHb-z2-yNs"/>
                                 </connections>
                             </arscnView>
@@ -250,16 +248,6 @@
                 <swipeGestureRecognizer direction="right" id="7VE-fp-LXS" userLabel="Right Swipe">
                     <connections>
                         <action selector="handleRightSwipe:" destination="BV1-FR-VrT" id="X1b-dg-6y1"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="up" id="4Lu-Z2-AvF" userLabel="Up Swipe">
-                    <connections>
-                        <action selector="handleUpSwipe:" destination="BV1-FR-VrT" id="FYL-NV-5Uh"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="down" id="Qnd-MV-cD6" userLabel="Down Swipe">
-                    <connections>
-                        <action selector="handleDownSwipe:" destination="BV1-FR-VrT" id="jzp-7G-Z0y"/>
                     </connections>
                 </swipeGestureRecognizer>
                 <pinchGestureRecognizer id="KHu-rC-Xdy">

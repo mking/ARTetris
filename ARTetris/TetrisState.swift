@@ -10,11 +10,10 @@ import Foundation
 
 /** Tetris game state: current tetromino and its position in the well */
 class TetrisState {
-    
     // Start at lower than the top in case the tetromino exceeds the ceiling...
     // TODO We do not need ceiling collision detection...
 	static func random(_ config: TetrisConfig) -> TetrisState {
-		return TetrisState(random(Tetromino.all.count), random(4), random(4), config.width / 2, config.height - 2, config.depth / 2)
+		return TetrisState(random(Tetromino.all.count), 1, random(4), config.width / 2, config.height - 2, config.depth / 2)
 	}
 	
 	let index: Int
@@ -36,8 +35,6 @@ class TetrisState {
 	}
 	
 	func tetromino() -> Tetromino { return Tetromino.all[index].rotate(x: rotationX, y: rotationY) }
-	
-    func rotateX(_ angle: Int) -> TetrisState { return TetrisState(index, (rotationX + angle + 4) % 4, rotationY, x, y, z) }
     
     func rotateY(_ angle: Int) -> TetrisState { return TetrisState(index, rotationX, (rotationY + angle + 4) % 4, x, y, z) }
     

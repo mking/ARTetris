@@ -37,9 +37,7 @@ class TetrisEngine {
         startTimer()
         self.setState(current)
 	}
-	
-	func rotateX(_ angle: Int) { setState(current.rotateX(angle)) }
-    
+	    
     func rotateY(_ angle: Int) { setState(current.rotateY(angle)) }
     
     func forward() { setState(current.forward()) }
