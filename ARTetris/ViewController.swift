@@ -286,7 +286,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func tapTranslate(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let position = sender.location(in: sceneView)
-            let results = sceneView.hitTest(position, options: [.categoryBitMask: TetrisCategories.arrow.rawValue])
+            let results = sceneView.hitTest(position, options: [.categoryBitMask: TetrisCategories.arrow.rawValue, .searchMode: SCNHitTestSearchMode.all.rawValue])
             for result in results {
                 if let name = result.node.name {
                     switch name {
