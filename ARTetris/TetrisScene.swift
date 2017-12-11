@@ -373,7 +373,7 @@ class TetrisScene {
 	
     private func block(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int) -> SCNNode {
 		let cell = cg(self.cell)
-		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
+		let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 6)
 //        let matrix = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
 		let node = createNode(box, TetrisScene.colors[state.index])
         node.position = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
@@ -383,7 +383,7 @@ class TetrisScene {
 	
     private func blockWithColor(_ state: TetrisState, _ x: Int, _ y: Int, _ z: Int, _ color: UIColor) -> SCNNode {
         let cell = cg(self.cell)
-        let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 10)
+        let box = SCNBox(width: cell, height: cell, length: cell, chamferRadius: cell / 6)
         let node = createNode(box, color)
         node.position = translate(Float(state.x + x), Float(state.y + y) - 0.5, Float(state.z + z))
         return node
