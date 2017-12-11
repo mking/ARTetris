@@ -82,11 +82,20 @@ class TetrisScene {
         let cubeNode = SCNNode(geometry: cubeGeometry)
         cubeNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
         
+        let light = SCNLight()
+        light.type = .omni
+        light.color = UIColor.white
+        
+        let lightNode = SCNNode()
+        lightNode.position = SCNVector3(x: 0.0, y: Float(config.height) * cell, z: 0.0)
+        lightNode.light = light
+        
         let pinchNode = SCNNode()
         pinchNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
 //        pinchNode.addChildNode(cubeNode)
         pinchNode.addChildNode(self.frame)
         pinchNode.addChildNode(self.gameNode)
+        pinchNode.addChildNode(lightNode)
         movementHandler.addArrows(parentNode: pinchNode)
         return pinchNode
     }
