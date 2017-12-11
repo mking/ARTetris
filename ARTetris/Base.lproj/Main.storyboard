@@ -144,6 +144,7 @@
                                     <outletCollection property="gestureRecognizers" destination="eG1-1q-HG4" appends="YES" id="FPF-EK-lh1"/>
                                     <outletCollection property="gestureRecognizers" destination="7VE-fp-LXS" appends="YES" id="u2Z-rl-FDo"/>
                                     <outletCollection property="gestureRecognizers" destination="KHu-rC-Xdy" appends="YES" id="sHb-z2-yNs"/>
+                                    <outletCollection property="gestureRecognizers" destination="7s4-w7-pG5" appends="YES" id="Nqi-ZK-rq4"/>
                                 </connections>
                             </arscnView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCp-d2-0oi">
@@ -154,18 +155,6 @@
                                 </state>
                                 <connections>
                                     <action selector="restart:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Iub-kc-Byr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puB-bg-Yop">
-                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="jdd-TM-hP0"/>
-                                </constraints>
-                                <state key="normal" title="Tap to go down">
-                                    <color key="titleColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="handleDown:" destination="BV1-FR-VrT" eventType="touchUpInside" id="EOG-M1-20j"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NJR-k8-Ato">
@@ -219,9 +208,6 @@
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="leading" secondItem="sN0-71-vJM" secondAttribute="leading" id="DFl-6X-kGX"/>
                             <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="2gm-5K-F1B" secondAttribute="trailing" id="GYE-K4-hug"/>
                             <constraint firstItem="VCp-d2-0oi" firstAttribute="centerX" secondItem="qrU-Qk-cHL" secondAttribute="centerX" id="H1e-sM-BCE"/>
-                            <constraint firstItem="sN0-71-vJM" firstAttribute="trailing" secondItem="puB-bg-Yop" secondAttribute="trailing" id="I5F-S8-hK0"/>
-                            <constraint firstItem="puB-bg-Yop" firstAttribute="leading" secondItem="sN0-71-vJM" secondAttribute="leading" id="Ubx-RM-4tX"/>
-                            <constraint firstItem="puB-bg-Yop" firstAttribute="bottom" secondItem="sN0-71-vJM" secondAttribute="bottom" id="XFR-nv-Goo"/>
                             <constraint firstItem="VCp-d2-0oi" firstAttribute="centerY" secondItem="qrU-Qk-cHL" secondAttribute="centerY" id="afi-1Z-r1v"/>
                             <constraint firstItem="NJR-k8-Ato" firstAttribute="top" secondItem="sN0-71-vJM" secondAttribute="top" id="atw-oL-0fz"/>
                             <constraint firstItem="2gm-5K-F1B" firstAttribute="top" secondItem="qrU-Qk-cHL" secondAttribute="top" id="nXO-e9-6eb"/>
@@ -232,7 +218,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Len-DP-HMm"/>
                     <connections>
-                        <outlet property="downButton" destination="puB-bg-Yop" id="VpO-X8-AiX"/>
                         <outlet property="restartButton" destination="VCp-d2-0oi" id="41W-wX-lwl"/>
                         <outlet property="sceneView" destination="2gm-5K-F1B" id="jOL-ac-Uze"/>
                         <outlet property="scoreLabel" destination="J6n-lL-pDq" id="zUe-a6-2Vw"/>
@@ -255,6 +240,11 @@
                         <action selector="handlePinch:" destination="BV1-FR-VrT" id="KM6-y3-ieg"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="7s4-w7-pG5" userLabel="Down Swipe">
+                    <connections>
+                        <action selector="handleDown:" destination="BV1-FR-VrT" id="k9A-0O-imn"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-498" y="110"/>
         </scene>

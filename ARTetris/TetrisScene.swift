@@ -46,9 +46,8 @@ class TetrisScene {
 	private var frame: SCNNode!
     private var movementHandler: TetrisMovementHandler
     private var restartButton: UIButton!
-    private var downButton: UIButton!
 
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ downButton: UIButton!, _ lineWidth: Float) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ lineWidth: Float) {
 		self.config = config
 		self.scene = scene
         self.x = x
@@ -57,7 +56,6 @@ class TetrisScene {
         self.enableProjection = true
         self.cell = cell
         self.restartButton = restartButton
-        self.downButton = downButton
         self.gameNode = SCNNode()
         self.movementHandler = movementHandler
         self.lineWidth = lineWidth
@@ -228,7 +226,6 @@ class TetrisScene {
            UserDefaults.standard.set(scores, forKey: "topScore")
         }
         restartButton.isHidden = false
-        downButton.isHidden = true
         
 		// Remove well frame from the scene
 		self.frame.removeFromParentNode()
