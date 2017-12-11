@@ -271,21 +271,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let results = sceneView.hitTest(position, options: [.categoryBitMask: TetrisCategories.arrow.rawValue, .searchMode: SCNHitTestSearchMode.all.rawValue])
             for result in results {
                 if let name = result.node.name {
+                    var flash = false
                     switch name {
                     case "left":
                         tetris!.left()
-                        movementHandler.flash(node: result.node)
+                        flash = true
                     case "right":
                         tetris!.right()
-                        movementHandler.flash(node: result.node)
+                        flash = true
                     case "backward":
                         tetris!.backward()
-                        movementHandler.flash(node: result.node)
+                        flash = true
                     case "forward":
                         tetris!.forward()
-                        movementHandler.flash(node: result.node)
+                        flash = true
                     default:
                         break
+                    }
+                    if flash {
+                        movementHandler.flash(node: sceneView.scene.rootNode.childNode(withName: "arrow-\(name)", recursively: true)!)
                     }
                 }
             }

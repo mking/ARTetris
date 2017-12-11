@@ -10,4 +10,5 @@ import Foundation
 
 enum TetrisCategories: Int {
     case arrow = 1
+    case segment = 2
 }

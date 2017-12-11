@@ -31,32 +31,44 @@ class TetrisMovementHandler {
     }
     
     func addArrows(parentNode: SCNNode) {
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor.white
-        
-        let geometry = SCNBox(width: CGFloat(lineWidth), height: CGFloat(lineWidth), length: CGFloat(arrowLength * cell), chamferRadius: 0)
-        geometry.firstMaterial = material
-        
         let centerX = (Float(config.length - 1) / 2) * cell
         let centerZ = (Float(config.length - 1) / 2) * cell
-        let deltaOut = ((Float(config.length) + outLength) / 2) * cell
+        let deltaOut = (Float(config.length) / 2) * cell
         let deltaArrow = ((arrowLength / 2) * cell) / sqrt(2)
 
         for (name, i, signX, signZ) in [("backward", 0, Float(0), Float(-1)), ("left", 1, Float(-1), Float(0)), ("forward", 2, Float(0), Float(1)), ("right", 3, Float(1), Float(0))] {
-            let leftNode = SCNNode(geometry: geometry)
+            let leftMaterial = SCNMaterial()
+            leftMaterial.diffuse.contents = UIColor.white
+            let leftGeometry = SCNBox(width: CGFloat(lineWidth), height: CGFloat(lineWidth), length: CGFloat(arrowLength * cell), chamferRadius: 0)
+            leftGeometry.firstMaterial = leftMaterial
+            let leftNode = SCNNode(geometry: leftGeometry)
+            leftNode.categoryBitMask = TetrisCategories.segment.rawValue
             leftNode.position = SCNVector3(0, 0, -deltaArrow)
             leftNode.rotation = SCNVector4(0, 1, 0, Float.pi / 4)
             
-            let rightNode = SCNNode(geometry: geometry)
+            let rightMaterial = SCNMaterial()
+            rightMaterial.diffuse.contents = UIColor.white
+            let rightGeometry = SCNBox(width: CGFloat(lineWidth), height: CGFloat(lineWidth), length: CGFloat(arrowLength * cell), chamferRadius: 0)
+            rightGeometry.firstMaterial = rightMaterial
+            let rightNode = SCNNode(geometry: rightGeometry)
+            rightNode.categoryBitMask = TetrisCategories.segment.rawValue
             rightNode.position = SCNVector3(0, 0, deltaArrow)
             rightNode.rotation = SCNVector4(0, 1, 0, -Float.pi / 4)
             
+            let arrowNode = SCNNode()
+            arrowNode.name = "arrow-\(name)"
+            arrowNode.position = SCNVector3(outLength * cell, 0, 0)
+            arrowNode.addChildNode(leftNode)
+            arrowNode.addChildNode(rightNode)
+            
             let material = SCNMaterial()
-            material.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
-            let box = SCNBox(width: CGFloat(2.0 * cell), height: CGFloat(lineWidth), length: CGFloat(config.length) * CGFloat(cell), chamferRadius: 0.0)
+            material.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.0)
+            let rectHeight = CGFloat(10.0 * cell)
+            let box = SCNBox(width: rectHeight, height: CGFloat(lineWidth), length: CGFloat(config.length) * CGFloat(cell), chamferRadius: 0.0)
             box.firstMaterial = material
             let rectNode = SCNNode(geometry: box)
             rectNode.name = name
+            rectNode.position = SCNVector3(rectHeight / 2, 0, 0)
             rectNode.categoryBitMask = TetrisCategories.arrow.rawValue
             
             let node = SCNNode()
@@ -64,8 +76,7 @@ class TetrisMovementHandler {
             let deltaZ = signZ * deltaOut
             node.position = SCNVector3(centerX + deltaX, -0.5 * cell, centerZ + deltaZ)
             node.rotation = SCNVector4(0, 1, 0, (Float.pi / 2) * Float(i + 1))
-            node.addChildNode(leftNode)
-            node.addChildNode(rightNode)
+            node.addChildNode(arrowNode)
             node.addChildNode(rectNode)
             parentNode.addChildNode(node)
         }
@@ -94,13 +105,20 @@ class TetrisMovementHandler {
     }
     
     func flash(node: SCNNode) {
+        let segments = node.childNodes(passingTest: { (node, _) in
+            return node.categoryBitMask & TetrisCategories.segment.rawValue != 0
+        })
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 0.2
-        node.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.2)
+        for segment in segments {
+            segment.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0)
+        }
         SCNTransaction.completionBlock = {
             SCNTransaction.begin()
             SCNTransaction.animationDuration = 0.2
-            node.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
+            for segment in segments {
+                segment.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            }
             SCNTransaction.commit()
         }
         SCNTransaction.commit()
