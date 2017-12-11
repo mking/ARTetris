@@ -136,7 +136,7 @@ class TetrisEngine {
         case 4:
             return 800
 		default:
-			return Int(pow(3.0, Double(lineCount))) * 100
+            return lineCount > 0 ? (Int(pow(3.0, Double(lineCount - 2))) * 100) : 0
 		}
 	}
 	
