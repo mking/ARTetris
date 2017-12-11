@@ -284,19 +284,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func tapTranslate(sender: UITapGestureRecognizer) {
-        if let movementHandler = self.movementHandler {
-            let screenPosition = sender.location(in: self.sceneView)
-            let (worldPosition, _, _) = worldPositionFromScreenPosition(screenPosition, objectPos: focusSquare?.position)
-            let direction = movementHandler.tap(tapPosition: worldPosition!, sceneView: sceneView)
-            switch direction {
-            case .left:
-                tetris?.left()
-            case .right:
-                tetris?.right()
-            case .backward:
-                tetris?.backward()
-            case .forward:
-                tetris?.forward()
+        if sender.state == .ended {
+            let position = sender.location(in: sceneView)
+            let results = sceneView.hitTest(position, options: [.categoryBitMask: TetrisCategories.arrow.rawValue])
+            for result in results {
+                if let name = result.node.name {
+                    switch name {
+                    case "left":
+                        tetris!.left()
+                        movementHandler.flash(node: result.node)
+                    case "right":
+                        tetris!.right()
+                        movementHandler.flash(node: result.node)
+                    case "backward":
+                        tetris!.backward()
+                        movementHandler.flash(node: result.node)
+                    case "forward":
+                        tetris!.forward()
+                        movementHandler.flash(node: result.node)
+                    default:
+                        break
+                    }
+                }
             }
         }
     }

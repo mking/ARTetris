@@ -42,7 +42,7 @@ class TetrisMovementHandler {
         let deltaOut = ((Float(config.length) + outLength) / 2) * cell
         let deltaArrow = ((arrowLength / 2) * cell) / sqrt(2)
 
-        for (i, signX, signZ) in [(0, Float(0), Float(-1)), (1, Float(-1), Float(0)), (2, Float(0), Float(1)), (3, Float(1), Float(0))] {
+        for (name, i, signX, signZ) in [("backward", 0, Float(0), Float(-1)), ("left", 1, Float(-1), Float(0)), ("forward", 2, Float(0), Float(1)), ("right", 3, Float(1), Float(0))] {
             let leftNode = SCNNode(geometry: geometry)
             leftNode.position = SCNVector3(0, 0, -deltaArrow)
             leftNode.rotation = SCNVector4(0, 1, 0, Float.pi / 4)
@@ -51,6 +51,14 @@ class TetrisMovementHandler {
             rightNode.position = SCNVector3(0, 0, deltaArrow)
             rightNode.rotation = SCNVector4(0, 1, 0, -Float.pi / 4)
             
+            let material = SCNMaterial()
+            material.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
+            let box = SCNBox(width: CGFloat(2.0 * cell), height: CGFloat(lineWidth), length: CGFloat(config.length) * CGFloat(cell), chamferRadius: 0.0)
+            box.firstMaterial = material
+            let rectNode = SCNNode(geometry: box)
+            rectNode.name = name
+            rectNode.categoryBitMask = TetrisCategories.arrow.rawValue
+            
             let node = SCNNode()
             let deltaX = signX * deltaOut
             let deltaZ = signZ * deltaOut
@@ -58,6 +66,7 @@ class TetrisMovementHandler {
             node.rotation = SCNVector4(0, 1, 0, (Float.pi / 2) * Float(i + 1))
             node.addChildNode(leftNode)
             node.addChildNode(rightNode)
+            node.addChildNode(rectNode)
             parentNode.addChildNode(node)
         }
     }
@@ -82,5 +91,18 @@ class TetrisMovementHandler {
         let node = SCNNode(geometry: box)
         node.position = position
         sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    func flash(node: SCNNode) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 0.2
+        node.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 0.2)
+        SCNTransaction.completionBlock = {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.2
+            node.geometry!.firstMaterial!.diffuse.contents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
+            SCNTransaction.commit()
+        }
+        SCNTransaction.commit()
     }
 }
