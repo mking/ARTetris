@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08CE518F1FDE10EF00F135CE /* TetrisCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */; };
 		08EEE2211FD4D670009185F4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EEE2201FD4D670009185F4 /* TutorialViewController.swift */; };
 		581A9D861F065AB1003ABB79 /* TetrisEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D851F065AB1003ABB79 /* TetrisEngine.swift */; };
 		581A9D881F0AA04F003ABB79 /* TetrisConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisCategories.swift; sourceTree = "<group>"; };
 		08EEE2201FD4D670009185F4 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		581A9D851F065AB1003ABB79 /* TetrisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEngine.swift; sourceTree = "<group>"; };
 		581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisConfig.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8B59F4FC1FA5569700DE80E1 /* TetrisMovementDirection.swift */,
 				905EA7801FC2834C00BECD86 /* HomeViewController.swift */,
 				08EEE2201FD4D670009185F4 /* TutorialViewController.swift */,
+				08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */,
 			);
 			path = ARTetris;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B32969B1F9C14C000A3CFAB /* TetrisSlot.swift in Sources */,
+				08CE518F1FDE10EF00F135CE /* TetrisCategories.swift in Sources */,
 				8B59F4F91FA52D5200DE80E1 /* TetrisOverlay.swift in Sources */,
 				8B32969F1F9C1C9300A3CFAB /* TetrisHeightTransition.swift in Sources */,
 				905EA7811FC2834C00BECD86 /* HomeViewController.swift in Sources */,
