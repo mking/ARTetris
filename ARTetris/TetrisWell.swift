@@ -85,28 +85,32 @@ class TetrisWell {
 	public func clearFilledLines() -> TetrisMatrixTransition {
         var removed = Set<String>()
         var score = 0
-        loop: for j in 0..<config.width {
-            for k in 0..<config.depth {
-                if (!matrix[0][j][k].isFilled) {
-                    continue loop
+
+        for i in 0..<config.height {
+            loop: for j in 0..<config.width {
+                for k in 0..<config.depth {
+                    if (!matrix[i][j][k].isFilled) {
+                        continue loop
+                    }
+                }
+                score += 1
+                for k in 0..<config.depth {
+                    removed.insert(matrix[i][j][k].name!)
                 }
             }
-            score += 1
-            for k in 0..<config.depth {
-                removed.insert(matrix[0][j][k].name!)
-            }
-        }
-        loop: for k in 0..<config.depth {
-            for j in 0..<config.width {
-                if (!matrix[0][j][k].isFilled) {
-                    continue loop
+            loop: for k in 0..<config.depth {
+                for j in 0..<config.width {
+                    if (!matrix[i][j][k].isFilled) {
+                        continue loop
+                    }
+                }
+                score += 1
+                for j in 0..<config.width {
+                    removed.insert(matrix[i][j][k].name!)
                 }
             }
-            score += 1
-            for j in 0..<config.width {
-                removed.insert(matrix[0][j][k].name!)
-            }
         }
+
         var newMatrix = [[[TetrisSlot]]]()
         for i in 0..<config.matrixHeight {
             newMatrix.append([[TetrisSlot]]())

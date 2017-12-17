@@ -99,18 +99,25 @@ class TetrisEngine {
 		let names = scene.addToWell(current)
         well.add(current, names)
         
-		let transition = well.clearFilledLines()
+		var transition = well.clearFilledLines()
 		if (transition.isEmpty()) {
 			nextTetromino()
 		} else {
 			animate(onComplete: nextTetromino) {
-				let scores = getScores(transition.score)
-				self.scores += scores
-				return scene.removeLines(transition, scores)
+                var scores = 0
+                var result = 0.0
+                while transition.score > 0 {
+                    scores += transition.score
+                    print ("get score: ", transition.score)
+                    result += scene.removeLines(transition, scores)
+                    transition = well.clearFilledLines()
+                }
+				self.scores += getScores(scores)
+				return result
 			}
 		}
 	}
-	
+
 	private func nextTetromino() {
         repeat {
             current = .random(config)
