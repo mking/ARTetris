@@ -21,6 +21,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var startScale: Float = 0
     var didTap = false
+    var showTutorial = false
+    
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         setupScene()
         setupFocusSquare()
         addGestures()
+        
+        showTutorial = TetrisDefaults.showTutorial
+        TetrisDefaults.showTutorial = false
+        if showTutorial {
+            showTemporaryMessage(message: "Tap to place the board")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,6 +151,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, lineWidth)
         let overlay = TetrisOverlay(scoreLabel: scoreLabel)
         self.tetris = TetrisEngine(config, well, scene, overlay)
+        
+        if showTutorial {
+            showTemporaryMessage(message: "Create a line of blocks to score points", completion: { _ in
+                self.showTemporaryMessage(message: "Swipe left and right to rotate")
+            })
+        }
     }
     
     func worldPositionFromScreenPosition(_ position: CGPoint,
@@ -336,5 +351,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func handleDown(_ sender: UISwipeGestureRecognizer) {
         tetris?.drop()
+    }
+    
+    func showTemporaryMessage(message: String, completion: ((Bool) -> Void)? = nil) {
+        messageLabel.text = message
+        messageLabel.alpha = 1.0
+        UIView.animate(withDuration: 1.0, delay: 4.0, options: .curveEaseOut, animations: {
+            self.messageLabel.alpha = 0.0
+        }, completion: completion)
     }
 }

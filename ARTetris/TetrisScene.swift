@@ -228,11 +228,11 @@ class TetrisScene {
 	}
 	
 	func showGameOver(_ scores: Int) {
-        let topScore = UserDefaults.standard.integer(forKey: "topScore")
+        let topScore = TetrisDefaults.topScore
         print ("gameover, the previous top score: ", topScore)
         print ("gameover, current score: ", scores)
         if (scores > topScore) {
-           UserDefaults.standard.set(scores, forKey: "topScore")
+            TetrisDefaults.topScore = scores
         }
         restartButton.isHidden = false
         

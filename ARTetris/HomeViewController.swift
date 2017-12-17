@@ -14,13 +14,13 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let topScore = UserDefaults.standard.object(forKey: "topScore")
-        if (topScore == nil) {
-            UserDefaults.standard.set(0, forKey: "topScore")
-        }
         updateTopScore()
 
         navigationController!.isNavigationBarHidden = true
+        
+        if TetrisDefaults.showTutorial {
+            performSegue(withIdentifier: "tutorial", sender: self)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +29,12 @@ class HomeViewController: UIViewController {
     }
     
     func updateTopScore() {
-        self.topScoreLabel.text = "Top score: \(UserDefaults.standard.integer(forKey: "topScore"))"
+        self.topScoreLabel.text = "Top score: \(TetrisDefaults.topScore)"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "tutorial" {
+            TetrisDefaults.showTutorial = true
+        }
     }
 }
