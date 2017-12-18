@@ -10,7 +10,7 @@ import SceneKit
 
 class Tetromino {
     
-    static let all = [i, j, o, s, t]
+    static let all = [t, j, l, s, z, o, i]
 //    static let all = [o]
     
     static let t = Tetromino([
@@ -27,11 +27,25 @@ class Tetromino {
         -1, -1, 0,
     ])
     
+    static let l = Tetromino([
+        0, 1, 0,
+        0, 0, 0,
+        0, -1, 0,
+        1, -1, 0,
+    ])
+    
     static let s = Tetromino([
         0, 1, 0,
         1, 1, 0,
         0, 0, 0,
         -1, 0, 0,
+    ])
+    
+    static let z = Tetromino([
+        0, 1, 0,
+        -1, 1, 0,
+        0, 0, 0,
+        1, 0, 0,
     ])
     
     static let o = Tetromino([
