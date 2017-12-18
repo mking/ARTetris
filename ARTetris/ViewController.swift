@@ -348,7 +348,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func handleMenu(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Quit", style: .`default`, handler: { _ in
-            TetrisDefaults.topScore = self.tetris!.scores
+            if let tetris = self.tetris {
+                TetrisDefaults.topScore = tetris.scores
+            }
             self.navigationController?.popViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
