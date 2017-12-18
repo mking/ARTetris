@@ -46,8 +46,9 @@ class TetrisScene {
 	private var frame: SCNNode!
     private var movementHandler: TetrisMovementHandler
     private var restartButton: UIButton!
+    private var showMessage: ((Int, Int) -> Void)
 
-    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ lineWidth: Float) {
+    init(_ config: TetrisConfig, _ scene: SCNScene, _ movementHandler: TetrisMovementHandler, _ x: Float, _ y: Float, _ z: Float, _ cell: Float, _ restartButton: UIButton!, _ lineWidth: Float, _ showMessage: @escaping ((Int, Int) -> Void)) {
 		self.config = config
 		self.scene = scene
         self.x = x
@@ -59,6 +60,7 @@ class TetrisScene {
         self.gameNode = SCNNode()
         self.movementHandler = movementHandler
         self.lineWidth = lineWidth
+        self.showMessage = showMessage
         self.frame = createWellFrame(config.width, config.height, config.depth)
 //        gameNode.addChildNode(self.frame)
 //        gameNode.addChildNode(createBoard())
@@ -231,12 +233,13 @@ class TetrisScene {
 		return time
 	}
 	
-	func showGameOver(_ scores: Int) {
+    func showGameOver(_ scores: Int) {
         let topScore = TetrisDefaults.topScore
         print ("gameover, the previous top score: ", topScore)
         print ("gameover, current score: ", scores)
         if (scores > topScore) {
             TetrisDefaults.topScore = scores
+            showMessage(scores, topScore)
         }
         restartButton.isHidden = false
         

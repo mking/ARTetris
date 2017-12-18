@@ -69,7 +69,7 @@
                                         <rect key="frame" x="0.0" y="201" width="375" height="201"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oBc-fG-Kpk">
-                                                <rect key="frame" x="149.5" y="60" width="76" height="82"/>
+                                                <rect key="frame" x="149.5" y="39.5" width="76" height="123"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-P9-tZK">
                                                         <rect key="frame" x="15" y="0.0" width="46" height="41"/>
@@ -89,6 +89,16 @@
                                                         </state>
                                                         <connections>
                                                             <segue destination="BV1-FR-VrT" kind="show" identifier="tutorial" id="dnG-Uz-4LY"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVe-Zy-AKg">
+                                                        <rect key="frame" x="8" y="82" width="60" height="41"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <state key="normal" title="Reset">
+                                                            <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="handleReset:" destination="OJg-mp-Zc6" eventType="touchUpInside" id="gSA-Ip-auR"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

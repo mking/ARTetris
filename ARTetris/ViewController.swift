@@ -43,7 +43,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         showTutorial = TetrisDefaults.showTutorial
         TetrisDefaults.showTutorial = false
         if showTutorial {
-            showTemporaryMessage(message: "Tap to place the board")
+            showTemporaryMessage(message: "Point the camera to the floor", completion: { _ in
+                self.showTemporaryMessage(message: "Tap to place the board")
+            })
         }
     }
     
@@ -149,7 +151,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let lineWidth = 0.001 * focusSquare!.scaleBasedOnDistance(camera: self.session.currentFrame?.camera)
 
         movementHandler = TetrisMovementHandler(config: config, position: SCNVector3(x, y ,z), cell: cell, lineWidth: lineWidth)
-        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, lineWidth)
+        let scene = TetrisScene(config, self.sceneView.scene, movementHandler, x, y, z, cell, restartButton, lineWidth, { (currentScore, previousScore) in
+            self.showTemporaryMessage(message: "Congratulations! \(currentScore) is the new high score. The previous high score was \(previousScore).")
+        })
         let overlay = TetrisOverlay(scoreLabel: scoreLabel)
         self.tetris = TetrisEngine(config, well, scene, overlay)
         
