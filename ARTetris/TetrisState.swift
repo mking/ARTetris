@@ -37,7 +37,9 @@ class TetrisState {
 	func tetromino() -> Tetromino { return Tetromino.all[index].rotate(x: rotationX, y: rotationY) }
     
     func rotateY(_ angle: Int) -> TetrisState { return TetrisState(index, rotationX, (rotationY + angle + 4) % 4, x, y, z) }
-    
+
+    func rotateX(_ angle: Int) -> TetrisState { return TetrisState(index, (rotationX + angle + 4) % 4, rotationY, x, y, z) }
+
     func forward() -> TetrisState { return TetrisState(index, rotationX, rotationY, x, y, z + 1) }
     
     func backward() -> TetrisState { return TetrisState(index, rotationX, rotationY, x, y, z - 1) }

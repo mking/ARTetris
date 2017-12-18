@@ -130,6 +130,7 @@
                                     <outletCollection property="gestureRecognizers" destination="KHu-rC-Xdy" appends="YES" id="sHb-z2-yNs"/>
                                     <outletCollection property="gestureRecognizers" destination="7s4-w7-pG5" appends="YES" id="Nqi-ZK-rq4"/>
                                     <outletCollection property="gestureRecognizers" destination="llR-LM-ivY" appends="YES" id="hSk-Xh-OhH"/>
+                                    <outletCollection property="gestureRecognizers" destination="Jdf-4Q-iUb" appends="YES" id="UGo-Tn-PPJ"/>
                                 </connections>
                             </arscnView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCp-d2-0oi">
@@ -264,6 +265,11 @@
                         <action selector="handleRotate:" destination="BV1-FR-VrT" id="cI2-Ct-M8k"/>
                     </connections>
                 </rotationGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="Jdf-4Q-iUb" userLabel="Up Swipe">
+                    <connections>
+                        <action selector="handleUpSwipe:" destination="BV1-FR-VrT" id="AbS-mf-s9h"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-498.39999999999998" y="109.29535232383809"/>
         </scene>

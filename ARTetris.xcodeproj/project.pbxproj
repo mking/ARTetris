@@ -129,8 +129,8 @@
 		589A2D0F1F02417D003BB05E /* ARTetris */ = {
 			isa = PBXGroup;
 			children = (
-				589A2D101F02417D003BB05E /* AppDelegate.swift */,
 				08C0D8BC1FE74A8F00201DD0 /* AboutViewController.swift */,
+				589A2D101F02417D003BB05E /* AppDelegate.swift */,
 				589A2D141F02417D003BB05E /* ViewController.swift */,
 				905EA7801FC2834C00BECD86 /* HomeViewController.swift */,
 				589A2D161F02417D003BB05E /* Main.storyboard */,
