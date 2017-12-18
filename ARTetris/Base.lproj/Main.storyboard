@@ -37,29 +37,29 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oBc-fG-Kpk">
-                                <rect key="frame" x="67.5" y="169.5" width="240" height="328.5"/>
+                                <rect key="frame" x="67.5" y="175.5" width="240" height="316.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tetris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9F-7k-uxb">
-                                        <rect key="frame" x="68.5" y="0.0" width="103" height="48"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        <rect key="frame" x="84" y="0.0" width="72.5" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                         <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kU-LS-F0n">
-                                        <rect key="frame" x="80" y="48" width="80" height="20.5"/>
+                                        <rect key="frame" x="80" y="36" width="80" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLI-Xu-3VN">
-                                        <rect key="frame" x="0.0" y="68.5" width="240" height="100"/>
+                                        <rect key="frame" x="0.0" y="56.5" width="240" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="zIX-Wt-QHc"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-P9-tZK">
-                                        <rect key="frame" x="82.5" y="168.5" width="75" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                        <rect key="frame" x="80" y="156.5" width="80" height="60"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         <state key="normal" title="Play">
                                             <color key="titleColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -68,7 +68,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lvh-TA-KaU">
-                                        <rect key="frame" x="0.0" y="228.5" width="240" height="100"/>
+                                        <rect key="frame" x="0.0" y="216.5" width="240" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="tTf-2W-ynl"/>
                                         </constraints>
@@ -88,6 +88,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Btw-B1-ivQ" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="u6v-hX-FEc" secondAttribute="trailing" id="2P2-hD-Ril"/>
                             <constraint firstItem="oBc-fG-Kpk" firstAttribute="centerX" secondItem="Fof-ke-7eN" secondAttribute="centerX" id="Iwv-IK-Bv6"/>
                             <constraint firstItem="Btw-B1-ivQ" firstAttribute="bottom" secondItem="dIi-KL-LI7" secondAttribute="bottom" constant="-30" id="K69-2a-NIL"/>
                             <constraint firstItem="u6v-hX-FEc" firstAttribute="top" secondItem="Fof-ke-7eN" secondAttribute="top" id="NMM-sp-i4T"/>

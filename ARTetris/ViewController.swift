@@ -44,9 +44,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         TetrisDefaults.showTutorial = false
         if showTutorial {
             showTemporaryMessage(message: "Point the camera to a flat surface", completion: { _ in
-                self.showTemporaryMessage(message: "Tap to place the board", completion: { _ in
-                    self.showTemporaryMessage(message: "Use two fingers to pinch or rotate the board")
-                })
+                self.showTemporaryMessage(message: "Tap to place the board. Use two fingers to pinch or rotate the board.")
             })
         }
     }
