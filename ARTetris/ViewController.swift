@@ -159,7 +159,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if showTutorial {
             showTemporaryMessage(message: "Create a line of blocks to score points", completion: { _ in
-                self.showTemporaryMessage(message: "Swipe left and right to rotate")
+                self.showTemporaryMessage(message: "Swipe left and right to rotate. Swipe up to rotate vertically. Swipe down to drop.")
             })
         }
     }
