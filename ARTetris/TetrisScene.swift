@@ -90,13 +90,17 @@ class TetrisScene {
         lightNode.position = SCNVector3(x: 0.0, y: Float(config.height) * cell, z: 0.0)
         lightNode.light = light
         
+        let centeringNode = SCNNode()
+        centeringNode.position = SCNVector3(x: -(Float(config.length) / 2.0) * cell, y: 0.0, z: -(Float(config.length) / 2.0) * cell)
+        centeringNode.addChildNode(self.frame)
+        centeringNode.addChildNode(self.gameNode)
+        centeringNode.addChildNode(lightNode)
+        movementHandler.addArrows(parentNode: centeringNode)
+        
         let pinchNode = SCNNode()
         pinchNode.position = SCNVector3(x: self.x, y: self.y, z: self.z)
 //        pinchNode.addChildNode(cubeNode)
-        pinchNode.addChildNode(self.frame)
-        pinchNode.addChildNode(self.gameNode)
-        pinchNode.addChildNode(lightNode)
-        movementHandler.addArrows(parentNode: pinchNode)
+        pinchNode.addChildNode(centeringNode)
         return pinchNode
     }
     
@@ -443,6 +447,16 @@ class TetrisScene {
         
         set {
             pinchNode.setUniformScale(min(2.0, max(0.5, newValue)))
+        }
+    }
+    
+    var rotation: Float {
+        get {
+            return pinchNode.eulerAngles.y
+        }
+        
+        set {
+            pinchNode.eulerAngles = SCNVector3(x: pinchNode.eulerAngles.x, y: newValue, z: pinchNode.eulerAngles.z)
         }
     }
 }

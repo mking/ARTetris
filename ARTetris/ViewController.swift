@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var movementHandler: TetrisMovementHandler!
     
     var startScale: Float = 0
+    var startRotation: Float = 0
     var didTap = false
     var showTutorial = false
     
@@ -359,5 +360,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         UIView.animate(withDuration: 1.0, delay: 4.0, options: .curveEaseOut, animations: {
             self.messageLabel.alpha = 0.0
         }, completion: completion)
+    }
+    
+    @IBAction func handleRotate(_ sender: UIRotationGestureRecognizer) {
+        guard tetris != nil else { return }
+        
+        switch sender.state {
+        case .began:
+            startRotation = tetris!.scene.rotation
+        case .changed:
+            tetris!.scene.rotation = startRotation - Float(sender.rotation)
+        default:
+            break
+        }
     }
 }
