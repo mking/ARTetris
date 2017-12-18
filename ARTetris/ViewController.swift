@@ -52,7 +52,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func checkCamera() {
-        if AVCaptureDevice.authorizationStatus(for: .video) != .authorized {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        if status != .authorized && status != .notDetermined {
             let alert = UIAlertController(title: nil, message: "This app requires access to the camera. Please enable the permission in Settings.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             present(alert, animated: true)

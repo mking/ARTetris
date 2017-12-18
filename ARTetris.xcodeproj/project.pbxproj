@@ -505,7 +505,7 @@
 				DEVELOPMENT_TEAM = QN46P2PK7U;
 				INFOPLIST_FILE = ARTetris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.exyte.ARTetris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artetris.3DARTetris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -520,7 +520,7 @@
 				DEVELOPMENT_TEAM = QN46P2PK7U;
 				INFOPLIST_FILE = ARTetris/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.exyte.ARTetris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artetris.3DARTetris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
