@@ -38,14 +38,25 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func handleReset(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: "Are you sure you want to clear saved data (including high score)?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
-            TetrisDefaults.topScore = 0
-            TetrisDefaults.showTutorial = true
-            self.updateTopScore()
+    @IBAction func handleHelp(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Tutorial", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "tutorial", sender: self)
         }))
+        alert.addAction(UIAlertAction(title: "About", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "about", sender: self)
+        }))
+        alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+            let alert = UIAlertController(title: nil, message: "Are you sure you want to clear saved data (including high score)?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+                TetrisDefaults.topScore = 0
+                TetrisDefaults.showTutorial = true
+                self.updateTopScore()
+            }))
+            self.present(alert, animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
 }
