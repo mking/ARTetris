@@ -39,11 +39,13 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func handleReset(_ sender: UIButton) {
-        TetrisDefaults.topScore = 0
-        TetrisDefaults.showTutorial = true
-        let alert = UIAlertController(title: "Reset", message: "High score and tutorial were reset.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to clear saved data (including high score)?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { _ in
+            TetrisDefaults.topScore = 0
+            TetrisDefaults.showTutorial = true
+            self.updateTopScore()
+        }))
         present(alert, animated: true)
-        updateTopScore()
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08C0D8BB1FE7389100201DD0 /* TetrisDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0D8BA1FE7389100201DD0 /* TetrisDefaults.swift */; };
+		08C0D8BD1FE74A8F00201DD0 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0D8BC1FE74A8F00201DD0 /* AboutViewController.swift */; };
 		08CE518F1FDE10EF00F135CE /* TetrisCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */; };
 		581A9D861F065AB1003ABB79 /* TetrisEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D851F065AB1003ABB79 /* TetrisEngine.swift */; };
 		581A9D881F0AA04F003ABB79 /* TetrisConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		08C0D8BA1FE7389100201DD0 /* TetrisDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisDefaults.swift; sourceTree = "<group>"; };
+		08C0D8BC1FE74A8F00201DD0 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisCategories.swift; sourceTree = "<group>"; };
 		581A9D851F065AB1003ABB79 /* TetrisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisEngine.swift; sourceTree = "<group>"; };
 		581A9D871F0AA04F003ABB79 /* TetrisConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrisConfig.swift; sourceTree = "<group>"; };
@@ -128,7 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				589A2D101F02417D003BB05E /* AppDelegate.swift */,
+				08C0D8BC1FE74A8F00201DD0 /* AboutViewController.swift */,
 				589A2D141F02417D003BB05E /* ViewController.swift */,
+				905EA7801FC2834C00BECD86 /* HomeViewController.swift */,
 				589A2D161F02417D003BB05E /* Main.storyboard */,
 				589A2D191F02417D003BB05E /* Assets.xcassets */,
 				589A2D1B1F02417D003BB05E /* LaunchScreen.storyboard */,
@@ -146,7 +150,6 @@
 				8B59F4F81FA52D5200DE80E1 /* TetrisOverlay.swift */,
 				8B59F4FA1FA5372500DE80E1 /* TetrisMovementHandler.swift */,
 				8B59F4FC1FA5569700DE80E1 /* TetrisMovementDirection.swift */,
-				905EA7801FC2834C00BECD86 /* HomeViewController.swift */,
 				08CE518E1FDE10EF00F135CE /* TetrisCategories.swift */,
 				8B32969C1F9C198F00A3CFAB /* TetrisMatrixTransition.swift */,
 				08C0D8BA1FE7389100201DD0 /* TetrisDefaults.swift */,
@@ -344,6 +347,7 @@
 				581A9D881F0AA04F003ABB79 /* TetrisConfig.swift in Sources */,
 				9088190F1F25337E00181A7A /* Utilities.swift in Sources */,
 				581A9D861F065AB1003ABB79 /* TetrisEngine.swift in Sources */,
+				08C0D8BD1FE74A8F00201DD0 /* AboutViewController.swift in Sources */,
 				8B59F4FD1FA5569700DE80E1 /* TetrisMovementDirection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
