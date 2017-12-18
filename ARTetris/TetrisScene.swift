@@ -12,13 +12,13 @@ import SceneKit
 class TetrisScene {
 	
 	private static let colors : [UIColor] = [
-		UIColor(red:1.00, green:0.23, blue:0.19, alpha:1.0),
-		UIColor(red:1.00, green:0.18, blue:0.33, alpha:1.0),
-		UIColor(red:1.00, green:0.58, blue:0.00, alpha:1.0),
-		UIColor(red:1.00, green:0.80, blue:0.00, alpha:1.0),
-		UIColor(red:0.35, green:0.34, blue:0.84, alpha:1.0),
-		UIColor(red:0.20, green:0.67, blue:0.86, alpha:1.0),
-		UIColor(red:0.56, green:0.56, blue:0.58, alpha:1.0)]
+		UIColor.cyan,
+        UIColor.blue,
+        UIColor.orange,
+        UIColor.yellow,
+        UIColor.green,
+        UIColor.magenta,
+        UIColor.red]
 	
 	private static let wellColor = UIColor(red:0, green:0, blue:0, alpha:0.0)
     private static let sideWellColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
