@@ -29,6 +29,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkCamera()
+        
 //        // Set the view's delegate
 //        sceneView.delegate = self
 //
@@ -46,6 +48,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             showTemporaryMessage(message: "Point the camera to a flat surface", completion: { _ in
                 self.showTemporaryMessage(message: "Tap to place the board. Use two fingers to pinch or rotate the board.")
             })
+        }
+    }
+    
+    func checkCamera() {
+        if AVCaptureDevice.authorizationStatus(for: .video) != .authorized {
+            let alert = UIAlertController(title: nil, message: "This app requires access to the camera. Please enable the permission in Settings.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true)
         }
     }
     
