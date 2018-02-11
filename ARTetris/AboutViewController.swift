@@ -10,7 +10,7 @@ import UIKit
 
 class AboutViewController: UIViewController {
     @IBAction func handleMail(_ sender: UIButton) {
-        UIApplication.shared.open(URL(string: "mailto:artetrisapp@gmail.com")!)
+        UIApplication.shared.open(URL(string: "mailto:arrussianblocks@gmail.com")!)
     }
     
     @IBAction func handleDone(_ sender: UIButton) {
